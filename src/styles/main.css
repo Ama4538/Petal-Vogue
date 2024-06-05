@@ -1,0 +1,41 @@
+/*  (Format *ABC Order for same family)
+    Position
+    Position format (top - left - bottom - right)
+    index
+    Display
+    Display format
+    Gap
+    Margin
+    Padding
+    size
+    alignment
+    Font
+    Extra 
+*/
+
+@import '../components/Loader/Loader.css';
+
+:root {
+    --background-color: #FDFDF9;
+    --font-color: #121205;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+/* Home */
+
+.home {
+    background-color: maroon;
+    overflow: hidden;
+}
+
+.temp {
+    max-width: 100dvw;
+    object-fit: cover;
+}
+
