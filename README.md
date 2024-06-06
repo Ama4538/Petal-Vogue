@@ -29,7 +29,7 @@ A E-commerce platform
 4. Open on localHost: npm run preview
 
 ## Features
-- Dynmcially add information to home page via data.json
+- Dynamically add information to home page via data.json
 
 ## Tech Stack
 - React
