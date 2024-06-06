@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { debounce } from "lodash"
 import HomeColumnBlock from './HomeColumnBlock.jsx';
 
-function HomeColumnMain({ section, data }) {
+function HomeColumn({ section, data }) {
     // State to manage the current scroll position
     const [scrollPosition, setScrollPosition] = useState(0);
 
@@ -37,21 +37,9 @@ function HomeColumnMain({ section, data }) {
             variants={scrollAnimation}
             animate='scroll'
             onWheel={handleWheel}
-        >
-            {/* Main image to transition from loading */}
-            <motion.article
-                className="home-column__block"
-                style={{ backgroundImage: `url("/homeimage/women/home-women-background-image-1.jpg")` }}
-                layoutId="main-image-1"
-                transition={{
-                    duration: 0.75,
-                    ease: [0.16, 0.86, 0.64, 0.90]
-                }}
-            >
-            </motion.article>
-
-            {/* Generate blocks within the column except the first */}
-            {data.slice(1).map((element, index) => {
+        >   
+            {/* Generate blocks within the column */}
+            {data.map((element, index) => {
                 return (
                     <HomeColumnBlock
                         key={index}
@@ -64,4 +52,4 @@ function HomeColumnMain({ section, data }) {
     )
 }
 
-export default HomeColumnMain
+export default HomeColumn

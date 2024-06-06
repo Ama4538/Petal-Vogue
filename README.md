@@ -50,15 +50,15 @@ A E-commerce platform
     4. https://unsplash.com/@alcure
     5. https://unsplash.com/@zonde
 - Male Home 
-    1. https://unsplash.com/@swltni
-    2. https://unsplash.com/@gohrhyyan
-    3. https://unsplash.com/@clemono
+    1. https://unsplash.com/@mostafa_meraji
+    2. https://unsplash.com/@clemono
+    3. https://unsplash.com/@biancaberg
     4. https://unsplash.com/@saintape
     5. https://unsplash.com/@cahh
 - Kid Home
     1. https://unsplash.com/@yaanapi
-    2. https://unsplash.com/@leorivas
-    3. https://unsplash.com/@jessicarockowitz 
+    2. https://unsplash.com/@jessicarockowitz 
+    3. https://unsplash.com/@leorivas
     4. https://unsplash.com/@anniespratt 
     5. https://unsplash.com/@seteph
     

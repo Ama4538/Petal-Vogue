@@ -7,24 +7,38 @@
     Gap
     Margin
     Padding
-    size
+    height
+    width
     alignment
     Font
     Extra 
 */
 
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 @import '../components/loader/Loader.css';
+@import '../components/nav/homenav.css';
 
 :root {
+    --primary-font: "Libre Baskerville", serif;
+    --secondary-font: "Montserrat", sans-serif;
+
+    --font-size-small: clamp(1rem, max(1.15rem, 1.10vmax), max(1.25rem, 1.75vmax));
+
+    --padding-very-small: clamp(0.5rem, max(0.75rem, 1vmax), max(1rem, 1.25vmax));
+    --padding-small: clamp(1rem, max(1.25rem, 1.5vmax), max(1.5rem, 2vmax));
+    --padding-med: clamp(3rem, max(3.5rem, 4vmax), max(4rem, 4.5vmax));
+
+
     --background-color: #FDFDF9;
-    --font-color: #121205;
+    --primary-font-color: #121205;
+    --secondary-font-color: #F5F5F5;
+
 }
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    
 }
 
 /* Home */
@@ -38,29 +52,42 @@
     overflow: hidden;
 }
 
+.home__row {
+    display: flex;
+    height: 100%;
+    width: 100%;
+}
+
 .home__column {
-    height: 100%; 
+    height: 100%;
 }
 
 .home-column__block {
+    position: relative;
     height: 100%;
-    background-position: center;
+    width: 100dvw;
+    background-position: center 10%;
     background-size: cover;
 }
 
-/* Nav */
+.home__column > .home-column__block:nth-child(2) {
+    background-position: center;
+}
 
-.nav {
-    position: fixed;
-    z-index: 999;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    height: 5vmax;
+.home-column__block::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
     width: 100%;
-    background-color: #FDFDF9;
+    background: linear-gradient(
+        to top,
+        rgba(0, 0, 0, 0.4),
+        rgba(0, 0, 0, 0.1),
+        transparent,
+        rgba(0, 0, 0, 0.1),
+        rgba(0, 0, 0, 0.4)
+    );
+    content: "";
 }
 
-.nav__list {
-    display: flex;
-    list-style: none;
-}

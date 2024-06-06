@@ -5,3 +5,4 @@ function HomeColumnBlock({ section, id }) {
 }
 
 export default HomeColumnBlock
+

@@ -1,23 +1,58 @@
-{   
+{
     "home": {
         "women": [
             {
-                "file" : "home-women-background-image-1.jpg"
+                "file": "home-women-background-image-1.jpg",
+                "title": "Mackenzie Sunglass Collection:",
+                "subtitle": "Captivating and Subverting Expectation",
+                "statement": "It's more than just eyewear—it's your fashion statement, empowering you to conquer the world, one stylish frame at a time."
             },
             {
-                "file" : "home-women-background-image-2.jpg"
+                "file": "home-women-background-image-2.jpg"
             },
             {
-                "file" : "home-women-background-image-3.jpg"
+                "file": "home-women-background-image-3.jpg"
             },
             {
-                "file" : "home-women-background-image-4.jpg"
+                "file": "home-women-background-image-4.jpg"
             },
             {
-                "file" : "home-women-background-image-5.jpg"
+                "file": "home-women-background-image-5.jpg"
             }
         ],
-        "men": [],
-        "kid": []
+        "men": [
+            {
+                "file": "home-men-background-image-1.jpg"
+            },
+            {
+                "file": "home-men-background-image-2.jpg"
+            },
+            {
+                "file": "home-men-background-image-3.jpg"
+            },
+            {
+                "file": "home-men-background-image-4.jpg"
+            },
+            {
+                "file": "home-men-background-image-5.jpg"
+            }
+        ],
+        "kid": [
+            {
+                "file": "home-kid-background-image-1.jpg"
+            },
+            {
+                "file": "home-kid-background-image-2.jpg"
+            },
+            {
+                "file": "home-kid-background-image-3.jpg"
+            },
+            {
+                "file": "home-kid-background-image-4.jpg"
+            },
+            {
+                "file": "home-kid-background-image-5.jpg"
+            }
+        ]
     }
 }
