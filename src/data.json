@@ -1,0 +1,23 @@
+{   
+    "home": {
+        "women": [
+            {
+                "file" : "home-women-background-image-1.jpg"
+            },
+            {
+                "file" : "home-women-background-image-2.jpg"
+            },
+            {
+                "file" : "home-women-background-image-3.jpg"
+            },
+            {
+                "file" : "home-women-background-image-4.jpg"
+            },
+            {
+                "file" : "home-women-background-image-5.jpg"
+            }
+        ],
+        "men": [],
+        "kid": []
+    }
+}

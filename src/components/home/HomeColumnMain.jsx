@@ -1,19 +1,22 @@
-import { motion } from 'framer-motion';
 import { useState } from 'react';
+import { motion } from 'framer-motion';
 import { debounce } from "lodash"
 import HomeColumnBlock from './HomeColumnBlock';
 
-function HomeColumnMain({section}) {
+function HomeColumnMain({ section, data }) {
     // State to manage the current scroll position
     const [scrollPosition, setScrollPosition] = useState(0);
+
+    // variable used to find the max translate value
+    const ITEM_SCROLL_HEIGHT = -100;
+    const maxScrollPosition = (data.length - 1) * ITEM_SCROLL_HEIGHT;
 
     // Handle the scrolling position
     const handleWheel = debounce((event) => {
         let scrollDirection = event.deltaY;
-        // Negative = down, Positive = up
-        let newScrollPosition = scrollPosition + (scrollDirection > 0 ? -100 : 100)
+        let newScrollPosition = scrollPosition + (scrollDirection > 0 ? ITEM_SCROLL_HEIGHT : (ITEM_SCROLL_HEIGHT * -1))
         // Making sure the newScrollPoisition doesnt exceed boundaries 
-        if (newScrollPosition >= -400 && newScrollPosition <= 0) {
+        if (newScrollPosition >= maxScrollPosition && newScrollPosition <= 0) {
             setScrollPosition(newScrollPosition);
         }
     }, 100)
@@ -29,31 +32,35 @@ function HomeColumnMain({section}) {
     }
 
     return (
-        <div className="home__column">
-            <motion.div
-                className="home__column-inner"
-                variants={scrollAnimation}
-                animate='scroll'
-                onWheel={handleWheel}
+        <motion.div
+            className="home__column"
+            variants={scrollAnimation}
+            animate='scroll'
+            onWheel={handleWheel}
+        >
+            {/* Main image to transition from loading */}
+            <motion.article
+                className="home-column__block"
+                style={{ backgroundImage: `url("/homeimage/women/home-women-background-image-1.jpg")` }}
+                layoutId="main-image-1"
+                transition={{
+                    duration: 0.75,
+                    ease: [0.16, 0.86, 0.64, 0.90]
+                }}
             >
-                {/* Main Image to transition from loading */}
-                <motion.article
-                    className="home-column__block"
-                    style={{ backgroundImage: `url("./loadingImages/image-1.jpg")` }}
-                    layoutId="main-image-1"
-                    transition={{
-                        duration: 0.75,
-                        ease: [0.16, 0.86, 0.64, 0.90]
-                    }}
-                >
-                </motion.article>
+            </motion.article>
 
-                <HomeColumnBlock section = {section} id="image-2" />
-                <HomeColumnBlock section = {section} id="image-3" />
-                <HomeColumnBlock section = {section} id="image-4" />
-                <HomeColumnBlock section = {section} id="image-5" />
-            </motion.div>
-        </div>
+            {/* Generate blocks within the column except the first */}
+            {data.slice(1).map((element, index) => {
+                return (
+                    <HomeColumnBlock
+                        key={index}
+                        section={section}
+                        id={element.file}
+                    />
+                )
+            })}
+        </motion.div>
     )
 }
 

@@ -1,10 +1,10 @@
 import { motion } from 'framer-motion'
 import HomeColumnMain from '../components/home/HomeColumnMain';
 
-function Home() {
+function Home({home}) {
     return (
         <section className="home">
-            <HomeColumnMain section = "women"  />
+            <HomeColumnMain section = "women" data = {home.women} />
         </section>
     )
 }

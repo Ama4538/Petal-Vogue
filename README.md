@@ -29,6 +29,7 @@ A E-commerce platform
 4. Open on localHost: npm run preview
 
 ## Features
+- Dynmcially add information to home page via data.json
 
 ## Tech Stack
 - React
@@ -55,6 +56,12 @@ A E-commerce platform
     3. https://unsplash.com/@clemono
     4. https://unsplash.com/@saintape
     5. https://unsplash.com/@cahh
+- Kid Home
+    1. https://unsplash.com/@yaanapi
+    2. https://unsplash.com/@leorivas
+    3. https://unsplash.com/@jessicarockowitz 
+    4. https://unsplash.com/@anniespratt 
+    5. https://unsplash.com/@seteph
     
 ## License
 Distributed under the MIT License. See `LICENSE` for more information.

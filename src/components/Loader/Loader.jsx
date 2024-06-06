@@ -1,7 +1,7 @@
-import LoaderImage from './LoaderImage';
 import { motion } from 'framer-motion';
+import LoaderImage from './LoaderImage';
 
-// Container Animation
+// Container animation
 const container = {
     show: {
         transition: {
@@ -10,7 +10,22 @@ const container = {
     }
 };
 
-// Side Image Animation
+// Main image animation
+const loadingMain = {
+    hidden: {
+        y: 200,
+        opacity: 0,
+    },
+    show: {
+        y: 0,
+        opacity: 1,
+        transition: {
+            duration: 1.6,
+        }
+    },
+}
+
+// Side image animation
 const loadingItems = {
     hidden: {
         y: 200,
@@ -33,21 +48,6 @@ const loadingItems = {
     }
 };
 
-// Main Animation
-const loadingMain = {
-    hidden: {
-        y: 200,
-        opacity: 0,
-    },
-    show: {
-        y: 0,
-        opacity: 1,
-        transition: {
-            duration: 1.6,
-        }
-    },
-}
-
 function Loader({ setLoading }) {
     return (
         <motion.div
@@ -58,23 +58,24 @@ function Loader({ setLoading }) {
             exit="exit"
             onAnimationComplete={() => setLoading(false)}
         >
-
-            {/* ID is image name */}
+            {/* Main image used to transition */}
             <motion.div
-                className={`loader__image-container loader__image-1`}
+                className={`loader__image-container loader__loader-image-1`}
                 variants={loadingMain}
             >
                 <motion.img
                     className="loader__image"
-                    src="/loadingImages/image-1.jpg"
-                    alt="image-1"
+                    src="/homeimage/women/home-women-background-image-1.jpg"
+                    alt="home-women-background-image-1.jpg"
                     layoutId="main-image-1"
                 />
             </motion.div>
-            <LoaderImage variants={loadingItems} id="image-2"></LoaderImage>
-            <LoaderImage variants={loadingItems} id="image-3"></LoaderImage>
-            <LoaderImage variants={loadingItems} id="image-4"></LoaderImage>
-            <LoaderImage variants={loadingItems} id="image-5"></LoaderImage>
+
+            {/* ID is image name */}
+            <LoaderImage variants={loadingItems} id="loader-image-2"></LoaderImage>
+            <LoaderImage variants={loadingItems} id="loader-image-3"></LoaderImage>
+            <LoaderImage variants={loadingItems} id="loader-image-4"></LoaderImage>
+            <LoaderImage variants={loadingItems} id="loader-image-5"></LoaderImage>
         </motion.div>
     );
 }

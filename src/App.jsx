@@ -1,7 +1,8 @@
-import { motion, AnimatePresence } from "framer-motion"
 import { useState } from "react";
-import Home from "./pages/Home";
+import { motion, AnimatePresence } from "framer-motion"
+import { home } from "./data.json"
 import Loader from "./components/loader/Loader.jsx"
+import Home from "./pages/Home";
 
 function App() {
     // The state of the loading animation
@@ -16,7 +17,7 @@ function App() {
                     <Loader setLoading={setLoading} />
                 </motion.div>
             ) : (
-                <Home />
+                <Home home = {home}/>
             )}
         </AnimatePresence>
     )
