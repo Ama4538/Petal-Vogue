@@ -1,7 +1,7 @@
-import { useEffect } from 'react';
 import LoaderImage from './LoaderImage';
-import { motion, easeInOut } from 'framer-motion';
+import { motion } from 'framer-motion';
 
+// Container Animation
 const container = {
     show: {
         transition: {
@@ -10,6 +10,7 @@ const container = {
     }
 };
 
+// Side Image Animation
 const loadingItems = {
     hidden: {
         y: 200,
@@ -20,6 +21,7 @@ const loadingItems = {
         opacity: 1,
         transition: {
             duration: 1.6,
+            ease: [0.16, 0.86, 0.64, 0.90]
         }
     },
     exit: {
@@ -27,11 +29,11 @@ const loadingItems = {
         opacity: 0,
         transition: {
             duration: 0.8,
-            ease: easeInOut,
         }
     }
 };
 
+// Main Animation
 const loadingMain = {
     hidden: {
         y: 200,
@@ -51,13 +53,24 @@ function Loader({ setLoading }) {
         <motion.div
             className="loader"
             variants={container}
-            initial='hidden'
-            animate='show'
-            exit='exit'
+            initial="hidden"
+            animate="show"
+            exit="exit"
             onAnimationComplete={() => setLoading(false)}
         >
 
-            <LoaderImage variants={loadingMain} id="image-1"></LoaderImage>
+            {/* ID is image name */}
+            <motion.div
+                className={`loader__image-container loader__image-1`}
+                variants={loadingMain}
+            >
+                <motion.img
+                    className="loader__image"
+                    src="/loadingImages/image-1.jpg"
+                    alt="image-1"
+                    layoutId="main-image-1"
+                />
+            </motion.div>
             <LoaderImage variants={loadingItems} id="image-2"></LoaderImage>
             <LoaderImage variants={loadingItems} id="image-3"></LoaderImage>
             <LoaderImage variants={loadingItems} id="image-4"></LoaderImage>

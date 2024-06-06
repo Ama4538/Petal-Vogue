@@ -38,11 +38,23 @@ A E-commerce platform
 - Inspiration
     - Uniqlo
 - Loading Image 
-    - image 1 https://unsplash.com/@joshrh19
-    - image 2  https://unsplash.com/@von_co
-    - image 3 https://unsplash.com/@danielmonteirox
-    - image 4 https://unsplash.com/@lzzbest
-    - image 5 https://unsplash.com/@zhangkaiyv 
-
+    1. https://unsplash.com/@joshrh19
+    2. https://unsplash.com/@khodzinskyi 
+    3. https://unsplash.com/@danielmonteirox
+    4. https://unsplash.com/@lzzbest
+    5. https://unsplash.com/@omarlopez1 
+- Female Home 
+    1. https://unsplash.com/@joshrh19
+    2. https://unsplash.com/@olegivanovpht 
+    3. https://unsplash.com/@marcute
+    4. https://unsplash.com/@alcure
+    5. https://unsplash.com/@zonde
+- Male Home 
+    1. https://unsplash.com/@swltni
+    2. https://unsplash.com/@gohrhyyan
+    3. https://unsplash.com/@clemono
+    4. https://unsplash.com/@saintape
+    5. https://unsplash.com/@cahh
+    
 ## License
 Distributed under the MIT License. See `LICENSE` for more information.

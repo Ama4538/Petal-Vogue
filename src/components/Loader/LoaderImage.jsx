@@ -1,4 +1,4 @@
-import { motion, easeInOut } from 'framer-motion';
+import { motion } from 'framer-motion';
 
 function LoaderImage({ variants, id }) {
     return (

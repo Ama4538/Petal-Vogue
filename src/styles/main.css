@@ -13,7 +13,7 @@
     Extra 
 */
 
-@import '../components/Loader/Loader.css';
+@import '../components/loader/Loader.css';
 
 :root {
     --background-color: #FDFDF9;
@@ -24,18 +24,32 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    
 }
 
-
 /* Home */
-
 .home {
-    background-color: maroon;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100%;
+    background-color: var(--background-color);
+    
+}
+
+.home__column {
+    height: 100dvh;
     overflow: hidden;
 }
 
-.temp {
-    max-width: 100dvw;
-    object-fit: cover;
+.home__column-inner {
+    height: 100%;
 }
 
+.home-column__block {
+    background-position: center;
+    background-size: cover;
+    height: 100%;
+    scroll-snap-align: center;
+}

@@ -1,7 +1,7 @@
 import { motion, AnimatePresence } from "framer-motion"
 import { useState } from "react";
 import Home from "./pages/Home";
-import Loader from "./components/Loader/Loader.jsx"
+import Loader from "./components/loader/Loader.jsx"
 
 function App() {
     // The state of the loading animation
@@ -11,12 +11,12 @@ function App() {
         // AnimatePresence for exit animation
         <AnimatePresence>
             {loading ? (
-                // Required by Animation Presence 
-                <motion.div key="loader">
-                    <Loader setLoading={setLoading}></Loader>
+                // Wrapper div with key for AnimatePresence
+                <motion.div key = "loader">
+                    <Loader setLoading={setLoading} />
                 </motion.div>
             ) : (
-                <Home></Home>
+                <Home />
             )}
         </AnimatePresence>
     )
