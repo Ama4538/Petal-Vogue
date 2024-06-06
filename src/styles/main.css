@@ -47,3 +47,20 @@
     background-position: center;
     background-size: cover;
 }
+
+/* Nav */
+
+.nav {
+    position: fixed;
+    z-index: 999;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    height: 5vmax;
+    width: 100%;
+    background-color: #FDFDF9;
+}
+
+.nav__list {
+    display: flex;
+    list-style: none;
+}

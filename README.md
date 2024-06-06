@@ -12,7 +12,6 @@ A E-commerce platform
 
 ## TODO
 1. Home (Uniqlo)
-    - Zoom in effect
     - Nav: Logo, Women, Men, Kids, Favorite, Shopping card
     - 3 Section with 5 Images
     - Search Icon at the bottom middle

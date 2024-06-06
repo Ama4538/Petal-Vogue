@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { debounce } from "lodash"
-import HomeColumnBlock from './HomeColumnBlock';
+import HomeColumnBlock from './HomeColumnBlock.jsx';
 
 function HomeColumnMain({ section, data }) {
     // State to manage the current scroll position
