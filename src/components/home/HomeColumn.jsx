@@ -40,7 +40,7 @@ function HomeColumn({ section, data }) {
         scroll: {
             y: `${scrollPosition}%`,
             transition: {
-                duration: 0.75,
+                duration: 0.65,
             }
         },
     }

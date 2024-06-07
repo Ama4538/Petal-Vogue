@@ -34,6 +34,7 @@ function Loader() {
             y: 0,
             opacity: 1,
             transition: {
+                delay: 0.6,
                 duration: 1.6,
             }
         },
@@ -53,13 +54,6 @@ function Loader() {
                 ease: [0.16, 0.86, 0.64, 0.90]
             }
         },
-        exit: {
-            y: -200,
-            opacity: 0,
-            transition: {
-                duration: 0.8,
-            }
-        }
     };
 
     return (
@@ -68,7 +62,6 @@ function Loader() {
             variants={container}
             initial="hidden"
             animate="show"
-            exit="exit"
             onAnimationComplete={() => setLoading(false)}
         >
             {/* Main image used to transition */}
