@@ -17,12 +17,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 @import '../components/loader/Loader.css';
 @import '../components/nav/homenav.css';
+@import '../components/home/home.css';
 
 :root {
     --primary-font: "Libre Baskerville", serif;
     --secondary-font: "Montserrat", sans-serif;
 
     --font-size-small: clamp(1rem, max(1.15rem, 1.10vmax), max(1.25rem, 1.75vmax));
+    --font-size-med: clamp(1.35rem, max(1.25rem, 1.75vmax), max(2.25rem, 2.5vmax));
+    --font-size-large: clamp(1.75rem, max(2.25rem, 2.5vmax), max(2.5rem, 3vmax));
 
     --padding-very-small: clamp(0.5rem, max(0.75rem, 1vmax), max(1rem, 1.25vmax));
     --padding-small: clamp(1rem, max(1.25rem, 1.5vmax), max(1.5rem, 2vmax));
@@ -41,53 +44,6 @@
     box-sizing: border-box;
 }
 
-/* Home */
-.home {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100vh;
-    width: 100%;
-    background-color: var(--background-color);
-    overflow: hidden;
+ul {
+    list-style: none;
 }
-
-.home__row {
-    display: flex;
-    height: 100%;
-    width: 100%;
-}
-
-.home__column {
-    height: 100%;
-}
-
-.home-column__block {
-    position: relative;
-    height: 100%;
-    width: 100dvw;
-    background-position: center 10%;
-    background-size: cover;
-}
-
-.home__column > .home-column__block:nth-child(2) {
-    background-position: center;
-}
-
-.home-column__block::before {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    background: linear-gradient(
-        to top,
-        rgba(0, 0, 0, 0.4),
-        rgba(0, 0, 0, 0.1),
-        transparent,
-        rgba(0, 0, 0, 0.1),
-        rgba(0, 0, 0, 0.4)
-    );
-    content: "";
-}
-

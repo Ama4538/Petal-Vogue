@@ -13,8 +13,7 @@ A E-commerce platform
 ## TODO
 1. Home (Uniqlo)
     - Nav: Logo, Women, Men, Kids, Favorite, Shopping card
-    - 3 Section with 5 Images
-    - Search Icon at the bottom middle
+
 2. Shop (React Router)
     - 
 3. Finish readme
@@ -41,7 +40,7 @@ A E-commerce platform
     1. https://unsplash.com/@joshrh19
     2. https://unsplash.com/@khodzinskyi 
     3. https://unsplash.com/@danielmonteirox
-    4. https://unsplash.com/@lzzbest
+    4. https://unsplash.com/@joshrh19
     5. https://unsplash.com/@omarlopez1 
 - Female Home 
     1. https://unsplash.com/@joshrh19
@@ -52,7 +51,7 @@ A E-commerce platform
 - Male Home 
     1. https://unsplash.com/@mostafa_meraji
     2. https://unsplash.com/@clemono
-    3. https://unsplash.com/@biancaberg
+    3. https://unsplash.com/@queens_photos
     4. https://unsplash.com/@saintape
     5. https://unsplash.com/@cahh
 - Kid Home

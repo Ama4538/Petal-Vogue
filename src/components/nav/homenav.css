@@ -29,15 +29,14 @@
 
 .home-nav__list {
     display: flex;
-    list-style: none;
 }
 
-.home-nav__list-button-wrapper {
+.home-nav__list-button-container {
     justify-content: center;
     gap: var(--padding-very-small);
 }
 
-.home-nav__list-icon-wrapper {
+.home-nav__list-icon-container {
     justify-content: flex-end;
     gap: var(--padding-very-small);
     height: 100%;
@@ -87,24 +86,24 @@
     width: 100%;
 }
 
-.home-nav__list-icon-wrapper>.home-nav__list-icon:nth-child(1)::before {
+.home-nav__list-icon-container>.home-nav__list-icon:nth-child(1)::before {
     background: url(/icons/search.svg) no-repeat center / contain;
 }
 
-.home-nav__list-icon-wrapper>.home-nav__list-icon:nth-child(2)::before {
+.home-nav__list-icon-container>.home-nav__list-icon:nth-child(2)::before {
     background: url(/icons/heart.svg) no-repeat center / contain;
 }
 
-.home-nav__list-icon-wrapper>.home-nav__list-icon:nth-child(3)::before {
+.home-nav__list-icon-container>.home-nav__list-icon:nth-child(3)::before {
     background: url(/icons/cart.svg) no-repeat center / contain;
 }
 
 /* Animation */
 .home-nav__buttons:hover,
 .home-nav__logo:hover,
-.home-nav__list-icon-wrapper>.home-nav__list-icon:nth-child(1):hover,
-.home-nav__list-icon-wrapper>.home-nav__list-icon:nth-child(2):hover,
-.home-nav__list-icon-wrapper>.home-nav__list-icon:nth-child(3):hover {
+.home-nav__list-icon-container>.home-nav__list-icon:nth-child(1):hover,
+.home-nav__list-icon-container>.home-nav__list-icon:nth-child(2):hover,
+.home-nav__list-icon-container>.home-nav__list-icon:nth-child(3):hover {
     translate: 0 -3.5%;
 }
 

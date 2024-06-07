@@ -44,30 +44,30 @@ function Nav({ setSectionLocation }) {
             animate="show"
         >
             <Link to="/home" className="home-nav__logo" href=""></Link>
-            <ul className="home-nav__list home-nav__list-button-wrapper">
+            <ul className="home-nav__list home-nav__list-button-container">
                 <li>
                     <button
                         className="home-nav__buttons"
                         onClick={() => { handleClick("women") }}
-                        data-activeStatus={`${activeSection === 0 ? 'active' : 'inactive'}`}
+                        data-activestatus={`${activeSection === 0 ? 'active' : 'inactive'}`}
                     ><p>Women</p></button>
                 </li>
                 <li>
                     <button
                         className="home-nav__buttons"
                         onClick={() => { handleClick("men") }}
-                        data-activeStatus={`${activeSection === 1 ? 'active' : 'inactive'}`}
+                        data-activestatus={`${activeSection === 1 ? 'active' : 'inactive'}`}
                     ><p>Men</p></button>
                 </li>
                 <li>
                     <button
                         className="home-nav__buttons"
                         onClick={() => { handleClick("kid") }}
-                        data-activeStatus={`${activeSection === 2 ? 'active' : 'inactive'}`}
+                        data-activestatus={`${activeSection === 2 ? 'active' : 'inactive'}`}
                     ><p>Kid</p></button>
                 </li>
             </ul>
-            <ul className="home-nav__list home-nav__list-icon-wrapper">
+            <ul className="home-nav__list home-nav__list-icon-container">
                 <Link to="/home" className="home-nav__list-icon" ></Link>
                 <Link to="/home" className="home-nav__list-icon" ></Link>
                 <Link to="/home" className="home-nav__list-icon" ></Link>

@@ -1,0 +1,112 @@
+/* Home */
+.home {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100%;
+    background-color: var(--background-color);
+    overflow: hidden;
+}
+
+.home__row {
+    display: flex;
+    height: 100%;
+    width: 100%;
+}
+
+.home__column,
+.home-column__slider {
+    height: 100%;
+}
+
+.home__column {
+    position: relative;
+}
+
+.home-column__pagination-container {
+    position: absolute;
+    top: 50%;
+    right: 1%;
+    z-index: 999;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    height: 35%;
+    width: 0.5%;
+    justify-content: center;
+    opacity: 0.75;
+    translate: -50% -50%;
+}
+
+.home-column__pagination {
+    height: 3%;
+    aspect-ratio: 1 / 1;
+    background-color: var(--background-color);
+    border-radius: 1rem;
+    transition: height 0.15s ease-in-out;
+}
+
+.home-column__block {
+    position: relative;
+    height: 100%;
+    width: 100dvw;
+    background-position: center 10%;
+    background-size: cover;
+}
+
+.home-column__slider>.home-column__block:nth-child(2) {
+    background-position: center 70%;
+}
+
+.home-column__slider>.home-column__block:nth-child(4) {
+    background-position: center 40%;
+}
+
+.home-column__block::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: radial-gradient(circle,
+            transparent,
+            rgba(0, 0, 0, 0.2),
+            rgba(0, 0, 0, 0.4),
+            rgba(0, 0, 0, 0.6));
+    content: "";
+}
+
+.home-column__text-container {
+    position: absolute;
+    left: 5%;
+    bottom: 25%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: var(--padding-very-small);
+    width: 30%;
+    background-color: transparent;
+    color: var(--secondary-font-color);
+}
+
+.home-column__text-title,
+.home-column__text-statement {
+    font-weight: 400;
+}
+
+.home-column__text-title {
+    font-family: var(--primary-font);
+    font-size: var(--font-size-med);
+}
+
+.home-column__text-statement {
+    font-family: var(--secondary-font);
+    font-size: var(--font-size-small);
+}
+
+/* Animation */
+.home-column__pagination[data-active="active"] {
+    height: 7%;
+    background-color: #808080;
+}

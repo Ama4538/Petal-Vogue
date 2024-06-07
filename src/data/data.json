@@ -3,55 +3,97 @@
         "women": [
             {
                 "file": "home-women-background-image-1.jpg",
-                "title": "Mackenzie Sunglass Collection:",
+                "title": "Mackenzie's Sunglass Collection:",
                 "subtitle": "Captivating and Subverting Expectation",
-                "statement": "It's more than just eyewear—it's your fashion statement, empowering you to conquer the world, one stylish frame at a time."
+                "statement": "Elevate your style with ease, one frame at a time."
             },
             {
-                "file": "home-women-background-image-2.jpg"
+                "file": "home-women-background-image-2.jpg",
+                "title": "Bikini Collection:",
+                "subtitle": "Effortless and Empowering",
+                "statement": "Discover the hottest trends, boldest designs, and must-have essentials to make a splash wherever you go."
             },
             {
-                "file": "home-women-background-image-3.jpg"
+                "file": "home-women-background-image-3.jpg",
+                "title": "T-Shirt Collection:",
+                "subtitle": "Iconic & Trendsetting",
+                "statement": "Redefining Comfort, Reinventing Fashion! From timeless basics to statement pieces, embark on a journey of self-expression"
             },
             {
-                "file": "home-women-background-image-4.jpg"
+                "file": "home-women-background-image-4.jpg",
+                "title": "Tank Top Collection:",
+                "subtitle": "Dress Less to Impress",
+                "statement": "Dive into a world of versatility and style, where each tank embodies the essence of elegance."
             },
             {
-                "file": "home-women-background-image-5.jpg"
+                "file": "home-women-background-image-5.jpg",
+                "title": "Allie's Sweater Collection:",
+                "subtitle": "Comfort for Every Season",
+                "statement": "From classic knits to trendy textures, discover the perfect sweater to complete your look."
             }
         ],
         "men": [
             {
-                "file": "home-men-background-image-1.jpg"
+                "file": "home-men-background-image-1.jpg",
+                "title": "Hoodie Collection:",
+                "subtitle": "Crafted for Comfort, Designed for Style",
+                "statement": "From laid-back weekends to urban adventures, each hoodie is designed to exude confidence"
             },
             {
-                "file": "home-men-background-image-2.jpg"
+                "file": "home-men-background-image-2.jpg",
+                "title": "Bond's Hat Collection:",
+                "subtitle": "Essentials for Every Occasion",
+                "statement": "Experience the epitome of sophistication: Perfect Hats for Every Occasion."
             },
             {
-                "file": "home-men-background-image-3.jpg"
+                "file": "home-men-background-image-3.jpg",
+                "title": "Rain Coat Collection:",
+                "subtitle": "Timeless Elegance, Modern Edge",
+                "statement": "Stay stylish and dry. Where Fashion Meets Functionality. Rain or Shine, We've Got You Covered."
             },
             {
-                "file": "home-men-background-image-4.jpg"
+                "file": "home-men-background-image-4.jpg",
+                "title": "Shirt Collection:",
+                "subtitle": "Tradition Meets Trendsetting",
+                "statement": "From meetings to nights out, ensure you're always covered with style and confidence in every look."
             },
             {
-                "file": "home-men-background-image-5.jpg"
+                "file": "home-men-background-image-5.jpg",
+                "title": "Arasaka's Jacket Collection:",
+                "subtitle": "Ultimate style and comfort",
+                "statement": "Step into unparalleled style and innovation with jackets that redefine modern fashion."
             }
         ],
         "kid": [
             {
-                "file": "home-kid-background-image-1.jpg"
+                "file": "home-kid-background-image-1.jpg",
+                "title": "Shorts Collection:",
+                "subtitle": "Everyday Comfort",
+                "statement": "Let your kids explore in style with our fun and durable shorts."
             },
             {
-                "file": "home-kid-background-image-2.jpg"
+                "file": "home-kid-background-image-2.jpg",
+                "title": "Vayne's Jacket Collection:",
+                "subtitle": "Simple, Yet Stylish",
+                "statement": "Explore endless possibilities for your little fashionistas with Vayne's jacket collection."
             },
             {
-                "file": "home-kid-background-image-3.jpg"
+                "file": "home-kid-background-image-3.jpg",
+                "title": "Swimwear Collection:",
+                "subtitle": "Colorful and Comfortable Classics",
+                "statement": "Make a splash this summer with our trendy and playful swimwear picks."
             },
             {
-                "file": "home-kid-background-image-4.jpg"
+                "file": "home-kid-background-image-4.jpg",
+                "title": "Sweater Collection:",
+                "subtitle": "Cute & Playful",
+                "statement": "Stay snug and stylish all season long with our must-have sweater picks for kids."
             },
             {
-                "file": "home-kid-background-image-5.jpg"
+                "file": "home-kid-background-image-5.jpg",
+                "title": "Crop Top Collection:",
+                "subtitle": "Fun and Fashionable",
+                "statement": "Add a touch of fun and flair to their wardrobe with our playful crop tops."
             }
         ]
     }
