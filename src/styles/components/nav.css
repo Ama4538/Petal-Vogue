@@ -1,5 +1,5 @@
 /* Nav */
-.home-nav {
+.nav {
     position: fixed;
     z-index: 999;
     display: grid;
@@ -7,43 +7,45 @@
     padding: 0 var(--padding-med);
     align-items: center;
     justify-content: space-between;
-    height: 7.5dvh;
     width: 100%;
     font-family: var(--primary-font);
     font-size: var(--font-size-small);
+    box-shadow: 0px 2px 2px var(--primary-shadow-color);
 }
 
-.home-nav__logo {
+.nav__logo {
     position: relative;
     height: 90%;
     width: 30%;
+    cursor: pointer;
     transition: 0.25s;
 }
 
-.home-nav__list-icon {
+.nav__list-icon {
     position: relative;
     height: 100%;
     width: 17.5%;
+    cursor: pointer;
     transition: 0.25s;
 }
 
-.home-nav__list {
+.nav__list {
     display: flex;
 }
 
-.home-nav__list-button-container {
+.nav__list-button-container {
     justify-content: center;
     gap: var(--padding-very-small);
 }
 
-.home-nav__list-icon-container {
+.nav__list-icon-container {
     justify-content: flex-end;
     gap: var(--padding-very-small);
     height: 100%;
     width: 100%;
 }
 
-.home-nav__buttons {
+.nav__buttons {
     position: relative;
     display: grid;
     padding: var(--padding-small) 0;
@@ -54,21 +56,20 @@
     font-weight: 700;
     background-color: transparent;
     border: none;
-    color: var(--secondary-font-color);
+
     cursor: pointer;
-    text-shadow: 1px 2px 2px black;
     transition: 0.25s;
 }
 
-.home-nav__buttons>p {
+.nav__buttons>p {
     position: relative;
     width: min-content;
     text-transform: uppercase;
 }
 
 /* Icons */
-.home-nav__logo::before,
-.home-nav__list-icon::before {
+.nav__logo::before,
+.nav__list-icon::before {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -76,58 +77,58 @@
     translate: -50% -50%;
 }
 
-.home-nav__logo::before {
+.nav__logo::before {
     height: 60%;
     width: 100%;
-    background: url(/icons/logo.svg) no-repeat center / contain;
+    background: url(/icons/default-logo.svg) no-repeat center / contain;
 }
 
-.home-nav__list-icon::before {
+.nav__list-icon::before {
     height: 45%;
     width: 100%;
 }
 
-.home-nav__list-icon-container>.home-nav__list-icon:nth-child(1)::before {
-    background: url(/icons/search.svg) no-repeat center / contain;
+.nav__list-icon-container>.nav__list-icon:nth-child(1)::before {
+    background: url(/icons/default-search.svg) no-repeat center / contain;
 }
 
-.home-nav__list-icon-container>.home-nav__list-icon:nth-child(2)::before {
-    background: url(/icons/heart.svg) no-repeat center / contain;
+.nav__list-icon-container>.nav__list-icon:nth-child(2)::before {
+    background: url(/icons/default-heart.svg) no-repeat center / contain;
 }
 
-.home-nav__list-icon-container>.home-nav__list-icon:nth-child(3)::before {
-    background: url(/icons/cart.svg) no-repeat center / contain;
+.nav__list-icon-container>.nav__list-icon:nth-child(3)::before {
+    background: url(/icons/default-cart.svg) no-repeat center / contain;
 }
 
 /* Animation */
-.home-nav__buttons:hover,
-.home-nav__logo:hover,
-.home-nav__list-icon-container>.home-nav__list-icon:nth-child(1):hover,
-.home-nav__list-icon-container>.home-nav__list-icon:nth-child(2):hover,
-.home-nav__list-icon-container>.home-nav__list-icon:nth-child(3):hover {
+.nav__buttons:hover,
+.nav__logo:hover,
+.nav__list-icon-container>.nav__list-icon:nth-child(1):hover,
+.nav__list-icon-container>.nav__list-icon:nth-child(2):hover,
+.nav__list-icon-container>.nav__list-icon:nth-child(3):hover {
     translate: 0 -3.5%;
 }
 
-.home-nav__buttons>p::before,
-.home-nav__buttons>p::after {
+.nav__buttons>p::before,
+.nav__buttons>p::after {
     position: absolute;
     bottom: 0;
     height: 2px;
     width: 0;
-    background-color: var(--secondary-font-color);
+    background-color: var(--primary-font-color);
     content: "";
     transition: width 0.25s;
 }
 
-.home-nav__buttons>p::before {
+.nav__buttons>p::before {
     left: 50%;
 }
 
-.home-nav__buttons>p::after {
+.nav__buttons>p::after {
     right: 50%;
 }
 
-.home-nav__buttons[data-activeStatus='active']>p::before,
-.home-nav__buttons[data-activeStatus='active']>p::after {
+.nav__buttons[data-activeStatus='active']>p::before,
+.nav__buttons[data-activeStatus='active']>p::after {
     width: 50%;
 }

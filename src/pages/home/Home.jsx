@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { motion } from 'framer-motion'
 import HomeColumnMain from "./HomeColumnMain.jsx"
 import HomeColumn from './HomeColumn.jsx';
-import HomeNav from './HomeNav.jsx';
+import Nav from '../../components/nav/Nav.jsx';
 
 function Home({ home }) {
     const [sectionLocation, setSectionLocation] = useState(0);
@@ -12,7 +12,7 @@ function Home({ home }) {
         swipe: {
             x: `${sectionLocation}%`,
             transition: {
-                duration: 0.65,
+                duration: 0.5,
             }
         },
         exit: {
@@ -29,7 +29,7 @@ function Home({ home }) {
             variants={homeAnimation}
             exit = "exit"
         >
-            <HomeNav setSectionLocation={setSectionLocation}></HomeNav>
+            <Nav delayTime = {0.75} transtitionTime = {0.5} setSectionLocation={setSectionLocation}/>
             <motion.div
                 className='home__row'
                 variants={homeAnimation}

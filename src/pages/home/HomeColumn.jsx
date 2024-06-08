@@ -32,7 +32,7 @@ function HomeColumn({ section, data }) {
         scroll: {
             y: `${scrollPosition}%`,
             transition: {
-                duration: 0.65,
+                duration: 0.5,
             }
         },
     }

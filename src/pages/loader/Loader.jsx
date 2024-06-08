@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from 'framer-motion';
 import LoaderImage from './LoaderImage';
+import Nav from "../../components/nav/Nav";
 
 function Loader() {
     // The state of the loading animation
@@ -71,7 +72,8 @@ function Loader() {
             animate="show"
             exit = "exit"
             onAnimationComplete={() => setLoading(false)}
-        >
+        >   
+            <Nav />
             {/* Main image used to transition */}
             <motion.div
                 className={`loader__image-container loader__loader-image-1`}

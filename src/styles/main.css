@@ -16,7 +16,7 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 @import './components/Loader.css';
-@import './components/homenav.css';
+@import './components/nav.css';
 @import './components/home.css';
 
 :root {
@@ -28,11 +28,12 @@
     --font-size-large: clamp(1.75rem, max(2.25rem, 2.5vmax), max(2.5rem, 3vmax));
 
     --padding-very-small: clamp(0.5rem, max(0.75rem, 1vmax), max(1rem, 1.25vmax));
-    --padding-small: clamp(1rem, max(1.25rem, 1.5vmax), max(1.5rem, 2vmax));
+    --padding-small: clamp(0.75rem, max(1rem, 1.25vmax), max(1.5rem, 2vmax));
     --padding-med: clamp(3rem, max(3.5rem, 4vmax), max(4rem, 4.5vmax));
 
 
     --background-color: #FDFDF9;
+    --primary-shadow-color: #D3D3D3;
     --primary-font-color: #121205;
     --secondary-font-color: #F5F5F5;
 
@@ -47,3 +48,5 @@
 ul {
     list-style: none;
 }
+
+/* Search */
