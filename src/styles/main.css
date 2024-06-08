@@ -15,9 +15,9 @@
 */
 
 @import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
-@import '../components/loader/Loader.css';
-@import '../components/nav/homenav.css';
-@import '../components/home/home.css';
+@import './components/Loader.css';
+@import './components/homenav.css';
+@import './components/home.css';
 
 :root {
     --primary-font: "Libre Baskerville", serif;

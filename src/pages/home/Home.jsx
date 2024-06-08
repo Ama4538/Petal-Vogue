@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion'
-import HomeColumnMain from '../components/home/HomeColumnMain.jsx';
-import HomeColumn from '../components/home/HomeColumn.jsx';
-import HomeNav from '../components/nav/HomeNav.jsx';
+import HomeColumnMain from "./HomeColumnMain.jsx"
+import HomeColumn from './HomeColumn.jsx';
+import HomeNav from './HomeNav.jsx';
 
 function Home({ home }) {
     const [sectionLocation, setSectionLocation] = useState(0);

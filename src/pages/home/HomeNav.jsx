@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom"
-import { delay, motion } from 'framer-motion';
+import { motion } from 'framer-motion';
 
 function Nav({ setSectionLocation }) {
     const [activeSection, setActiveSection] = useState(0);
@@ -68,7 +68,7 @@ function Nav({ setSectionLocation }) {
                 </li>
             </ul>
             <ul className="home-nav__list home-nav__list-icon-container">
-                <Link to="/home" className="home-nav__list-icon" ></Link>
+                <Link to="/search" className="home-nav__list-icon" ></Link>
                 <Link to="/home" className="home-nav__list-icon" ></Link>
                 <Link to="/home" className="home-nav__list-icon" ></Link>
             </ul>

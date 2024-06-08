@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from 'framer-motion';
-import LoaderImage from '../components/loader/LoaderImage';
+import LoaderImage from './LoaderImage';
 
 function Loader() {
     // The state of the loading animation

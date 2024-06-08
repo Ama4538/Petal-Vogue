@@ -6,14 +6,12 @@ import HomeColumnBlock from './HomeColumnBlock.jsx';
 function HomeColumn({ section, data }) {
     // State to manage the current scroll position
     const [scrollPosition, setScrollPosition] = useState(0);
-    const [currentIndex, setCurrentIndex] = useState(0);
 
     // variable used to find the max translate value
     const ITEM_SCROLL_HEIGHT = -100;
     const maxScrollPosition = (data.length - 1) * ITEM_SCROLL_HEIGHT;
 
     // Handle the generation of pagination
-    const maxIndex = (data.length - 1);
     const paginationArray = Array.from({ length: data.length })
 
     // Handle the scrolling animation
@@ -25,12 +23,6 @@ function HomeColumn({ section, data }) {
         // Making sure the newScrollPoisition doesnt exceed boundaries 
         if (newScrollPosition >= maxScrollPosition && newScrollPosition <= 0) {
             setScrollPosition(newScrollPosition);
-        }
-
-        // Handle the pagination index
-        let newIndex = currentIndex + (scrollDirection > 0 ? 1 : -1)
-        if (newIndex <= maxIndex && newIndex >= 0) {
-            setCurrentIndex(newIndex);
         }
 
     }, 100)
@@ -54,7 +46,7 @@ function HomeColumn({ section, data }) {
                         <li
                             key={index}
                             className="home-column__pagination"
-                            data-active={`${currentIndex === index ? "active" : "inactive"}`}
+                            data-active={`${(scrollPosition / ITEM_SCROLL_HEIGHT) === index ? "active" : "inactive"}`}
                         ></li>
                     )
                 })}
