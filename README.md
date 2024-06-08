@@ -1,4 +1,4 @@
-![Default Screenshot](Image/screenshot.jpg)
+![Default Screenshot](image/screenshot.jpg)
 
 # E-commerce
 A E-commerce platform
