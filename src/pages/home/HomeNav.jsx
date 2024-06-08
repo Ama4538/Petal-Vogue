@@ -3,11 +3,14 @@ import { Link } from "react-router-dom"
 import { motion } from 'framer-motion';
 
 function Nav({ setSectionLocation }) {
+    // States used to manage the current column in view
     const [activeSection, setActiveSection] = useState(0);
 
+    // onClick event handler
     function handleClick(section) {
         switch (section) {
             case "women":
+                // Changes states based on which buttom is pressed
                 setActiveSection(0);
                 setSectionLocation(0);
                 break;
@@ -22,6 +25,7 @@ function Nav({ setSectionLocation }) {
         }
     }
 
+    // Main nav animation
     const navAnimationMain = {
         initial: {
             y: -200
@@ -29,7 +33,7 @@ function Nav({ setSectionLocation }) {
         show: {
             y: 0,
             transition: {
-                delay: 0.40,
+                delay: 0.20,
                 duration: 1.25,
                 ease: [0.16, 0.86, 0.64, 0.90]
             }

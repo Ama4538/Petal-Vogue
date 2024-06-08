@@ -1,15 +1,16 @@
 import { Route, Routes, useLocation } from "react-router-dom";
 import { AnimatePresence } from 'framer-motion';
 import { home } from "../../data/data.json"
-import Loader from "../../pages/Loader.jsx"
-import Home from "../../pages/Home.jsx";
-import Search from "../../pages/Search.jsx";
+import Loader from "../../pages/loader/Loader.jsx"
+import Home from "../../pages/home/Home.jsx";
+import Search from "../../pages/search/Search.jsx";
 
 function AnimatedRoutes() {
     // Listens to url changes
     const location = useLocation();
 
     return (
+        // Wraps Routes in AnimatePresence to enable exit animations
         <AnimatePresence mode="wait">
             <Routes location={location} key={location.key}>
                 <Route path="/" element={<Loader />} />

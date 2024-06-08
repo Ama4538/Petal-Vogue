@@ -15,12 +15,22 @@ function Home({ home }) {
                 duration: 0.65,
             }
         },
+        exit: {
+            opacity: 0,
+            transition: {
+                duration: 0.25,
+            }
+        }
     }
 
     return (
-        <section className="home">
-            <HomeNav setSectionLocation = {setSectionLocation}></HomeNav>
-            <motion.div 
+        <motion.section
+            className="home"
+            variants={homeAnimation}
+            exit = "exit"
+        >
+            <HomeNav setSectionLocation={setSectionLocation}></HomeNav>
+            <motion.div
                 className='home__row'
                 variants={homeAnimation}
                 animate="swipe"
@@ -30,7 +40,7 @@ function Home({ home }) {
                 <HomeColumn section="kid" data={home.kid} />
             </motion.div>
 
-        </section>
+        </motion.section>
     )
 }
 

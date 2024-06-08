@@ -47,8 +47,9 @@ function HomeColumnMain({ section, data }) {
             y: 0,
             opacity: 1,
             transition: {
-                delay: 1,
+                delay: 0.8,
                 duration: 1,
+                ease: [0.16, 0.86, 0.64, 0.90]
             }
         }
     }
@@ -61,8 +62,9 @@ function HomeColumnMain({ section, data }) {
         show: {
             opacity: 1,
             transition: {
-                delay: 1.5,
+                delay: 1.3,
                 duration: 1,
+                ease: [0.16, 0.86, 0.64, 0.90]
             }
         }
     }
