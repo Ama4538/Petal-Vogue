@@ -1,16 +1,16 @@
 /* Nav */
 .nav {
-    position: fixed;
+    position: sticky;
     z-index: 999;
     display: grid;
     grid-template-columns: 0.4fr 1fr 0.4fr;
-    padding: 0 var(--padding-med);
+    padding: 0 var(--padding-large);
     align-items: center;
     justify-content: space-between;
     width: 100%;
     font-family: var(--primary-font);
     font-size: var(--font-size-small);
-    box-shadow: 0px 2px 2px var(--primary-shadow-color);
+    box-shadow: 0px 2px 5px var(--primary-shadow-color);
 }
 
 .nav__logo {
@@ -56,7 +56,6 @@
     font-weight: 700;
     background-color: transparent;
     border: none;
-
     cursor: pointer;
     transition: 0.25s;
 }

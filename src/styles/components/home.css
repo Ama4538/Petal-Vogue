@@ -114,6 +114,7 @@
 
 /* Home Nav */
 .home>.nav {
+    position: fixed;
     box-shadow: none;
 }
 

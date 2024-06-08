@@ -1,0 +1,63 @@
+{
+    "product": {
+        "women": [
+            {
+                "id": 0,
+                "name": "Sunset Mirage",
+                "price": 125.99,
+                "category": "Sunglass",
+                "star": 4.6,
+                "review": 23,
+                "image": "sunset-mirage.jpg"
+            },
+            {
+                "id": 1,
+                "name": "Ocean Breeze",
+                "price": 95.99,
+                "category": "Sunglass",
+                "size-range": "S-M",
+                "star": 4.6,
+                "review": 78,
+                "image": "ocean-breeze.jpg"
+            },
+            {
+                "id": 2,
+                "name": "Desert Horizon",
+                "price": 135.99,
+                "category": "Sunglass",
+                "star": 4.7,
+                "review": 42,
+                "image": "desert-horizon.jpg"
+            },
+            {
+                "id": 3,
+                "name": "Mountain Echo",
+                "price": 110.99,
+                "category": "Sunglass",
+                "star": 4.5,
+                "review": 56,
+                "image": "mountain-echo.jpg"
+            },
+            {
+                "id": 4,
+                "name": "Urban Shade",
+                "price": 105,
+                "category": "Sunglass",
+                "star": 4.4,
+                "review": 91,
+                "image": "urban-shade.jpg"
+            },
+            {
+                "id": 5,
+                "name": "Tropical Dawn",
+                "price": 125.99,
+                "category": "Sunglass",
+                "star": 4.8,
+                "review": 67,
+                "image": "tropical-dawn.jpg"
+            }
+        ],
+        "men": [],
+        "kid": []
+    }
+}
