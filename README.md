@@ -1,3 +1,5 @@
+![Default Screenshot](Image/screenshot.jpg)
+
 # E-commerce
 A E-commerce platform
 
