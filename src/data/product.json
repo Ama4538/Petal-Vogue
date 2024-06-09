@@ -2,50 +2,116 @@
     "product": {
         "women": [
             {
-                "id": 0,
-                "name": "Sunset Mirage",
+                "name": "Mackenzie's Sunset Mirage",
                 "price": 125.99,
-                "category": "Sunglass",
-                "image": "sunset-mirage.jpg"
+                "category": "sunglass",
+                "description" : "Embrace the hues of twilight",
+                "rating": 4.6,
+                "review": 619,
+                "image": "mackenzie-sunset-mirage.jpg"
             },
             {
-                "id": 1,
-                "name": "Ocean Breeze",
+                "name": "Mackenzie's Ocean Breeze",
                 "price": 95.99,
-                "category": "Sunglass",
-                "size-range": "S-M",
-                "image": "ocean-breeze.jpg"
+                "category": "sunglass",
+                "description" : "Feel the refreshing vibes of the sea",
+                "rating": 4.3,
+                "review": 527,
+                "image": "mackenzie-ocean-breeze.jpg"
             },
             {
-                "id": 2,
-                "name": "Desert Horizon",
+                "name": "Mackenzie's Desert Horizon",
                 "price": 135.99,
-                "category": "Sunglass",
-                "image": "desert-horizon.jpg"
+                "category": "sunglass",
+                "description" : "Navigate the vast landscapes",
+                "rating": 4.7,
+                "review": 936,
+                "image": "mackenzie-desert-horizon.jpg"
             },
             {
-                "id": 3,
-                "name": "Mountain Echo",
+                "name": "Mackenzie's Mountain Echo",
                 "price": 110.99,
-                "category": "Sunglass",
-                "image": "mountain-echo.jpg"
+                "category": "sunglass",
+                "description" : "Conquer the peaks",
+                "rating": 4.5,
+                "review": 295,
+                "image": "mackenzie-mountain-echo.jpg"
             },
             {
-                "id": 4,
-                "name": "Urban Shade",
+                "name": "Mackenzie's Urban Shade",
                 "price": 105,
-                "category": "Sunglass",
-                "image": "urban-shade.jpg"
+                "category": "sunglass",
+                "description" : "Step into the city",
+                "rating": 4.4,
+                "review": 127,
+                "image": "mackenzie-urban-shade.jpg"
             },
             {
-                "id": 5,
-                "name": "Tropical Dawn",
+                "name": "Mackenzie's Tropical Dawn",
                 "price": 125.99,
-                "category": "Sunglass",
-                "image": "tropical-dawn.jpg"
+                "category": "sunglass",
+                "description" : "Awaken to the colors of paradise",
+                "rating": 4.8,
+                "review": 154,
+                "image": "mackenzie-tropical-dawn.jpg"
             }
         ],
-        "men": [],
+        "men": [
+            {
+                "name": "Urban Pulse Hoodie",
+                "price": 45.99,
+                "category": "hoodie",
+                "description" : "Sleek and modern",
+                "rating": 4.3,
+                "review": 738,
+                "image": "urban-pulse-hoodie.jpg"
+            },
+            {
+                "name": "Metro Flex Hoodie",
+                "price": 55.99,
+                "category": "hoodie",
+                "description" : "Maximum comfort and flexibility",
+                "rating": 4.6,
+                "review": 912,
+                "image": "metro-flex-hoodie.jpg"
+            },
+            {
+                "name": "Midnight Dream Hoodie",
+                "price": 50.99,
+                "category": "hoodie",
+                "description" : "Stylish warmth for cool nights",
+                "rating": 4.7,
+                "review": 847,
+                "image": "midnight-dream-hoodie.jpg"
+            },
+            {
+                "name": "Cozy Cloud Hoodie",
+                "price": 125.99,
+                "category": "hoodie",
+                "description" : "Softness like floating on clouds",
+                "rating": 4.3,
+                "review": 624,
+                "image": "cozy-cloud-hoodie.jpg"
+            },
+            {
+                "name": "Adventure Seeker Hoodie",
+                "price": 60.99,
+                "category": "hoodie",
+                "description" : "Ready for any outdoor escapade",
+                "rating": 4.7,
+                "review": 718,
+                "image": "adventure-seeker-hoodie.jpg"
+            },
+            {
+                "name": "Arctic Chill Hoodie",
+                "price": 55.99,
+                "category": "hoodie",
+                "description" : "Frosty comfort for cold days",
+                "rating": 4.6,
+                "review": 839,
+                "image": "arctic-chill-hoodie.jpg"
+            }
+        ],
         "kid": []
     }
 }

@@ -1,42 +1,29 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import SearchNav from '../../components/nav/SearchNav.jsx';
 import { motion } from 'framer-motion'
 import Product from './Product.jsx';
 
 function Search({ product }) {
     // State used to manage current section
-    const [activeSection, setActiveSection] = useState(0)
+    const [activeSection, setActiveSection] = useState("women");
+    // State used to manage the current display of content
     const [currentDisplay, setCurrentDisplay] = useState(product.women)
-    const [sectionTitle, setSectionTitle] = useState("women");
-
-    useEffect(() => {
-        switch (activeSection) {
-            case 0:
-                setSectionTitle("women");
-                setCurrentDisplay(product.women);
-                break;
-            case 1:
-                setSectionTitle("men");
-                setCurrentDisplay(product.men);
-                break;
-            case 2:
-                setSectionTitle("kid");
-                setCurrentDisplay(product.kid);
-                break;
-        }
-    }, [activeSection])
-
+    
+    // Handles the section changes
     function handleClick(section) {
         switch (section) {
+            // Change states based on which buttom is pressed
             case "women":
-                // Changes states based on which buttom is pressed
-                setActiveSection(0);
+                setActiveSection("women");
+                setCurrentDisplay(product.women);
                 break;
             case "men":
-                setActiveSection(1);
+                setActiveSection("men");
+                setCurrentDisplay(product.men);
                 break;
             case "kid":
-                setActiveSection(2);
+                setActiveSection("kid");
+                setCurrentDisplay(product.kid);
                 break;
         }
     }
@@ -58,21 +45,63 @@ function Search({ product }) {
             exit="exit"
         >
             <SearchNav />
-            <ul className='search__section-selector'>
-                <button className='search__section-button' onClick={() => handleClick('women')}>Women</button>
-                <button className='search__section-button' onClick={() => handleClick('men')}>Men</button>
-                <button className='search__section-button' onClick={() => handleClick('kid')}>Kid</button>
-            </ul>
-            <section className='search__content'>
-                <div className='search__header'>
-                    <h3 className='search-header__title'>{sectionTitle}</h3>
+            <div className='search__banner-container'>
+                <div className="search__banner" style={{ backgroundImage: `url("./bannerImage/${activeSection}-banner.jpg")` }} >
+                    <div className="search-banner__text-container">
+                        {activeSection === 'women' && (
+                            <>
+                            <h2 className='search-banner__text-title'>Fashion Finds a New Arc</h2>
+                            <h3 className='search-banner__text-subtitle'>A Glimpse Into Modern</h3>
+                            </>
+                        )} 
+                        {activeSection === 'men' && (
+                            <>
+                            <h2 className='search-banner__text-title'>Style Redefined</h2>
+                            <h3 className='search-banner__text-subtitle'>Crafting Confidence in Every Thread</h3>
+                            </>
+                        )} 
+                        {activeSection === 'kid' && (
+                            <>
+                            <h2 className='search-banner__text-title'>Fashionable Futures Begin Here</h2>
+                            <h3 className='search-banner__text-subtitle'>Discovering the Next Generation of Style Icons</h3>
+                            </>
+                        )} 
+                    </div>
                 </div>
+            </div>
+
+            {/* Change Section Buttons */}
+            <ul className='search__section-selector'>
+                <button
+                    className='search__section-button'
+                    onClick={() => handleClick('women')}
+                    data-activestatus={`${activeSection === 'women' ? 'active' : 'inactive'}`}
+                >Women</button>
+                <button
+                    className='search__section-button'
+                    onClick={() => handleClick('men')}
+                    data-activestatus={`${activeSection === 'men' ? 'active' : 'inactive'}`}
+                >Men</button>
+                <button
+                    className='search__section-button'
+                    onClick={() => handleClick('kid')}
+                    data-activestatus={`${activeSection === 'kid' ? 'active' : 'inactive'}`}
+                >Kid</button>
+            </ul>
+
+            {/* Main Content */}
+            <section className='search__content'>
+                <h3 className='search-header__title'>{activeSection}</h3>
                 <article className='search-content__main'>
+                    {/* Populate the display area */}
                     {currentDisplay.map((element, index) => {
                         return (<Product
-                            sectionTitle={sectionTitle}
+                            sectionTitle={activeSection}
                             name={element.name}
                             price={element.price}
+                            description = {element.description}
+                            rating = {element.rating}
+                            review = {element.review}
                             image={element.image}
                             key={index}
                         />)

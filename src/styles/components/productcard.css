@@ -1,0 +1,99 @@
+.product-card {
+    display: flex;
+    flex-direction: column;
+    aspect-ratio: 1 / 1.15;
+    color: var(--primary-font-color);
+    transition: 0.25s;
+}
+
+.product-card__img-container {
+    position: relative;
+    border-radius: 6px 6px 0 0;
+    overflow: hidden;
+}
+
+.product-card__img-container::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    background: radial-gradient(circle,
+            transparent,
+            rgba(0, 0, 0, 0.2));
+    content: "";
+}
+
+.product-card__img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+}
+
+.product-card__content-container {
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--padding-very-small) / 4);
+    padding: calc(var(--padding-very-small) / 3) 0 var(--padding-small);
+    font-family: var(--secondary-font);
+    font-size: var(--font-size-very-small);
+    font-weight: 500;
+}
+
+.product-card__name {
+    font-family: var(--secondary-font);
+    font-weight: 600;
+}
+
+.product-card__description {
+    font-weight: 400;
+    font-size: calc(var(--font-size-very-small) / 1.15);
+}
+
+.product-card__price {
+    font-size: var(--font-size-small);
+}
+
+.product-card__rating-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: calc((var(--padding-very-small) / 1.5) * -1);
+}
+
+.product-card__rating {
+    padding-left: 5px;
+    font-weight: 400;
+    font-size: calc(var(--font-size-very-small) / 1.15);
+}
+
+.product-card__rating-star {
+    display: flex;
+}
+
+.product-rating__star--filled,
+.product-rating__star--empty {
+    height: calc(var(--font-size-very-small) / 1.15);
+    aspect-ratio: 1 / 1;
+}
+
+.product-rating__star--filled {
+    background: url('/icons/default-star-filled.svg') no-repeat center / cover;
+}
+
+.product-rating__star--empty {
+    background: url('/icons/default-star-empty.svg') no-repeat center / cover;
+}
+
+.product-card__button {
+    padding: calc(var(--padding-very-small) / 1.5) var(--padding-very-small);
+    font-family: var(--secondary-font);
+    font-size: calc(var(--font-size-very-small) / 1.15);
+    border: solid 1px var(--primary-shadow-color);
+    cursor: pointer;
+}
+
+/* Animation */
+.product-card:hover {
+    translate: 0 -1%;
+}
