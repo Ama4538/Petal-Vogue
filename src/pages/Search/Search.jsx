@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import Nav from '../../components/nav/Nav.jsx';
+import SearchNav from '../../components/nav/SearchNav.jsx';
 import { motion } from 'framer-motion'
 import Product from './Product.jsx';
 
@@ -26,6 +26,21 @@ function Search({ product }) {
         }
     }, [activeSection])
 
+    function handleClick(section) {
+        switch (section) {
+            case "women":
+                // Changes states based on which buttom is pressed
+                setActiveSection(0);
+                break;
+            case "men":
+                setActiveSection(1);
+                break;
+            case "kid":
+                setActiveSection(2);
+                break;
+        }
+    }
+
     // Main search Animation
     const searchAnimation = {
         exit: {
@@ -42,20 +57,23 @@ function Search({ product }) {
             variants={searchAnimation}
             exit="exit"
         >
-            <Nav setActiveSection={setActiveSection}></Nav>
+            <SearchNav />
+            <ul className='search__section-selector'>
+                <button className='search__section-button' onClick={() => handleClick('women')}>Women</button>
+                <button className='search__section-button' onClick={() => handleClick('men')}>Men</button>
+                <button className='search__section-button' onClick={() => handleClick('kid')}>Kid</button>
+            </ul>
             <section className='search__content'>
-                <aside className='search-content__side'>
-                    <h2 className='search-side__title'>{sectionTitle}</h2>
-                </aside>
+                <div className='search__header'>
+                    <h3 className='search-header__title'>{sectionTitle}</h3>
+                </div>
                 <article className='search-content__main'>
                     {currentDisplay.map((element, index) => {
                         return (<Product
-                            sectionTitle = {sectionTitle}
-                            name = {element.name}
-                            price = {element.price}
-                            star = {element.star}
-                            review = {element.review}
-                            image = {element.image} 
+                            sectionTitle={sectionTitle}
+                            name={element.name}
+                            price={element.price}
+                            image={element.image}
                             key={index}
                         />)
                     })}

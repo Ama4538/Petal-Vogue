@@ -115,7 +115,8 @@
 /* Home Nav */
 .home>.nav {
     position: fixed;
-    box-shadow: none;
+    background-color: transparent;
+    border: none;
 }
 
 .home>.nav>.nav__list>li>.nav__buttons {

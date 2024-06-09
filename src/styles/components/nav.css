@@ -1,16 +1,17 @@
 /* Nav */
 .nav {
-    position: sticky;
     z-index: 999;
     display: grid;
     grid-template-columns: 0.4fr 1fr 0.4fr;
     padding: 0 var(--padding-large);
     align-items: center;
     justify-content: space-between;
+    height: max(4vmax, 3.5rem);
     width: 100%;
     font-family: var(--primary-font);
     font-size: var(--font-size-small);
-    box-shadow: 0px 2px 5px var(--primary-shadow-color);
+    background-color: var(--background-color);
+    border-bottom: solid 1px var(--primary-shadow-color);
 }
 
 .nav__logo {
@@ -48,7 +49,6 @@
 .nav__buttons {
     position: relative;
     display: grid;
-    padding: var(--padding-small) 0;
     width: max(7.25vmax, 7rem);
     place-items: center;
     font-family: var(--primary-font);
@@ -130,4 +130,20 @@
 .nav__buttons[data-activeStatus='active']>p::before,
 .nav__buttons[data-activeStatus='active']>p::after {
     width: 50%;
+}
+
+.nav__search-container {
+    display: grid;
+    padding: var(--padding-very-small);
+    width: 100%;
+    place-items: center;
+}
+
+.nav__search {
+    padding-left: var(--padding-very-small);
+    height: var(--font-size-large);
+    width: 80%;
+    font-family: var(--secondary-font);
+    font-size: var(--font-size-very-small);
+    border: solid 1px var(--primary-shadow-color);
 }

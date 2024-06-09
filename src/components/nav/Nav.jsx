@@ -28,7 +28,7 @@ function Nav({ delayTime = 0, transtitionTime = 0, setActiveSection }) {
     return (
         <motion.nav
             className="nav"
-            layoutId = "Test"
+            layoutId = "nav"
             transition={{
                 delay: `${delayTime}`,
                 duration: `${transtitionTime}`,
