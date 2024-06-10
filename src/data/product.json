@@ -4,7 +4,7 @@
             {
                 "name": "Mackenzie's Sunset Mirage",
                 "price": 125.99,
-                "category": "sunglass",
+                "category": "women-sunglass",
                 "description" : "Embrace the hues of twilight",
                 "rating": 4.6,
                 "review": 619,
@@ -13,7 +13,7 @@
             {
                 "name": "Mackenzie's Ocean Breeze",
                 "price": 95.99,
-                "category": "sunglass",
+                "category": "women-sunglass",
                 "description" : "Feel the refreshing vibes of the sea",
                 "rating": 4.3,
                 "review": 527,
@@ -22,7 +22,7 @@
             {
                 "name": "Mackenzie's Desert Horizon",
                 "price": 135.99,
-                "category": "sunglass",
+                "category": "women-sunglass",
                 "description" : "Navigate the vast landscapes",
                 "rating": 4.7,
                 "review": 936,
@@ -31,7 +31,7 @@
             {
                 "name": "Mackenzie's Mountain Echo",
                 "price": 110.99,
-                "category": "sunglass",
+                "category": "women-sunglass",
                 "description" : "Conquer the peaks",
                 "rating": 4.5,
                 "review": 295,
@@ -40,7 +40,7 @@
             {
                 "name": "Mackenzie's Urban Shade",
                 "price": 105,
-                "category": "sunglass",
+                "category": "women-sunglass",
                 "description" : "Step into the city",
                 "rating": 4.4,
                 "review": 127,
@@ -49,7 +49,7 @@
             {
                 "name": "Mackenzie's Tropical Dawn",
                 "price": 125.99,
-                "category": "sunglass",
+                "category": "women-sunglass",
                 "description" : "Awaken to the colors of paradise",
                 "rating": 4.8,
                 "review": 154,
@@ -60,7 +60,7 @@
             {
                 "name": "Urban Pulse Hoodie",
                 "price": 45.99,
-                "category": "hoodie",
+                "category": "men-hoodie",
                 "description" : "Sleek and modern",
                 "rating": 4.3,
                 "review": 738,
@@ -69,7 +69,7 @@
             {
                 "name": "Metro Flex Hoodie",
                 "price": 55.99,
-                "category": "hoodie",
+                "category": "men-hoodie",
                 "description" : "Maximum comfort and flexibility",
                 "rating": 4.6,
                 "review": 912,
@@ -78,7 +78,7 @@
             {
                 "name": "Midnight Dream Hoodie",
                 "price": 50.99,
-                "category": "hoodie",
+                "category": "men-hoodie",
                 "description" : "Stylish warmth for cool nights",
                 "rating": 4.7,
                 "review": 847,
@@ -87,7 +87,7 @@
             {
                 "name": "Cozy Cloud Hoodie",
                 "price": 125.99,
-                "category": "hoodie",
+                "category": "men-hoodie",
                 "description" : "Softness like floating on clouds",
                 "rating": 4.3,
                 "review": 624,
@@ -96,7 +96,7 @@
             {
                 "name": "Adventure Seeker Hoodie",
                 "price": 60.99,
-                "category": "hoodie",
+                "category": "men-hoodie",
                 "description" : "Ready for any outdoor escapade",
                 "rating": 4.7,
                 "review": 718,
@@ -105,13 +105,68 @@
             {
                 "name": "Arctic Chill Hoodie",
                 "price": 55.99,
-                "category": "hoodie",
+                "category": "men-hoodie",
                 "description" : "Frosty comfort for cold days",
                 "rating": 4.6,
                 "review": 839,
                 "image": "arctic-chill-hoodie.jpg"
             }
         ],
-        "kid": []
+        "kid": [
+            {
+                "name": "Sunny Day Shorts",
+                "price": 20.99,
+                "category": "kid-shorts",
+                "description" : "Bright and cheerful summer wear",
+                "rating": 4.5,
+                "review": 312,
+                "image": "sunny-day-shorts.jpg"
+            },
+            {
+                "name": "Adventure Cargo Shorts",
+                "price": 25.99,
+                "category": "kid-shorts",
+                "description" : "Durable and pocket-friendly design",
+                "rating": 4.6,
+                "review": 487,
+                "image": "adventure-cargo-shorts.jpg"
+            },
+            {
+                "name": "Beach Fun Shorts",
+                "price": 22.99,
+                "category": "kid-shorts",
+                "description" : "Perfect for seaside adventures",
+                "rating": 4.3,
+                "review": 529,
+                "image": "beach-fun-shorts.jpg"
+            },
+            {
+                "name": "Playtime Mesh Shorts",
+                "price": 18.99,
+                "category": "kid-shorts",
+                "description" : "Lightweight and breathable comfort",
+                "rating": 4.4,
+                "review": 614,
+                "image": "playtime-mesh-shorts.jpg"
+            },
+            {
+                "name": "Urban Explorer Shorts",
+                "price": 23.99,
+                "category": "kid-shorts",
+                "description" : "Perfect for city adventures",
+                "rating": 4.7,
+                "review": 395,
+                "image": "urban-explorer-shorts.jpg"
+            },
+            {
+                "name": "Splash Zone Shorts",
+                "price": 18.99,
+                "category": "kid-shorts",
+                "description" : "Perfect for water play",
+                "rating": 4.3,
+                "review": 482,
+                "image": "splash-zone-shorts.jpg"
+            }
+        ]
     }
 }
