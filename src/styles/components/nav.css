@@ -72,19 +72,15 @@
     position: absolute;
     top: 50%;
     left: 50%;
+    height: var(--font-size-med);
+    aspect-ratio: 1 / 1;
     content: "";
     translate: -50% -50%;
 }
 
 .nav__logo::before {
-    height: 60%;
-    width: 100%;
+    height: var(--font-size-large);
     background: url(/icons/default-logo.svg) no-repeat center / contain;
-}
-
-.nav__list-icon::before {
-    height: 45%;
-    width: 100%;
 }
 
 .nav__list-icon-container>.nav__list-icon:nth-child(1)::before {
@@ -113,7 +109,7 @@
     position: absolute;
     bottom: 0;
     height: 2px;
-    width: 0;
+    width: 0%;
     background-color: var(--primary-font-color);
     content: "";
     transition: width 0.25s;
@@ -127,8 +123,8 @@
     right: 50%;
 }
 
-.nav__buttons[data-activeStatus='active']>p::before,
-.nav__buttons[data-activeStatus='active']>p::after {
+.nav__buttons[data-status='active']>p::before,
+.nav__buttons[data-status='active']>p::after {
     width: 50%;
 }
 

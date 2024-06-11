@@ -19,16 +19,18 @@
 @import './components/nav.css';
 @import './components/home.css';
 @import './components/productcard.css';
+@import './components/dropdown.css';
+@import './components/marquee.css';
 
 :root {
     --primary-font: "Libre Baskerville", serif;
     --secondary-font: "Montserrat", sans-serif;
 
-    --font-size-very-small: clamp(0.5rem, max(1rem, 1vmax), max(1.10rem, 1.1vmax));
-    --font-size-small: clamp(1rem, max(1.15rem, 1.10vmax), max(1.25rem, 1.75vmax));
+    --font-size-very-small: clamp(0.5rem, max(1rem, 1.1vmax), max(1.10rem, 1.1vmax));
+    --font-size-small: clamp(1rem, max(1.15rem, 1.3vmax), max(1.25rem, 1.75vmax));
     --font-size-med: clamp(1.35rem, max(1.25rem, 1.75vmax), max(2.25rem, 2.5vmax));
     --font-size-large: clamp(1.75rem, max(2rem, 2.5vmax), max(2.5rem, 2.75vmax));
-    --font-size-very-large: clamp(2.5rem, max(2.75rem, 3vmax), max(3rem, 3.25vmax));
+    --font-size-very-large: clamp(2.5rem, max(3rem, 3.25vmax), max(3.25rem, 3.5vmax));
 
     --padding-very-small: clamp(0.25rem, max(0.50rem, 0.75vmax), max(1rem, 1.25vmax));
     --padding-small: clamp(0.75rem, max(1.25rem, 1.25vmax), max(1.5rem, 2vmax));
@@ -162,6 +164,23 @@ body::-webkit-scrollbar {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: var(--padding-small);
+    width: 100%;
+}
+
+.search-content__filter-container {
+    display: flex;
+    margin: 0 var(--padding-large);
+    justify-content: space-between;
+    border-bottom: solid 1px var(--primary-shadow-color);
+}
+
+.search-content-dropdown-container {
+    display: flex;
+    gap: calc(var(--padding-very-small) / 2);
+    padding: var(--padding-very-small);
+    align-items: center;
+    font-size: var(--font-size-small);
+    font-family: var(--primary-font);
 }
 
 /* Animation */

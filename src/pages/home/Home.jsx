@@ -5,15 +5,22 @@ import HomeColumn from './HomeColumn.jsx';
 import Nav from '../../components/nav/Nav.jsx';
 
 function Home({ home }) {
-    const [activeSection, setActiveSection] = useState(0);
+    const [activeSection, setActiveSection] = useState('women');
 
     // The swipe value
     const BLOCK_SWIPE_LENGTH = -100;
 
+    // Translate value of each section
+    const sectionTranslateValue = {
+        women: 0,
+        men: 1 * BLOCK_SWIPE_LENGTH,
+        kid: 2 * BLOCK_SWIPE_LENGTH,
+    }
+
     // Animation for switching home section
     const homeAnimation = {
         swipe: {
-            x: `${(activeSection * BLOCK_SWIPE_LENGTH)}%`,
+            x: `${sectionTranslateValue[activeSection]}%`,
             transition: {
                 duration: 0.5,
             }
@@ -30,9 +37,9 @@ function Home({ home }) {
         <motion.section
             className="home"
             variants={homeAnimation}
-            exit = "exit"
+            exit="exit"
         >
-            <Nav delayTime = {0.75} transtitionTime = {0.5} setActiveSection={setActiveSection}/>
+            <Nav delayTime={0.75} transtitionTime={0.5} setActiveSection={setActiveSection} />
             <motion.div
                 className='home__row'
                 variants={homeAnimation}
