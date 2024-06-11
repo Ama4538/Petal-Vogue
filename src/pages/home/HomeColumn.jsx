@@ -17,14 +17,12 @@ function HomeColumn({ section, data }) {
     // Handle the scrolling animation
     const handleWheel = debounce((event) => {
         let scrollDirection = event.deltaY;
-
         // Handle the movement translation value
         let newScrollPosition = scrollPosition + (scrollDirection > 0 ? ITEM_SCROLL_HEIGHT : (ITEM_SCROLL_HEIGHT * -1))
         // Making sure the newScrollPoisition doesnt exceed boundaries 
         if (newScrollPosition >= maxScrollPosition && newScrollPosition <= 0) {
             setScrollPosition(newScrollPosition);
         }
-
     }, 100)
 
     // Animation for scroll

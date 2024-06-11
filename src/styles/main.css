@@ -183,6 +183,28 @@ body::-webkit-scrollbar {
     font-family: var(--primary-font);
 }
 
+.search-content__none {
+    display: flex;
+    flex-direction: column;
+    gap: var(--padding-very-small);
+    padding: var(--padding-large) 0 calc(var(--padding-large) * 5);
+}
+
+.search-content__none > * {
+    display: grid;
+    place-items: center;
+    font-family: var(--primary-font);
+    font-weight: 500;
+}
+
+.search-none__title {
+    font-size: var(--font-size-large);
+}
+
+.search-none__subtitle {
+    font-size: var(--font-size-med);
+}
+
 /* Animation */
 .search__section-button:hover {
     translate: 0 -7.5%;

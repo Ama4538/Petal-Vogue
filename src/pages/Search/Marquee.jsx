@@ -8,7 +8,7 @@ function Marquee({ text }) {
             <ul className="marquee__content">
                 {textArray.map((element, index) => {
                     return (
-                        <li index={index}>{element}</li>
+                        <li key={index}>{element}</li>
                     )
                 })}
             </ul>
@@ -16,7 +16,7 @@ function Marquee({ text }) {
             <ul className="marquee__content">
                 {textArray.map((element, index) => {
                     return (
-                        <li index={index * 9999}>{element}</li>
+                        <li key={index + textArray.length}>{element}</li>
                     )
                 })}
             </ul>

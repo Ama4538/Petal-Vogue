@@ -1,14 +1,19 @@
 import { useState, useEffect, useRef } from "react"
 
-function DropDown({ content }) {
+function DropDown({ content, setSelected, resetCondition }) {
     // State to manage visibility 
     const [visible, setVisible] = useState(false)
     const [displayName, setDisplayName] = useState(content[0])
+
     // ref to the drop down menu
     const drowDownRef = useRef(null);
 
     // Filter the content to show all but the currrent selected
     let dropDownMenu = (content.filter((choice) => choice !== displayName)).sort();
+
+    useEffect(() => {
+        setDisplayName(content[0])
+    }, [resetCondition])
 
     // Added a mouse listener to document to check if outside has been clicked
     useEffect(() => {
@@ -45,6 +50,7 @@ function DropDown({ content }) {
                             key={index}
                             onClick={() => {
                                 setDisplayName(element);
+                                setSelected(element);
                             }}
 
                         >{element}</li>

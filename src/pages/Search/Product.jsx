@@ -7,6 +7,8 @@ function Product({ sectionTitle, name, price, description, rating, review, image
 
     // Creating star array to populate stars
     const starArray = new Array(MAX_STARS).fill(0);
+
+    // Filling in all filled stars in relation to array
     for (let i = 0; i < filledStars; i++) {
         starArray[i] = 1;
     }

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import SearchNav from '../../components/nav/SearchNav.jsx';
 import { motion } from 'framer-motion'
 import Product from './Product.jsx';
@@ -10,6 +10,11 @@ function Search({ product }) {
     const [activeSection, setActiveSection] = useState("women");
     // State used to manage the current display of content
     const [currentDisplay, setCurrentDisplay] = useState(product.women)
+    const [sortingOrder, setSortingOrder] = useState("Relevance");
+    const [category, setcategory] = useState("All");
+    // State used to reset dropmenus
+    const [resetSortingOrder, setResetSortingOrder] = useState(false)
+    const [resetCategory, setResetCategory] = useState(false)
 
     // Banner text for each section
     const bannerText = {
@@ -19,25 +24,66 @@ function Search({ product }) {
     }
 
     // Filter for each section
-    const catergoryFilter = {
+    const categoryFilter = {
         women: ["All", "Sunglasses", "Bikinis", "T-shirts", "Tank Tops", "Sweaters"],
         men: ["All", "Hoodies", "Hats", "Rain Coats", "Shirts", "Jackets"],
         kid: ["All", "Shorts", "Jackets", "Swimwears", "Sweaters", "Crop Tops"],
     }
+
     // Sort by preference
     const sortByFilter = ["Relevance", "Low to High", "High to Low"]
 
     // Marquee text for each section
     const marqueeText = {
-        women: "Flash Sale: Up to 50% Off All Womens Fashion at Checkout",
-        men: "Flash Sale: Up to 30% Off All mens Fashion at Checkout",
-        kid: "Flash Sale: Up to 25% Off All kids Fashion at Checkout",
+        women: "Flash Sale: Up to 50% Off All Women's Fashion Item at Checkout",
+        men: "Flash Sale: Up to 30% Off All Men's Fashion Item at Checkout",
+        kid: "Flash Sale: Up to 25% Off All Kids' Fashion Item at Checkout",
     }
+
+    // When category change call needed functions
+    useEffect(() => {
+        changeCategory()
+        // Reset sorting order dropdown menu
+        setResetSortingOrder(prev => !prev);
+    }, [category])
+
+    // When sorting order change call needed functions
+    useEffect(() => {
+        // Sort the current display category
+        changeCategory()
+        changeSortingOrder()
+    }, [sortingOrder])
+
+    // Reset both dropdown menus
+    useEffect(() => {
+        setResetSortingOrder(prev => !prev);
+        setResetCategory(prev => !prev);
+    }, [activeSection])
 
     // Handles the section changes
     function handleClick(section) {
         setActiveSection(section);
         setCurrentDisplay(product[section]);
+    }
+
+    // Handle the change in sorting order
+    function changeSortingOrder() {
+        if (currentDisplay.length === 0) {
+            return;
+        } else if (sortingOrder.toLowerCase() === "high to low") {
+            setCurrentDisplay(prev => prev.slice().sort((a, b) => b.price - a.price));
+        } else if (sortingOrder.toLowerCase() === "low to high") {
+            setCurrentDisplay(prev => prev.slice().sort((a, b) => a.price - b.price));
+        }
+    }
+
+    // Handle the change in category order
+    function changeCategory() {
+        if (category.toLowerCase() === "all") {
+            setCurrentDisplay(product[activeSection]);
+        } else {
+            setCurrentDisplay(product[activeSection].filter(product => product.category === category.toLowerCase()))
+        }
     }
 
     // Main search Animation
@@ -83,21 +129,28 @@ function Search({ product }) {
             {/* Filters */}
             <div className="search-content__filter-container">
                 <div className="search-content-dropdown-container">
-                    <p className="search-dropdown__title">Catergory:</p>
-                    <DropDown content={catergoryFilter[activeSection]}></DropDown>
+                    <p className="search-dropdown__title">Category:</p>
+                    <DropDown content={categoryFilter[activeSection]} setSelected={setcategory} resetCondition={resetCategory} ></DropDown>
                 </div>
                 <Marquee text={marqueeText[activeSection]}></Marquee>
                 <div className="search-content-dropdown-container">
                     <p className="search-dropdown__title">Sort By:</p>
-                    <DropDown content={sortByFilter}></DropDown>
+                    <DropDown content={sortByFilter} setSelected={setSortingOrder} resetCondition={resetSortingOrder}></DropDown>
                 </div>
             </div>
 
             {/* Main Content */}
             <section className='search__content'>
-                <h3 className='search-header__title'>{activeSection}</h3>
+                <h2 className='search-header__title'>{activeSection}</h2>
+                {/* no content */}
+                {currentDisplay.length === 0 && (
+                    <div className='search-content__none'>
+                        <h3 className='search-none__title'> There is No Content Right Now!</h3>
+                        <p className='search-none__subtitle'>Come Back Later!</p>
+                    </div>
+                )}
                 <article className='search-content__main'>
-                    {/* Populate the display area */}
+                    {/* Display content */}
                     {currentDisplay.map((element, index) => {
                         return (<Product
                             sectionTitle={activeSection}
