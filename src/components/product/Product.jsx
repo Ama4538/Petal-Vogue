@@ -35,7 +35,10 @@ function Product({ product, handleAddToCart }) {
         <div className="product-card" >
             {/* Product img */}
             <div className="product-card__img-container">
-                <img className="product-card__img" src={`./productimage/${product.section}/${product.image}`} alt={product.image} />
+                <img
+                    className="product-card__img"
+                    src={`./productimage/${product.section}/${product.image}`}
+                    alt={product.image} />
             </div>
 
             {/* Product information */}
@@ -58,7 +61,7 @@ function Product({ product, handleAddToCart }) {
                     <button
                         className="product-card__button"
                         // If enable allow to be clicked
-                        onClick={ status === "enabled" ? onClick : null }
+                        onClick={status === "enabled" ? onClick : null}
                         data-status={status}
                     >{textStatus[status]}</button>
                 </div>

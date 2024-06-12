@@ -25,7 +25,7 @@ function Cart({ setInitalState, cartInventory }) {
         exit: {
             opacity: 0,
             transition: {
-                duration: 0.25,
+                duration: 0.15,
             }
         }
     }
@@ -36,15 +36,44 @@ function Cart({ setInitalState, cartInventory }) {
             variants={cartAnimation}
             exit="exit"
         >
-            <Nav setActiveSection={setActiveSection} cartAmount={cartInventory.length}/>
+            <Nav setActiveSection={setActiveSection} cartAmount={cartInventory.length} />
             <article className="cart__content-container">
+                
+                <h2 className="cart__title"> Shopping Cart</h2>
                 <div className="cart__content">
-                    <h2 className="cart-content__title"> My Shopping Cart</h2>
                     <div className="cart__display">
-                        
+                        {cartInventory.map(product => {
+                            return (
+                                <div className="cart-display__product" key={product.name}>
+                                    <div className="cart-product__img-container">
+                                        <img
+                                            src={`./productimage/${product.section}/${product.image}`}
+                                            alt={product.image}
+                                            className="cart-product__img" />
+                                    </div>
+                                    <div className="cart-product__content-container">
+                                        <div className="cart-product__upper-content">
+                                            <div className="cart-product__information">
+                                                <p className="cart-product__name"> {product.name}</p>
+                                                <p className="cart-product__additional"> Color: Red</p>
+                                                <p className="cart-product__additional"> Size: Medium</p>
+                                                <p className="cart-product__edit"> Edit</p>
+                                            </div>
+                                            <p className="cart-product__price">${product.price}</p>
+                                        </div>
+                                        <div className="cart-product__lower-content">
+
+                                        </div>
+                                    </div>
+                                </div>
+                            )
+                        })}
+                    </div>
+                    <div className="cart__summary">
+                       
                     </div>
                 </div>
-                <div className="cart__summary"></div>
+
             </article>
         </motion.section>
     )

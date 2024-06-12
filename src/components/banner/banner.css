@@ -1,0 +1,47 @@
+/* Banner */
+.banner {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    background-position: center 25%;
+    background-size: cover;
+}
+
+.banner::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: radial-gradient(circle,
+            transparent 10%,
+            rgba(0, 0, 0, 0.2),
+            rgba(0, 0, 0, 0.4),
+            rgba(0, 0, 0, 0.6));
+    content: "";
+}
+
+.banner__text-container {
+    position: absolute;
+    left: 5%;
+    bottom: 10%;
+    color: var(--secondary-font-color);
+    text-transform: uppercase;
+    text-shadow: 1px 2px 2px black;
+}
+
+.banner__text-title,
+.banner__text-subtitle {
+    font-weight: 400;
+}
+
+.banner__text-title {
+    font-family: var(--primary-font);
+    font-size: var(--font-size-large);
+
+}
+
+.banner__text-subtitle {
+    font-family: var(--secondary-font);
+    font-size: var(--font-size-med);
+}

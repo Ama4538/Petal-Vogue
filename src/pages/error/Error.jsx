@@ -26,7 +26,7 @@ function Error({ setInitalState, cartAmount }) {
         exit: {
             opacity: 0,
             transition: {
-                duration: 0.25,
+                duration: 0.15,
             }
         }
     }

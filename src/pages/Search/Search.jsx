@@ -1,12 +1,13 @@
 import { useEffect, useRef, useState } from 'react';
 import SearchNav from './SearchNav.jsx';
 import { motion } from 'framer-motion'
+import Banner from '../../components/banner/Banner.jsx';
 import Product from '../../components/product/Product.jsx';
 import DropDown from '../../components/dropdown/DropDown.jsx';
 import Marquee from '../../components/marquee/Marquee.jsx';
 
 function Search({ allProducts, setAllProducts, setCartInventory, cartAmount }) {
-     // State used to manage current section
+    // State used to manage current section
     const [activeSection, setActiveSection] = useState("women");
     const [currentDisplay, setCurrentDisplay] = useState(allProducts.filter(product => product.section === "women"))
 
@@ -131,7 +132,7 @@ function Search({ allProducts, setAllProducts, setCartInventory, cartAmount }) {
         exit: {
             opacity: 0,
             transition: {
-                duration: 0.10,
+                duration: 0.15,
             }
         }
     }
@@ -149,12 +150,11 @@ function Search({ allProducts, setAllProducts, setCartInventory, cartAmount }) {
                 cartAmount={cartAmount}
             />
             <div className='search__banner-container'>
-                <div className="search__banner" style={{ backgroundImage: `url("./bannerImage/${activeSection}-banner.jpg")` }} >
-                    <div className="search-banner__text-container">
-                        <h2 className='search-banner__text-title'>{bannerText[activeSection][0]}</h2>
-                        <h3 className='search-banner__text-subtitle'>{bannerText[activeSection][1]}</h3>
-                    </div>
-                </div>
+                <Banner
+                    title={bannerText[activeSection][0]}
+                    subtitle={bannerText[activeSection][1]}
+                    section={activeSection}
+                ></Banner>
             </div>
 
             {/* Change Section Buttons */}
