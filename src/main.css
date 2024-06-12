@@ -57,5 +57,30 @@ body::-webkit-scrollbar {
     width: 0;
 }
 
+/* Cart */
+.cart {
+    display: flex;
+    flex-direction: column;
+    height: 100dvh;
+    width: 100%;
+}
 
+.cart__content-container {
+    display: grid;
+    grid-template-columns: 1fr 0.3fr;
+    flex: 1;
+    padding: var(--padding-small) var(--padding-large);
+}
 
+.cart-content__title{
+    padding-bottom:  var(--padding-small);
+    font-family: var(--primary-font);
+    font-size: var(--font-size-large);
+    font-weight: 400;
+    text-transform: uppercase;
+}
+
+.cart__display {
+    display: flex;
+    flex-direction: column;
+}

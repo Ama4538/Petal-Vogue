@@ -1,9 +1,20 @@
-function Product({ section, name, price, description, rating, review, image }) {
+import { useState } from "react";
+
+function Product({ product, handleAddToCart }) {
+    // Status used to manage the button
+    const [status, setStatus] = useState(product.status)
+
+    // Text for each status
+    const textStatus = {
+        disabled: "Added To Cart",
+        enabled: "Add to Cart"
+    }
+
     // Max star rating
     const MAX_STARS = 5;
 
     // Filled stars based upon product avarage rating
-    let filledStars = Math.round(rating);
+    let filledStars = Math.round(product.rating);
 
     // Creating star array to populate stars
     const starArray = new Array(MAX_STARS).fill(0);
@@ -13,18 +24,25 @@ function Product({ section, name, price, description, rating, review, image }) {
         starArray[i] = 1;
     }
 
+    // Handle onClick
+    function onClick() {
+        // Has own status to update the button without refreshing the section
+        setStatus("disabled");
+        handleAddToCart();
+    }
+
     return (
         <div className="product-card" >
             {/* Product img */}
             <div className="product-card__img-container">
-                <img className="product-card__img" src={`./productimage/${section}/${image}`} alt={image} />
+                <img className="product-card__img" src={`./productimage/${product.section}/${product.image}`} alt={product.image} />
             </div>
 
             {/* Product information */}
             <div className="product-card__content-container">
-                <p className="product-card__name">{name}</p>
-                <p className="product-card__description">{description}</p>
-                <p className="product-card__price">{`$${price}`}</p>
+                <p className="product-card__name">{product.name}</p>
+                <p className="product-card__description">{product.description}</p>
+                <p className="product-card__price">{`$${product.price}`}</p>
                 <div className="product-card__rating-container">
                     <div className="product-card__rating-star">
                         {/* Populate the container with stars and their corresponding fillness */}
@@ -35,9 +53,14 @@ function Product({ section, name, price, description, rating, review, image }) {
                                     : <div className="product-rating__star--empty" key={index}></div>
                             )
                         })}
-                        <p className="product-card__rating">{`${rating} (${review})`}</p>
+                        <p className="product-card__rating">{`${product.rating} (${product.review})`}</p>
                     </div>
-                    <button className="product-card__button">Add To Cart</button>
+                    <button
+                        className="product-card__button"
+                        // If enable allow to be clicked
+                        onClick={ status === "enabled" ? onClick : null }
+                        data-status={status}
+                    >{textStatus[status]}</button>
                 </div>
 
             </div>

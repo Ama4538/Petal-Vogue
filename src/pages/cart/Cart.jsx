@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { motion } from "framer-motion"
+import { motion } from 'framer-motion'
 import Nav from "../../components/nav/Nav";
-import CustomLink from "../../components/router/CustomLink";
 
 
-function Error({ setInitalState, cartAmount }) {
+function Cart({ setInitalState, cartInventory }) {
     // State used to manage active section when returning to home page
     const [activeSection, setActiveSection] = useState("null")
 
@@ -21,8 +20,8 @@ function Error({ setInitalState, cartAmount }) {
         }
     }, [activeSection])
 
-    // Main error animation
-    const errorAnimation = {
+    // Main cart animation
+    const cartAnimation = {
         exit: {
             opacity: 0,
             transition: {
@@ -33,19 +32,22 @@ function Error({ setInitalState, cartAmount }) {
 
     return (
         <motion.section
-            className="error"
-            variants={errorAnimation}
+            className="cart"
+            variants={cartAnimation}
             exit="exit"
-            cartAmount={cartAmount}
         >
-            <Nav setActiveSection={setActiveSection} />
-            <article className="error__container">
-                <h2 className="error__title">Sorry</h2>
-                <h3 className="error__subtitle">We Couldn't Find That Page</h3>
-                <p className="error__text">Try searching again or go to our <CustomLink to="/home" >home page</CustomLink></p>
+            <Nav setActiveSection={setActiveSection} cartAmount={cartInventory.length}/>
+            <article className="cart__content-container">
+                <div className="cart__content">
+                    <h2 className="cart-content__title"> My Shopping Cart</h2>
+                    <div className="cart__display">
+                        
+                    </div>
+                </div>
+                <div className="cart__summary"></div>
             </article>
         </motion.section>
     )
 }
 
-export default Error;
+export default Cart

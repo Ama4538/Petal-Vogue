@@ -1,20 +1,12 @@
-import { useState } from "react";
-import { motion } from 'framer-motion';
 import CustomLink from "../router/CustomLink";
 
-function Nav({ delayTime = 0, transtitionTime = 0, setActiveSection = null, activeSection = "null"}) {
+function Nav({ setActiveSection = null, activeSection = "null", cartAmount = 0}) {
     return (
-        <motion.nav
-            className="nav"
-            layoutId="nav"
-            transition={{
-                delay: `${delayTime}`,
-                duration: `${transtitionTime}`,
-                ease: [0.16, 0.86, 0.64, 0.90]
-            }}
-        >
+        <nav
+            className="nav" >
             <CustomLink to="/home" className="nav__logo" />
             <ul className="nav__list nav__list-button-container">
+                {/* Print each tab for each section */}
                 {["women", "men", "kid"].map((element, index) => (
                     <li key={index}>
                         <button
@@ -30,9 +22,15 @@ function Nav({ delayTime = 0, transtitionTime = 0, setActiveSection = null, acti
             <ul className="nav__list nav__list-icon-container">
                 <CustomLink to="/search" className="nav__list-icon" />
                 <CustomLink to="/home" className="nav__list-icon" />
-                <CustomLink to="/home" className="nav__list-icon" />
+                {/* Manage cart amount display*/}
+                <CustomLink
+                    to="/cart"
+                    className="nav__list-icon"
+                    dataVisible={cartAmount !== 0 ? "visible" : "hidden"}
+                    dataAmount={cartAmount}
+                />
             </ul>
-        </motion.nav >
+        </nav >
     )
 }
 

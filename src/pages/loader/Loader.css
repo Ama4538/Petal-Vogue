@@ -48,8 +48,3 @@
     left: 20%;
     width: 32.5vmax;
 }
-
-.loader > .nav {
-    translate: 0 -100%;
-    visibility: hidden;
-}

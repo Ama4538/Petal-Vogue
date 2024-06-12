@@ -1,16 +1,12 @@
-import { motion } from 'framer-motion';
 import CustomLink from '../../components/router/CustomLink';
 import { useEffect, useRef, useState } from 'react';
 
-function SearchNav({ product, setSearched, intoView }) {
-    // All product in system
-    const allProduct = [].concat(...Object.values(product));
-
+function SearchNav({ products, setSearched, intoView, cartAmount }) {
     // States used to manage searching
     const [searchKeyword, setSearchKeyword] = useState("");
     const [visible, setVisible] = useState(false);
     // State used to manage the current sugguestions
-    const [content, setcontent] = useState(allProduct);
+    const [content, setcontent] = useState(products);
 
     // Ref for clicking off the input
     const navSearchRef = useRef(null);
@@ -18,7 +14,7 @@ function SearchNav({ product, setSearched, intoView }) {
 
     // Changing the suggestion
     useEffect(() => {
-        setcontent(allProduct.filter(product => product.name.toLowerCase().includes(searchKeyword.toLowerCase())))
+        setcontent(products.filter(product => product.name.toLowerCase().includes(searchKeyword.toLowerCase())))
     }, [searchKeyword])
 
     // Added a mouse listener to document to check if outside has been clicked
@@ -44,7 +40,7 @@ function SearchNav({ product, setSearched, intoView }) {
     function handleSearch(event) {
         setVisible(false)
         setSearched(searchKeyword);
-        intoView.current.scrollIntoView({behavior: 'smooth'})
+        intoView.current.scrollIntoView({ behavior: 'smooth' })
 
         // Time out for blur to allow for scroll into view
         setTimeout(() => {
@@ -54,11 +50,7 @@ function SearchNav({ product, setSearched, intoView }) {
     }
 
     return (
-        <motion.nav
-            className="nav"
-            layoutId="nav"
-            data-visible={(visible) ? "visible" : "hidden"}
-        >
+        <nav className="nav" data-visible={(visible) ? "visible" : "hidden"}>
             <CustomLink to="/home" className="nav__logo" />
             <div className='nav__search-container'>
                 <div className="nav-search__content">
@@ -77,10 +69,11 @@ function SearchNav({ product, setSearched, intoView }) {
                                 handleSearch(event);
                             }
                         }}
-                        value = {searchKeyword}
+                        value={searchKeyword}
                         ref={navSearchRef}
                     />
                     <div className='nav-search__display-container' ref={navContentRef}>
+                        {/* Prints out all sugguestion */}
                         {content.map((element, index) => {
                             return (<p key={index} className='nav-search__product-name'>{element.name}</p>)
                         })}
@@ -90,9 +83,15 @@ function SearchNav({ product, setSearched, intoView }) {
             <ul className="nav__list nav__list-icon-container">
                 <CustomLink to="/search" className="nav__list-icon" />
                 <CustomLink to="/home" className="nav__list-icon" />
-                <CustomLink to="/home" className="nav__list-icon" />
+                {/* Manage cart amount display*/}
+                <CustomLink
+                    to="/cart"
+                    className="nav__list-icon"
+                    dataVisible={cartAmount !== 0 ? "visible" : "hidden"}
+                    dataAmount={cartAmount}
+                />
             </ul>
-        </motion.nav>
+        </nav>
     )
 }
 

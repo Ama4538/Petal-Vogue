@@ -1,5 +1,7 @@
 /* Nav */
 .nav {
+    position: sticky;
+    top: 0;
     z-index: 999;
     display: grid;
     grid-template-columns: 0.4fr 1fr 0.4fr;
@@ -93,6 +95,24 @@
 
 .nav__list-icon-container>.nav__list-icon:nth-child(3)::before {
     background: url(/icons/default-cart.svg) no-repeat center / contain;
+}
+
+.nav__list-icon-container>.nav__list-icon:nth-child(3)[data-visible = "visible"]::after {
+    position: absolute;
+    top: 35%;
+    right: -5%;
+    display: grid;
+    height: var(--font-size-very-small);
+    place-items: center;
+    font-family: var(--secondary-font);
+    font-size: calc(var(--font-size-very-small) / 1.5);
+    font-weight: 700;
+    aspect-ratio: 1 / 1;
+    background-color: red;
+    border-radius: 100%;
+    content: attr(data-amount);
+    color: var(--secondary-font-color);
+    translate: -50% -50%;
 }
 
 /* Animation */

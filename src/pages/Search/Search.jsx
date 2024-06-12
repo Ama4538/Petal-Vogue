@@ -5,16 +5,19 @@ import Product from '../../components/product/Product.jsx';
 import DropDown from '../../components/dropdown/DropDown.jsx';
 import Marquee from '../../components/marquee/Marquee.jsx';
 
-function Search({ product }) {
-    // State used to manage current section
+function Search({ allProducts, setAllProducts, setCartInventory, cartAmount }) {
+     // State used to manage current section
     const [activeSection, setActiveSection] = useState("women");
-    // State used to manage the current display of content
-    const [currentDisplay, setCurrentDisplay] = useState(product.women)
+    const [currentDisplay, setCurrentDisplay] = useState(allProducts.filter(product => product.section === "women"))
+
+    // State for sorting and filtering
     const [sortingOrder, setSortingOrder] = useState("Relevance");
     const [category, setcategory] = useState("All");
-    // State used to reset dropmenus
+
+    // State used to reset dropdowns
     const [resetSortingOrder, setResetSortingOrder] = useState(false)
     const [resetCategory, setResetCategory] = useState(false)
+
     // State used to handle search function
     const [searched, setSearched] = useState("")
 
@@ -72,10 +75,9 @@ function Search({ product }) {
         // Prevent on mount search
         if (searched !== "") {
             // Gets all product
-            const allProduct = [].concat(...Object.values(product));
             setActiveSection("result")
             // Filter all product with the search value
-            setCurrentDisplay(allProduct.filter(product => product.name.toLowerCase().includes(searched.toLowerCase())))
+            setCurrentDisplay(allProducts.filter(product => product.name.toLowerCase().includes(searched.toLowerCase())))
         } else {
             // Default seach return
             setActiveSection("women")
@@ -85,8 +87,7 @@ function Search({ product }) {
     // Handles the section changes
     function handleClick(section) {
         setActiveSection(section);
-        setCurrentDisplay(product[section]);
-        animationBannerControl.start("animate")
+        setCurrentDisplay(allProducts.filter(product => product.section === section));
     }
 
     // Handle the change in sorting order
@@ -109,10 +110,20 @@ function Search({ product }) {
     // Handle the change in category order
     function changeCategory() {
         if (category.toLowerCase() === "all") {
-            setCurrentDisplay(product[activeSection]);
+            setCurrentDisplay(allProducts.filter(product => product.section === activeSection));
         } else {
-            setCurrentDisplay(product[activeSection].filter(product => product.category === category.toLowerCase()))
+            setCurrentDisplay(allProducts.filter(product => product.category === category.toLowerCase()));
         }
+    }
+
+    // Handled the onClick of the button
+    function handleAddToCart(product) {
+        setCartInventory(prev => [...prev, product]);
+        // Find the corresponding product and set its button to disabled
+        setAllProducts(prevProducts => prevProducts.map(prevProduct => (
+            prevProduct.name === product.name ? { ...prevProduct, status: 'disabled' } : prevProduct
+        )));
+
     }
 
     // Main search Animation
@@ -131,7 +142,12 @@ function Search({ product }) {
             variants={searchAnimation}
             exit="exit"
         >
-            <SearchNav product={product} setSearched={setSearched} intoView={contentRef} />
+            <SearchNav
+                products={allProducts}
+                setSearched={setSearched}
+                intoView={contentRef}
+                cartAmount={cartAmount}
+            />
             <div className='search__banner-container'>
                 <div className="search__banner" style={{ backgroundImage: `url("./bannerImage/${activeSection}-banner.jpg")` }} >
                     <div className="search-banner__text-container">
@@ -184,16 +200,11 @@ function Search({ product }) {
                 )}
                 <article className='search-content__main'>
                     {/* Display content */}
-                    {currentDisplay.map((element, index) => {
+                    {currentDisplay.map((product) => {
                         return (<Product
-                            section={element.section}
-                            name={element.name}
-                            price={element.price}
-                            description={element.description}
-                            rating={element.rating}
-                            review={element.review}
-                            image={element.image}
-                            key={index}
+                            product={product}
+                            handleAddToCart={() => handleAddToCart(product)}
+                            key={product.name}
                         />)
                     })}
                 </article>
