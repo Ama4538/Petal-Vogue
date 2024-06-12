@@ -11,6 +11,7 @@ function DropDown({ content, setSelected, resetCondition }) {
     // Filter the content to show all but the currrent selected
     let dropDownMenu = (content.filter((choice) => choice !== displayName)).sort();
 
+    // Reset the dropdown menu
     useEffect(() => {
         setDisplayName(content[0])
     }, [resetCondition])
@@ -18,14 +19,14 @@ function DropDown({ content, setSelected, resetCondition }) {
     // Added a mouse listener to document to check if outside has been clicked
     useEffect(() => {
         document.addEventListener('mousedown', handleClickOutside);
-
         return () => {
             document.removeEventListener('mousedown', handleClickOutside);
         };
     }, []);
 
     // Check if the click happen outside the dropdown menu
-    const handleClickOutside = (event) => {
+    function handleClickOutside (event) {
+        //drowDownRef.current to check if value is defined and not null/undefine
         if (drowDownRef.current && !drowDownRef.current.contains(event.target)) {
             setVisible(false);
         }
@@ -52,7 +53,6 @@ function DropDown({ content, setSelected, resetCondition }) {
                                 setDisplayName(element);
                                 setSelected(element);
                             }}
-
                         >{element}</li>
                     )
                 })}

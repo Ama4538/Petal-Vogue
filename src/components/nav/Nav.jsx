@@ -25,9 +25,8 @@ function Nav({ delayTime = 0, transtitionTime = 0, setActiveSection }) {
             <CustomLink to="/home" className="nav__logo" />
             <ul className="nav__list nav__list-button-container">
                 {["women", "men", "kid"].map((element, index) => (
-                    <li>
+                    <li key={index}>
                         <button
-                            key={index}
                             className='nav__buttons'
                             onClick={() => handleClick(element)}
                             data-status={`${activeTab === element ? 'active' : 'inactive'}`}

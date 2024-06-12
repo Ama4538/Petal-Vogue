@@ -1,4 +1,6 @@
-function Product({ sectionTitle, name, price, description, rating, review, image }) {
+import { motion } from 'framer-motion'
+
+function Product({ section, name, price, description, rating, review, image }) {
     // Max star rating
     const MAX_STARS = 5;
 
@@ -14,10 +16,10 @@ function Product({ sectionTitle, name, price, description, rating, review, image
     }
 
     return (
-        <div className="product-card">
+        <div className="product-card" >
             {/* Product img */}
             <div className="product-card__img-container">
-                <img className="product-card__img" src={`./productimage/${sectionTitle}/${image}`} alt={image} />
+                <img className="product-card__img" src={`./productimage/${section}/${image}`} alt={image} />
             </div>
 
             {/* Product information */}
@@ -42,7 +44,7 @@ function Product({ sectionTitle, name, price, description, rating, review, image
 
             </div>
 
-        </div >
+        </div>
     )
 }
 

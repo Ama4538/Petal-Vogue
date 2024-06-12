@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import SearchNav from '../../components/nav/SearchNav.jsx';
-import { motion } from 'framer-motion'
+import { easeInOut, motion } from 'framer-motion'
 import Product from './Product.jsx';
 import DropDown from './DropDown.jsx';
 import Marquee from './Marquee.jsx';
@@ -15,12 +15,15 @@ function Search({ product }) {
     // State used to reset dropmenus
     const [resetSortingOrder, setResetSortingOrder] = useState(false)
     const [resetCategory, setResetCategory] = useState(false)
+    // State used to handle search function
+    const [searched, setSearched] = useState("")
 
     // Banner text for each section
     const bannerText = {
         women: ["Fashion Finds a New Arc", "A Glimpse Into Modern"],
         men: ["Style Redefined", "Crafting Confidence in Every Thread"],
         kid: ["Fashionable Futures Begin Here", "Discovering the Next Generation of Style Icons"],
+        result: ["Elevate Your Style", "Be Bold. Be You. Discover Now"]
     }
 
     // Filter for each section
@@ -28,17 +31,22 @@ function Search({ product }) {
         women: ["All", "Sunglasses", "Bikinis", "T-shirts", "Tank Tops", "Sweaters"],
         men: ["All", "Hoodies", "Hats", "Rain Coats", "Shirts", "Jackets"],
         kid: ["All", "Shorts", "Jackets", "Swimwears", "Sweaters", "Crop Tops"],
+        result: ["All"]
     }
 
     // Sort by preference
-    const sortByFilter = ["Relevance", "Low to High", "High to Low"]
+    const sortByFilter = ["Relevance", "Price: Low to High", "Price: High to Low", "Most Reviewed", "Highest Rated"]
 
     // Marquee text for each section
     const marqueeText = {
-        women: "Flash Sale: Up to 50% Off All Women's Fashion Item at Checkout",
-        men: "Flash Sale: Up to 30% Off All Men's Fashion Item at Checkout",
-        kid: "Flash Sale: Up to 25% Off All Kids' Fashion Item at Checkout",
+        women: "Flash Sale: Up to 50% Off All Women's Fashion at Checkout",
+        men: "Flash Sale: Up to 30% Off All Men's Fashion at Checkout",
+        kid: "Flash Sale: Up to 25% Off All Kids' Fashion at Checkout",
+        result: "Clearance Sale: Up to 70% Off on All Items! Limited Stock!"
     }
+
+    // Ref to slide into view after search
+    const contentRef = useRef(null);
 
     // When category change call needed functions
     useEffect(() => {
@@ -50,7 +58,6 @@ function Search({ product }) {
     // When sorting order change call needed functions
     useEffect(() => {
         // Sort the current display category
-        changeCategory()
         changeSortingOrder()
     }, [sortingOrder])
 
@@ -60,20 +67,42 @@ function Search({ product }) {
         setResetCategory(prev => !prev);
     }, [activeSection])
 
+    // Handle search changes
+    useEffect(() => {
+        // Prevent on mount search
+        if (searched !== "") {
+            // Gets all product
+            const allProduct = [].concat(...Object.values(product));
+            setActiveSection("result")
+            // Filter all product with the search value
+            setCurrentDisplay(allProduct.filter(product => product.name.toLowerCase().includes(searched.toLowerCase())))
+        } else {
+            // Default seach return
+            setActiveSection("women")
+        }
+    }, [searched])
+
     // Handles the section changes
     function handleClick(section) {
         setActiveSection(section);
         setCurrentDisplay(product[section]);
+        animationBannerControl.start("animate")
     }
 
     // Handle the change in sorting order
     function changeSortingOrder() {
         if (currentDisplay.length === 0) {
             return;
-        } else if (sortingOrder.toLowerCase() === "high to low") {
+        } else if (sortingOrder.toLowerCase() === "relevance") {
+            setCurrentDisplay(prev => prev.slice().sort((a, b) => a.id - b.id));
+        } else if (sortingOrder.toLowerCase() === "price: high to low") {
             setCurrentDisplay(prev => prev.slice().sort((a, b) => b.price - a.price));
-        } else if (sortingOrder.toLowerCase() === "low to high") {
+        } else if (sortingOrder.toLowerCase() === "price: low to high") {
             setCurrentDisplay(prev => prev.slice().sort((a, b) => a.price - b.price));
+        } else if (sortingOrder.toLowerCase() === "most reviewed") {
+            setCurrentDisplay(prev => prev.slice().sort((a, b) => b.review - a.review));
+        } else if (sortingOrder.toLowerCase() === "highest rated") {
+            setCurrentDisplay(prev => prev.slice().sort((a, b) => b.rating - a.rating));
         }
     }
 
@@ -91,7 +120,7 @@ function Search({ product }) {
         exit: {
             opacity: 0,
             transition: {
-                duration: 0.30,
+                duration: 0.10,
             }
         }
     }
@@ -102,7 +131,7 @@ function Search({ product }) {
             variants={searchAnimation}
             exit="exit"
         >
-            <SearchNav />
+            <SearchNav product={product} setSearched={setSearched} intoView={contentRef} />
             <div className='search__banner-container'>
                 <div className="search__banner" style={{ backgroundImage: `url("./bannerImage/${activeSection}-banner.jpg")` }} >
                     <div className="search-banner__text-container">
@@ -140,8 +169,12 @@ function Search({ product }) {
             </div>
 
             {/* Main Content */}
-            <section className='search__content'>
-                <h2 className='search-header__title'>{activeSection}</h2>
+            <section className='search__content' ref={contentRef}>
+
+                {activeSection === "result"
+                    ? <h2 className='search-header__title'>{`Results for ${searched}`}</h2>
+                    : <h2 className='search-header__title'>{activeSection}</h2>}
+
                 {/* no content */}
                 {currentDisplay.length === 0 && (
                     <div className='search-content__none'>
@@ -153,7 +186,7 @@ function Search({ product }) {
                     {/* Display content */}
                     {currentDisplay.map((element, index) => {
                         return (<Product
-                            sectionTitle={activeSection}
+                            section={element.section}
                             name={element.name}
                             price={element.price}
                             description={element.description}
