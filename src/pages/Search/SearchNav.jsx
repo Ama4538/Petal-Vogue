@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import CustomLink from "../router/CustomLink";
+import CustomLink from '../../components/router/CustomLink';
 import { useEffect, useRef, useState } from 'react';
 
 function SearchNav({ product, setSearched, intoView }) {

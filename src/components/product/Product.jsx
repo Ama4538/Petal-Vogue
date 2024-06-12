@@ -1,5 +1,3 @@
-import { motion } from 'framer-motion'
-
 function Product({ section, name, price, description, rating, review, image }) {
     // Max star rating
     const MAX_STARS = 5;

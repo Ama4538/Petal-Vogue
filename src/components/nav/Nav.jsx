@@ -2,16 +2,7 @@ import { useState } from "react";
 import { motion } from 'framer-motion';
 import CustomLink from "../router/CustomLink";
 
-function Nav({ delayTime = 0, transtitionTime = 0, setActiveSection }) {
-    // States used to manage the current column in view
-    const [activeTab, setActiveTab] = useState("women");
-
-    // onClick event handler
-    function handleClick(section) {
-        setActiveTab(section);
-        setActiveSection(section);
-    }
-
+function Nav({ delayTime = 0, transtitionTime = 0, setActiveSection = null, activeSection = "null"}) {
     return (
         <motion.nav
             className="nav"
@@ -28,8 +19,8 @@ function Nav({ delayTime = 0, transtitionTime = 0, setActiveSection }) {
                     <li key={index}>
                         <button
                             className='nav__buttons'
-                            onClick={() => handleClick(element)}
-                            data-status={`${activeTab === element ? 'active' : 'inactive'}`}
+                            onClick={() => setActiveSection(element)}
+                            data-status={`${activeSection === element ? 'active' : 'inactive'}`}
                         >
                             <p>{element}</p>
                         </button>

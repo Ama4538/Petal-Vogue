@@ -4,8 +4,8 @@ import HomeColumnMain from "./HomeColumnMain.jsx"
 import HomeColumn from './HomeColumn.jsx';
 import Nav from '../../components/nav/Nav.jsx';
 
-function Home({ home }) {
-    const [activeSection, setActiveSection] = useState('women');
+function Home({ home, initalState = "women" }) {
+    const [activeSection, setActiveSection] = useState(initalState);
 
     // The swipe value
     const BLOCK_SWIPE_LENGTH = -100;
@@ -39,7 +39,7 @@ function Home({ home }) {
             variants={homeAnimation}
             exit="exit"
         >
-            <Nav delayTime={0.75} transtitionTime={0.5} setActiveSection={setActiveSection} />
+            <Nav delayTime={0.75} transtitionTime={0.5} setActiveSection={setActiveSection} activeSection = {activeSection}/>
             <motion.div
                 className='home__row'
                 variants={homeAnimation}

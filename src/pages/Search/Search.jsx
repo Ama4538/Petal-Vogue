@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
-import SearchNav from '../../components/nav/SearchNav.jsx';
-import { easeInOut, motion } from 'framer-motion'
-import Product from './Product.jsx';
-import DropDown from './DropDown.jsx';
-import Marquee from './Marquee.jsx';
+import SearchNav from './SearchNav.jsx';
+import { motion } from 'framer-motion'
+import Product from '../../components/product/Product.jsx';
+import DropDown from '../../components/dropdown/DropDown.jsx';
+import Marquee from '../../components/marquee/Marquee.jsx';
 
 function Search({ product }) {
     // State used to manage current section
