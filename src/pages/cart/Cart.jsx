@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from 'framer-motion'
 import Nav from "../../components/nav/Nav";
+import Banner from "../../components/banner/Banner";
 
 
 function Cart({ setInitalState, cartInventory }) {
@@ -38,7 +39,13 @@ function Cart({ setInitalState, cartInventory }) {
         >
             <Nav setActiveSection={setActiveSection} cartAmount={cartInventory.length} />
             <article className="cart__content-container">
-                
+                <div className='cart__banner-container'>
+                    <Banner
+                        title={"You're Almost There!"}
+                        subtitle={ "Complete Your Purchase and Enjoy Your New Look"}
+                        section={"exit"}
+                    ></Banner>
+                </div>
                 <h2 className="cart__title"> Shopping Cart</h2>
                 <div className="cart__content">
                     <div className="cart__display">
@@ -70,7 +77,7 @@ function Cart({ setInitalState, cartInventory }) {
                         })}
                     </div>
                     <div className="cart__summary">
-                       
+
                     </div>
                 </div>
 

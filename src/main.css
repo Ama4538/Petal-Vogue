@@ -70,9 +70,17 @@ body::-webkit-scrollbar {
     display: flex;
     flex-direction: column;
     flex: 1;
-    margin: var(--padding-small) var(--padding-large) ;
+    margin: 0 var(--padding-large) ;
 }
 
+.cart__banner-container {
+    padding: var(--padding-small) 0;
+    height: max(22.5rem, 22.5vmax);
+}
+
+.cart__banner-container  > .banner {
+    background-position: center;
+}
 
 .cart__title{
     padding-bottom:  var(--padding-small);
