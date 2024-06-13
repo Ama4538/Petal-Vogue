@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion"
-import Nav from "../../components/nav/Nav";
+import SearchNav from "../../components/nav/SearchNav";
 import CustomLink from "../../components/router/CustomLink";
 
 
-function Error({ setInitalState, cartAmount }) {
+function Error({ allProducts, cartAmount, setSearched }) {
     // State used to manage active section when returning to home page
     const [activeSection, setActiveSection] = useState("null")
 
@@ -36,9 +36,12 @@ function Error({ setInitalState, cartAmount }) {
             className="error"
             variants={errorAnimation}
             exit="exit"
-            cartAmount={cartAmount}
         >
-            <Nav setActiveSection={setActiveSection} />
+            <SearchNav
+                products={allProducts}
+                setSearched={setSearched}
+                cartAmount={cartAmount}
+            />
             <article className="error__container">
                 <h2 className="error__title">Sorry</h2>
                 <h3 className="error__subtitle">We Couldn't Find That Page</h3>

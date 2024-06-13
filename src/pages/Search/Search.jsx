@@ -1,12 +1,12 @@
 import { useEffect, useRef, useState } from 'react';
-import SearchNav from './SearchNav.jsx';
 import { motion } from 'framer-motion'
+import SearchNav from '../../components/nav/SearchNav.jsx';
 import Banner from '../../components/banner/Banner.jsx';
 import Product from '../../components/product/Product.jsx';
 import DropDown from '../../components/dropdown/DropDown.jsx';
 import Marquee from '../../components/marquee/Marquee.jsx';
 
-function Search({ allProducts, setAllProducts, setCartInventory, cartAmount }) {
+function Search({ allProducts, setAllProducts, setCartInventory, cartAmount, searched, setSearched }) {
     // State used to manage current section
     const [activeSection, setActiveSection] = useState("women");
     const [currentDisplay, setCurrentDisplay] = useState(allProducts.filter(product => product.section === "women"))
@@ -18,9 +18,6 @@ function Search({ allProducts, setAllProducts, setCartInventory, cartAmount }) {
     // State used to reset dropdowns
     const [resetSortingOrder, setResetSortingOrder] = useState(false)
     const [resetCategory, setResetCategory] = useState(false)
-
-    // State used to handle search function
-    const [searched, setSearched] = useState("")
 
     // Banner text for each section
     const bannerText = {

@@ -14,8 +14,8 @@ function AnimatedRoutes() {
     // Listens to url changes
     const location = useLocation();
 
-    // State used to handle arriving at home screen
-    const [initalState, setInitalState] = useState("women")
+    // Manage the search state for the searchNav
+    const [searched, setSearched] = useState("")
 
     // State used to manage the products status
     const productArray = [].concat(...Object.values(product));
@@ -41,27 +41,35 @@ function AnimatedRoutes() {
                     path="/home"
                     element={<Home
                         home={home}
-                        initalState={initalState}
                         cartAmount={cartInventory.length}
                     />}
                 />
                 <Route path="/search"
                     element={<Search
-                        product={product}
                         setCartInventory={setCartInventory}
                         cartAmount={cartInventory.length}
                         allProducts={allProducts}
                         setAllProducts={setAllProducts}
+                        searched={searched}
+                        setSearched={setSearched}
                     />}
                 />
                 <Route
                     path="/cart"
                     element={<Cart
-                        setInitalState={setInitalState}
                         cartInventory={cartInventory}
+                        allProducts={allProducts}
+                        setSearched={setSearched}
                     />}
                 />
-                <Route path="*" element={<Error setInitalState={setInitalState} cartAmount={cartInventory.length} />} />
+                <Route
+                    path="*"
+                    element={<Error
+                        cartAmount={cartInventory.length}
+                        allProducts={allProducts}
+                        setSearched={setSearched}
+                    />}
+                />
             </Routes>
         </AnimatePresence>
     )

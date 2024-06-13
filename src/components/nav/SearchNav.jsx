@@ -1,7 +1,8 @@
+import { useLocation, useNavigate } from 'react-router-dom';
 import CustomLink from '../../components/router/CustomLink';
 import { useEffect, useRef, useState } from 'react';
 
-function SearchNav({ products, setSearched, intoView, cartAmount }) {
+function SearchNav({ products, setSearched, intoView = null, cartAmount }) {
     // States used to manage searching
     const [searchKeyword, setSearchKeyword] = useState("");
     const [visible, setVisible] = useState(false);
@@ -11,6 +12,10 @@ function SearchNav({ products, setSearched, intoView, cartAmount }) {
     // Ref for clicking off the input
     const navSearchRef = useRef(null);
     const navContentRef = useRef(null);
+
+    // Redirect the page if the location of search is not on search page
+    const location = useLocation();
+    const redirect = useNavigate();
 
     // Changing the suggestion
     useEffect(() => {
@@ -40,8 +45,17 @@ function SearchNav({ products, setSearched, intoView, cartAmount }) {
     function handleSearch(event) {
         setVisible(false)
         setSearched(searchKeyword);
-        intoView.current.scrollIntoView({ behavior: 'smooth' })
+        
+        // scroll if into view is viable
+        if (intoView !== null) {
+            intoView.current.scrollIntoView({ behavior: 'smooth' })
+        } 
 
+        // Handle redirect
+        if (location.pathname !== "/search") {
+            redirect("/search")
+        }
+        
         // Time out for blur to allow for scroll into view
         setTimeout(() => {
             setSearchKeyword("");

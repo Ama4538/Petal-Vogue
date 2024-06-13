@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from 'framer-motion'
-import Nav from "../../components/nav/Nav";
-import Banner from "../../components/banner/Banner";
+import SearchNav from "../../components/nav/SearchNav.jsx";
+import Banner from "../../components/banner/Banner.jsx";
 
 
-function Cart({ setInitalState, cartInventory }) {
+function Cart({ cartInventory, allProducts, setSearched }) {
     // State used to manage active section when returning to home page
     const [activeSection, setActiveSection] = useState("null")
 
@@ -29,7 +29,7 @@ function Cart({ setInitalState, cartInventory }) {
                 duration: 0.15,
             }
         }
-    }
+    }  
 
     return (
         <motion.section
@@ -37,12 +37,16 @@ function Cart({ setInitalState, cartInventory }) {
             variants={cartAnimation}
             exit="exit"
         >
-            <Nav setActiveSection={setActiveSection} cartAmount={cartInventory.length} />
+            <SearchNav
+                products={allProducts}
+                setSearched={setSearched}
+                cartAmount={cartInventory.length}
+            />
             <article className="cart__content-container">
                 <div className='cart__banner-container'>
                     <Banner
                         title={"You're Almost There!"}
-                        subtitle={ "Complete Your Purchase and Enjoy Your New Look"}
+                        subtitle={"Complete Your Purchase and Enjoy Your New Look"}
                         section={"exit"}
                     ></Banner>
                 </div>

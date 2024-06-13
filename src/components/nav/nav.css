@@ -173,6 +173,7 @@
     font-size: var(--font-size-very-small);
     font-weight: 400;
     border: solid 1px var(--primary-shadow-color);
+    cursor: text;
 }
 
 .nav-search__display-container {

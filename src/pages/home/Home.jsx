@@ -4,9 +4,9 @@ import HomeColumnMain from "./HomeColumnMain.jsx"
 import HomeColumn from './HomeColumn.jsx';
 import Nav from '../../components/nav/Nav.jsx';
 
-function Home({ home, initalState = "women", cartAmount }) {
+function Home({ home, cartAmount }) {
     // State used to manage active section
-    const [activeSection, setActiveSection] = useState(initalState);
+    const [activeSection, setActiveSection] = useState("women");
 
     // The swipe value
     const BLOCK_SWIPE_LENGTH = -100;
