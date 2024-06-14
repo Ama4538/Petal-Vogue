@@ -73,5 +73,3 @@ function Product({ product, handleAddToCart }) {
 }
 
 export default Product
-
-// `url("./homeimage/${section}/${data.file}")`

@@ -4,10 +4,9 @@ import SearchNav from "../../components/nav/SearchNav.jsx";
 import Banner from "../../components/banner/Banner.jsx";
 import Recommendation from '../../components/Recommendation/Recommendation.jsx';
 
-
 function Cart() {
     // Custom Hook
-    const { allProducts, setAllProducts } = useAllProducts();
+    const { setAllProducts } = useAllProducts();
     const { cartInventory, setCartInventory, cartAmount} = useCartInventory();
 
     // Main cart animation
@@ -176,8 +175,8 @@ function Cart() {
                 }
 
                 <div className="cart__recommend-container">
-                    <h3 className="cart__title">Recommended For You</h3>
-                    <Recommendation products={allProducts} handleAddToCart={handleAddToCart} />
+                    <h3 className="cart__title">"Check Out These Recommendations"</h3>
+                    <Recommendation handleAddToCart={handleAddToCart} />
                 </div>
             </article>
         </motion.section>

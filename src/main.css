@@ -24,6 +24,7 @@
 @import './components/dropdown/dropdown.css';
 @import './components/marquee/marquee.css';
 @import './pages/error/error.css';
+@import "./components/Recommendation/recommendation.css";
 
 :root {
     --primary-font: "Libre Baskerville", serif;
@@ -170,7 +171,7 @@
 
 .cart-product__lower-content {
     display: flex;
-    grid-column: 1 / span 3;
+    grid-column: 1 / end;
     align-items: end;
 }
 
@@ -307,7 +308,6 @@
     display: flex;
     flex-direction: column;
     padding: calc(var(--padding-large) * 2) 0 calc(var(--padding-large) * 2);
-
 }
 
 .cart-empty__title {
@@ -319,10 +319,9 @@
 .cart-empty__text {
     font-family: var(--primary-font);
     font-size: var(--font-size-med);
-
 }
 
-.cart__recommend-container > .cart__title {
+.cart__recommend-container>.cart__title {
     font-size: calc(var(--font-size-large) / 1.15);
     border-bottom: solid 1px var(--primary-shadow-color);
 }
@@ -336,13 +335,4 @@
 
 .cart-summary__checkout:hover {
     translate: 0 -5%;
-}
-
-/* Recommendation */
-
-.recommendation{
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: var(--padding-small);
-    margin: var(--padding-small) 0;
 }

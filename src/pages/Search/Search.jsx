@@ -10,12 +10,12 @@ import Marquee from '../../components/marquee/Marquee.jsx';
 function Search() {
     // Custom Hooks
     const { allProducts, setAllProducts } = useAllProducts();
-    const { setCartInventory } = useCartInventory();
+    const { cartInventory, setCartInventory } = useCartInventory();
     const { searched } = useSearched();
 
     // State used to manage current section
     const [activeSection, setActiveSection] = useState("women");
-    const [currentDisplay, setCurrentDisplay] = useState(allProducts.filter(product => product.section === "women"))
+    const [currentDisplay, setCurrentDisplay] = useState([])
 
     // State for sorting and filtering
     const [sortingOrder, setSortingOrder] = useState("Relevance");
@@ -122,11 +122,11 @@ function Search() {
 
     // Handle the change in category order
     function changeCategory() {
-        if (category.toLowerCase() === "all") {
-            setCurrentDisplay(allProducts.filter(product => product.section === activeSection));
-        } else {
-            setCurrentDisplay(allProducts.filter(product => product.category === category.toLowerCase()));
-        }
+            if (category.toLowerCase() === "all") {
+                setCurrentDisplay(allProducts.filter(product => product.section === activeSection));
+            } else {
+                setCurrentDisplay(allProducts.filter(product => product.category === category.toLowerCase()));
+            }
     }
 
     // Handled the onClick of the button
@@ -156,7 +156,7 @@ function Search() {
             }
         }
     }
-
+    
     return (
         <motion.section
             className="search"
@@ -215,13 +215,13 @@ function Search() {
                 )}
                 <article className='search-content__main'>
                     {/* Display content */}
-                    {currentDisplay.map((product) => {
-                        return (<Product
+                    {currentDisplay.map((product) => (
+                        <Product
                             product={product}
                             handleAddToCart={() => handleAddToCart(product)}
-                            key={product.name}
-                        />)
-                    })}
+                            key={product.name} // Assuming 'name' is unique for each product
+                        />
+                    ))}
                 </article>
             </section>
         </motion.section>
