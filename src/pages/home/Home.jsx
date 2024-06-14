@@ -1,10 +1,9 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion'
-import HomeColumnMain from "./HomeColumnMain.jsx"
 import HomeColumn from './HomeColumn.jsx';
 import Nav from '../../components/nav/Nav.jsx';
 
-function Home({ home, cartAmount }) {
+function Home({ home }) {
     // State used to manage active section
     const [activeSection, setActiveSection] = useState("women");
 
@@ -34,6 +33,10 @@ function Home({ home, cartAmount }) {
         }
     }
 
+    // Handle the change of section
+    function handleActiveSection(data) {
+        setActiveSection(data);
+    }
 
     return (
         <motion.section
@@ -41,16 +44,13 @@ function Home({ home, cartAmount }) {
             variants={homeAnimation}
             exit="exit"
         >
-            <Nav
-                setActiveSection={setActiveSection}
-                activeSection={activeSection}
-                cartAmount={cartAmount} />
+            <Nav handleActiveSection={handleActiveSection} activeSection={activeSection} />
             <motion.div
                 className='home__row'
                 variants={homeAnimation}
                 animate="swipe"
             >
-                <HomeColumnMain section="women" data={home.women} />
+                <HomeColumn section="women" data={home.women} />
                 <HomeColumn section="men" data={home.men} />
                 <HomeColumn section="kids" data={home.kids} />
             </motion.div>

@@ -2,8 +2,7 @@ import { motion } from "framer-motion"
 import SearchNav from "../../components/nav/SearchNav";
 import CustomLink from "../../components/router/CustomLink";
 
-
-function Error({ allProducts, cartAmount, setSearched }) {
+function Error() {
     // Main error animation
     const errorAnimation = {
         exit: {
@@ -20,11 +19,7 @@ function Error({ allProducts, cartAmount, setSearched }) {
             variants={errorAnimation}
             exit="exit"
         >
-            <SearchNav
-                products={allProducts}
-                setSearched={setSearched}
-                cartAmount={cartAmount}
-            />
+            <SearchNav />
             <article className="error__container">
                 <h2 className="error__title">Sorry</h2>
                 <h3 className="error__subtitle">We Couldn't Find That Page</h3>

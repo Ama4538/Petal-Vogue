@@ -1,13 +1,20 @@
+import { useEffect, useRef, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import CustomLink from '../../components/router/CustomLink';
-import { useEffect, useRef, useState } from 'react';
+import { useCartInventory, useAllProducts, useSearched } from '../app/Hook.jsx';
 
-function SearchNav({ products, setSearched, intoView = null, cartAmount }) {
+function SearchNav({ intoView = null }) {
+    // Custom hook
+    const { cartAmount } = useCartInventory()
+    const { allProducts } = useAllProducts()
+    const { setSearched } = useSearched()
+
     // States used to manage searching
     const [searchKeyword, setSearchKeyword] = useState("");
     const [visible, setVisible] = useState(false);
+
     // State used to manage the current sugguestions
-    const [content, setcontent] = useState(products);
+    const [content, setcontent] = useState(allProducts);
 
     // Ref for clicking off the input
     const navSearchRef = useRef(null);
@@ -19,7 +26,7 @@ function SearchNav({ products, setSearched, intoView = null, cartAmount }) {
 
     // Changing the suggestion
     useEffect(() => {
-        setcontent(products.filter(product => product.name.toLowerCase().includes(searchKeyword.toLowerCase())))
+        setcontent(allProducts.filter(product => product.name.toLowerCase().includes(searchKeyword.toLowerCase())))
     }, [searchKeyword])
 
     // Added a mouse listener to document to check if outside has been clicked
@@ -45,17 +52,17 @@ function SearchNav({ products, setSearched, intoView = null, cartAmount }) {
     function handleSearch(event) {
         setVisible(false)
         setSearched(searchKeyword);
-        
+
         // scroll if into view is viable
         if (intoView !== null) {
             intoView.current.scrollIntoView({ behavior: 'smooth' })
-        } 
+        }
 
         // Handle redirect
         if (location.pathname !== "/search") {
             redirect("/search")
         }
-        
+
         // Time out for blur to allow for scroll into view
         setTimeout(() => {
             setSearchKeyword("");
@@ -72,24 +79,16 @@ function SearchNav({ products, setSearched, intoView = null, cartAmount }) {
                         className='nav__search'
                         type="text"
                         placeholder='Search by keyword'
-                        onChange={(event) => {
-                            setSearchKeyword(event.target.value);
-                        }}
-                        onClick={() => {
-                            setVisible(true);
-                        }}
-                        onKeyDown={(event) => {
-                            if (event.key === 'Enter') {
-                                handleSearch(event);
-                            }
-                        }}
+                        onChange={(event) => { setSearchKeyword(event.target.value) }}
+                        onClick={() => { setVisible(true) }}
+                        onKeyDown={(event) => { event.key === 'Enter' ? handleSearch(event) : null }}
                         value={searchKeyword}
                         ref={navSearchRef}
                     />
                     <div className='nav-search__display-container' ref={navContentRef}>
                         {/* Prints out all sugguestion */}
-                        {content.map((element, index) => {
-                            return (<p key={index} className='nav-search__product-name'>{element.name}</p>)
+                        {content.map((product) => {
+                            return (<p key={`${product.name}Search`} className='nav-search__product-name'>{product.name}</p>)
                         })}
                     </div>
                 </div>

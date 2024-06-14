@@ -4,6 +4,9 @@ import { debounce } from "lodash"
 import HomeColumnBlock from './HomeColumnBlock.jsx';
 
 function HomeColumn({ section, data }) {
+    // Current Display
+    const displayBanners = section === "women" ? data.slice(1) : data;
+
     // State to manage the current scroll position
     const [scrollPosition, setScrollPosition] = useState(0);
 
@@ -34,7 +37,7 @@ function HomeColumn({ section, data }) {
             }
         },
     }
-    
+
     return (
         <div className="home__column">
             <ul className="home-column__pagination-container">
@@ -49,14 +52,37 @@ function HomeColumn({ section, data }) {
                     )
                 })}
             </ul>
+
+            {/* Column */}
             <motion.div
                 className="home-column__slider"
                 variants={scrollAnimation}
                 animate='scroll'
                 onWheel={handleWheel}
             >
+                {section === "women" ?
+                // Main block used for transtion
+                    <motion.article
+                        className="home-column__block"
+                        style={{ backgroundImage: `url("/homeimage/women/home-women-background-image-1.jpg")` }}
+                        layoutId="main-image-1"
+                        transition={{
+                            duration: 0.75,
+                            ease: [0.16, 0.86, 0.64, 0.90]
+                        }}
+                    >
+                        {/* Handle data for the main block */}
+                        <div className="home-column__text-container" >
+                            {/* Add if data exist */}
+                            {(data[0].title !== null && data[0].subtitle !== null) && <h1 className="home-column__text home-column__text-title">{data[0].title} <br /> {data[0].subtitle}</h1>}
+                            {((data[0].title !== null && data[0].subtitle === null)) && <h1 className="home-column__text home-column__text-title">{data[0].title}</h1>}
+                            {(data[0].statement !== null) && <h2 className="home-column__text home-column__text-statement">{data[0].statement}</h2>}
+                        </div>
+                    </motion.article> : null
+                }
+
                 {/* Generate blocks within the column */}
-                {data.map((element, index) => {
+                {displayBanners.map((element, index) => {
                     return (
                         <HomeColumnBlock
                             key={index}

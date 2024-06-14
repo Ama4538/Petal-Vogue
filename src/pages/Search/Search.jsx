@@ -1,12 +1,18 @@
 import { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion'
+import { useAllProducts, useCartInventory, useSearched } from "../../components/app/Hook.jsx";
 import SearchNav from '../../components/nav/SearchNav.jsx';
 import Banner from '../../components/banner/Banner.jsx';
 import Product from '../../components/product/Product.jsx';
 import DropDown from '../../components/dropdown/DropDown.jsx';
 import Marquee from '../../components/marquee/Marquee.jsx';
 
-function Search({ allProducts, setAllProducts, setCartInventory, cartAmount, searched, setSearched }) {
+function Search() {
+    // Custom Hooks
+    const { allProducts, setAllProducts } = useAllProducts();
+    const { setCartInventory } = useCartInventory();
+    const { searched } = useSearched();
+
     // State used to manage current section
     const [activeSection, setActiveSection] = useState("women");
     const [currentDisplay, setCurrentDisplay] = useState(allProducts.filter(product => product.section === "women"))
@@ -90,18 +96,27 @@ function Search({ allProducts, setAllProducts, setCartInventory, cartAmount, sea
 
     // Handle the change in sorting order
     function changeSortingOrder() {
+        // Ensure currentDisplay is not empty
         if (currentDisplay.length === 0) {
             return;
-        } else if (sortingOrder.toLowerCase() === "relevance") {
-            setCurrentDisplay(prev => prev.slice().sort((a, b) => a.id - b.id));
-        } else if (sortingOrder.toLowerCase() === "price: high to low") {
-            setCurrentDisplay(prev => prev.slice().sort((a, b) => b.price - a.price));
-        } else if (sortingOrder.toLowerCase() === "price: low to high") {
-            setCurrentDisplay(prev => prev.slice().sort((a, b) => a.price - b.price));
-        } else if (sortingOrder.toLowerCase() === "most reviewed") {
-            setCurrentDisplay(prev => prev.slice().sort((a, b) => b.review - a.review));
-        } else if (sortingOrder.toLowerCase() === "highest rated") {
-            setCurrentDisplay(prev => prev.slice().sort((a, b) => b.rating - a.rating));
+        }
+
+        switch (sortingOrder.toLowerCase()) {
+            case 'price: high to low':
+                setCurrentDisplay(prev => [...prev].sort((a, b) => b.price - a.price));
+                break;
+            case 'price: low to high':
+                setCurrentDisplay(prev => [...prev].sort((a, b) => a.price - b.price));
+                break;
+            case 'most reviewed':
+                setCurrentDisplay(prev => [...prev].sort((a, b) => b.review - a.review));
+                break;
+            case 'highest rated':
+                setCurrentDisplay(prev => [...prev].sort((a, b) => b.rating - a.rating));
+                break;
+            default:
+                // Default to relevance sorting if order doesn't match
+                setCurrentDisplay(prev => [...prev].sort((a, b) => a.id - b.id));
         }
     }
 
@@ -148,12 +163,7 @@ function Search({ allProducts, setAllProducts, setCartInventory, cartAmount, sea
             variants={searchAnimation}
             exit="exit"
         >
-            <SearchNav
-                products={allProducts}
-                setSearched={setSearched}
-                intoView={contentRef}
-                cartAmount={cartAmount}
-            />
+            <SearchNav intoView={contentRef} />
             <div className='search__banner-container'>
                 <Banner
                     title={bannerText[activeSection][0]}

@@ -28,7 +28,7 @@ function Product({ product, handleAddToCart }) {
     function onClick() {
         // Has own status to update the button without refreshing the section
         setStatus("disabled");
-        handleAddToCart();
+        handleAddToCart(product);
     }
 
     return (

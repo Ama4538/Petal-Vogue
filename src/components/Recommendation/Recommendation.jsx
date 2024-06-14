@@ -1,7 +1,11 @@
 import { useEffect, useState } from "react";
-import Product from "../product/Product";
+import { useAllProducts } from "../../components/app/Hook.jsx";
+import Product from "../product/Product.jsx"
 
-function Recommendation({ products, mostCommonSection = "all", handleAddToCart }) {
+function Recommendation({ mostCommonSection = "all", handleAddToCart }) {
+    // Custom Hook
+    const { allProducts } = useAllProducts();
+    
     // Current display for recommendation
     const [currentDisplay, setCurrentDisplay] = useState([])
 
@@ -11,9 +15,9 @@ function Recommendation({ products, mostCommonSection = "all", handleAddToCart }
     // Most common product used to find recommendation
     let mostCommonProducts;
     if (mostCommonSection !== "all") {
-        mostCommonProducts = products.filter(product => product.section === mostCommonSection)
+        mostCommonProducts = allProducts.filter(product => product.section === mostCommonSection)
     } else {
-        mostCommonProducts = products.filter(product => product.status !== "disabled")
+        mostCommonProducts = allProducts.filter(product => product.status !== "disabled")
     }
 
     // Default cannot be greater then mostCommonProducts length

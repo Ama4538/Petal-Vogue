@@ -1,6 +1,10 @@
 import CustomLink from "../router/CustomLink";
+import { useCartInventory } from '../app/Hook.jsx';
 
-function Nav({ setActiveSection = null, activeSection = "null", cartAmount = 0}) {
+function Nav({ handleActiveSection, activeSection}) {
+    // Custom hook
+    const {cartAmount} = useCartInventory()
+
     return (
         <nav
             className="nav" >
@@ -11,7 +15,7 @@ function Nav({ setActiveSection = null, activeSection = "null", cartAmount = 0})
                     <li key={index}>
                         <button
                             className='nav__buttons'
-                            onClick={() => setActiveSection(element)}
+                            onClick={() => handleActiveSection(element)}
                             data-status={`${activeSection === element ? 'active' : 'inactive'}`}
                         >
                             <p>{element}</p>

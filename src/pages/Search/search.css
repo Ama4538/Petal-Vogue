@@ -39,6 +39,7 @@
     color: var(--secondary-font-color);
 }
 
+/* Main search */
 .search__content {
     display: flex;
     flex-direction: column;
@@ -78,6 +79,7 @@
     font-family: var(--primary-font);
 }
 
+/* No display */
 .search-content__none {
     display: flex;
     flex-direction: column;

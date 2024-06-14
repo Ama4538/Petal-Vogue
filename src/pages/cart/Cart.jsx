@@ -1,10 +1,15 @@
 import { motion } from 'framer-motion'
+import { useAllProducts, useCartInventory } from "../../components/app/Hook.jsx";
 import SearchNav from "../../components/nav/SearchNav.jsx";
 import Banner from "../../components/banner/Banner.jsx";
 import Recommendation from '../../components/Recommendation/Recommendation.jsx';
 
 
-function Cart({ setCartInventory, cartInventory, allProducts, setSearched, setAllProducts }) {
+function Cart() {
+    // Custom Hook
+    const { allProducts, setAllProducts } = useAllProducts();
+    const { cartInventory, setCartInventory, cartAmount} = useCartInventory();
+
     // Main cart animation
     const cartAnimation = {
         exit: {
@@ -18,6 +23,15 @@ function Cart({ setCartInventory, cartInventory, allProducts, setSearched, setAl
     // The carts subTotal
     let cartSubtotal = getTotal();
 
+    // Get total price
+    function getTotal() {
+        let currentPrice = 0.00;
+        cartInventory.forEach(product => {
+            currentPrice += parseFloat((product.price * product.quantity).toFixed(2))
+        });
+        return currentPrice.toFixed(2);
+    }
+
     // Handle adding 1 to the quantity
     function addQuantity(product) {
         setCartInventory(prevCart => prevCart.map(prevProduct =>
@@ -25,7 +39,6 @@ function Cart({ setCartInventory, cartInventory, allProducts, setSearched, setAl
                 ? { ...prevProduct, quantity: prevProduct.quantity + 1 }
                 : prevProduct
         ))
-        cartSubtotal = getTotal();
     }
 
     // Handle removing 1 to the quantity
@@ -35,7 +48,6 @@ function Cart({ setCartInventory, cartInventory, allProducts, setSearched, setAl
                 ? { ...prevProduct, quantity: prevProduct.quantity - 1 }
                 : prevProduct
         ))
-        cartSubtotal = getTotal();
     }
 
     // Handle removing the item from cart
@@ -47,16 +59,6 @@ function Cart({ setCartInventory, cartInventory, allProducts, setSearched, setAl
                 : prevProduct
         ))
         setCartInventory(prevCart => prevCart.filter(prevProduct => prevProduct !== product));
-        cartSubtotal = getTotal();
-    }
-
-    // Get total price
-    function getTotal() {
-        let currentPrice = 0.00;
-        cartInventory.forEach(product => {
-            currentPrice += parseFloat((product.price * product.quantity).toFixed(2))
-        });
-        return currentPrice.toFixed(2);
     }
 
     // Handled the onClick of the button to add to cart
@@ -83,11 +85,7 @@ function Cart({ setCartInventory, cartInventory, allProducts, setSearched, setAl
             variants={cartAnimation}
             exit="exit"
         >
-            <SearchNav
-                products={allProducts}
-                setSearched={setSearched}
-                cartAmount={cartInventory.length}
-            />
+            <SearchNav />
             <article className="cart__content-container">
                 <div className='cart__banner-container'>
                     <Banner
@@ -99,7 +97,7 @@ function Cart({ setCartInventory, cartInventory, allProducts, setSearched, setAl
                 <h2 className="cart__title"> Shopping Cart</h2>
                 {cartInventory.length !== 0 ? <div className="cart__content">
                     <div className="cart__display">
-                        {/* Printing out product information */}
+                        {/* Printing out product information if cart is not empty*/}
                         {cartInventory.map(product => {
                             return (
                                 <div className="cart-display__product" key={`${product.name}Cart`}>
@@ -146,7 +144,7 @@ function Cart({ setCartInventory, cartInventory, allProducts, setSearched, setAl
                     <div className="cart__summary">
                         <div className="cart-summary__title-container">
                             <p>Order Details</p>
-                            <p>{cartInventory.length} Item(s)</p>
+                            <p>{cartAmount} Item(s)</p>
                         </div>
 
                         <div className="cart-summary__information-container">
@@ -179,7 +177,7 @@ function Cart({ setCartInventory, cartInventory, allProducts, setSearched, setAl
 
                 <div className="cart__recommend-container">
                     <h3 className="cart__title">Recommended For You</h3>
-                    <Recommendation products={allProducts} handleAddToCart = {handleAddToCart}/>
+                    <Recommendation products={allProducts} handleAddToCart={handleAddToCart} />
                 </div>
             </article>
         </motion.section>
