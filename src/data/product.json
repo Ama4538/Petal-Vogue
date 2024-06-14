@@ -136,7 +136,7 @@
                 "section": "men"
             }
         ],
-        "kid": [
+        "kids": [
             {
                 "id": 0,
                 "name": "Sunny Day Shorts",
@@ -146,7 +146,7 @@
                 "rating": 4.5,
                 "review": 312,
                 "image": "sunny-day-shorts.jpg",
-                "section": "kid"
+                "section": "kids"
             },
             {
                 "id": 1,
@@ -157,7 +157,7 @@
                 "rating": 4.6,
                 "review": 487,
                 "image": "adventure-cargo-shorts.jpg",
-                "section": "kid"
+                "section": "kids"
             },
             {
                 "id": 2,
@@ -168,7 +168,7 @@
                 "rating": 4.3,
                 "review": 529,
                 "image": "beach-fun-shorts.jpg",
-                "section": "kid"
+                "section": "kids"
             },
             {
                 "id": 3,
@@ -179,7 +179,7 @@
                 "rating": 4.4,
                 "review": 614,
                 "image": "playtime-mesh-shorts.jpg",
-                "section": "kid"
+                "section": "kids"
             },
             {
                 "id": 4,
@@ -190,7 +190,7 @@
                 "rating": 4.7,
                 "review": 395,
                 "image": "urban-explorer-shorts.jpg",
-                "section": "kid"
+                "section": "kids"
             },
             {   
                 "id" : 5,
@@ -201,7 +201,7 @@
                 "rating": 4.3,
                 "review": 482,
                 "image": "splash-zone-shorts.jpg",
-                "section": "kid"
+                "section": "kids"
             }
         ]
     }

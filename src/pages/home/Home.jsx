@@ -15,7 +15,7 @@ function Home({ home, cartAmount }) {
     const sectionTranslateValue = {
         women: 0,
         men: 1 * BLOCK_SWIPE_LENGTH,
-        kid: 2 * BLOCK_SWIPE_LENGTH,
+        kids: 2 * BLOCK_SWIPE_LENGTH,
     }
 
     // Animation for switching home section
@@ -34,6 +34,7 @@ function Home({ home, cartAmount }) {
         }
     }
 
+
     return (
         <motion.section
             className="home"
@@ -51,7 +52,7 @@ function Home({ home, cartAmount }) {
             >
                 <HomeColumnMain section="women" data={home.women} />
                 <HomeColumn section="men" data={home.men} />
-                <HomeColumn section="kid" data={home.kid} />
+                <HomeColumn section="kids" data={home.kids} />
             </motion.div>
 
         </motion.section>

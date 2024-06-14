@@ -34,7 +34,7 @@ function HomeColumn({ section, data }) {
             }
         },
     }
-
+    
     return (
         <div className="home__column">
             <ul className="home-column__pagination-container">

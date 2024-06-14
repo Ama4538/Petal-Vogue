@@ -1,26 +1,9 @@
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion"
 import SearchNav from "../../components/nav/SearchNav";
 import CustomLink from "../../components/router/CustomLink";
 
 
 function Error({ allProducts, cartAmount, setSearched }) {
-    // State used to manage active section when returning to home page
-    const [activeSection, setActiveSection] = useState("null")
-
-    // Used to redirect the users
-    const redirect = useNavigate();
-
-    // When the nav is press manage the section
-    useEffect(() => {
-        // Prevent auto redirect on mount
-        if (activeSection !== "null") {
-            setInitalState(activeSection)
-            redirect('/home');
-        }
-    }, [activeSection])
-
     // Main error animation
     const errorAnimation = {
         exit: {

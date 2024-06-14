@@ -7,7 +7,7 @@ function Nav({ setActiveSection = null, activeSection = "null", cartAmount = 0})
             <CustomLink to="/home" className="nav__logo" />
             <ul className="nav__list nav__list-button-container">
                 {/* Print each tab for each section */}
-                {["women", "men", "kid"].map((element, index) => (
+                {["women", "men", "kids"].map((element, index) => (
                     <li key={index}>
                         <button
                             className='nav__buttons'

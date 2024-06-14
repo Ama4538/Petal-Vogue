@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
 import { AnimatePresence } from 'framer-motion';
 import { home } from "../../data/data.json"
@@ -19,18 +19,14 @@ function AnimatedRoutes() {
 
     // State used to manage the products status
     const productArray = [].concat(...Object.values(product));
-    const [allProducts, setAllProducts] = useState(productArray.map(element => ({
-        ...element,
+    const [allProducts, setAllProducts] = useState(productArray.map(product => ({
+        ...product,
         // Status of the button
         status: "enabled",
     })));
 
-    // Manage cart
+    // State used for manage cart
     const [cartInventory, setCartInventory] = useState([])
-
-    useEffect(() => {
-        console.log(cartInventory);
-    }, [cartInventory])
 
     return (
         // Wraps Routes in AnimatePresence to enable exit animations
@@ -57,9 +53,11 @@ function AnimatedRoutes() {
                 <Route
                     path="/cart"
                     element={<Cart
+                        setCartInventory={setCartInventory}
                         cartInventory={cartInventory}
                         allProducts={allProducts}
                         setSearched={setSearched}
+                        setAllProducts={setAllProducts}
                     />}
                 />
                 <Route

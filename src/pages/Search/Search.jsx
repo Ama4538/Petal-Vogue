@@ -23,7 +23,7 @@ function Search({ allProducts, setAllProducts, setCartInventory, cartAmount, sea
     const bannerText = {
         women: ["Fashion Finds a New Arc", "A Glimpse Into Modern"],
         men: ["Style Redefined", "Crafting Confidence in Every Thread"],
-        kid: ["Fashionable Futures Begin Here", "Discovering the Next Generation of Style Icons"],
+        kids: ["Fashionable Futures Begin Here", "Discovering the Next Generation of Style Icons"],
         result: ["Elevate Your Style", "Be Bold. Be You. Discover Now"]
     }
 
@@ -31,7 +31,7 @@ function Search({ allProducts, setAllProducts, setCartInventory, cartAmount, sea
     const categoryFilter = {
         women: ["All", "Sunglasses", "Bikinis", "T-shirts", "Tank Tops", "Sweaters"],
         men: ["All", "Hoodies", "Hats", "Rain Coats", "Shirts", "Jackets"],
-        kid: ["All", "Shorts", "Jackets", "Swimwears", "Sweaters", "Crop Tops"],
+        kids: ["All", "Shorts", "Jackets", "Swimwears", "Sweaters", "Crop Tops"],
         result: ["All"]
     }
 
@@ -42,7 +42,7 @@ function Search({ allProducts, setAllProducts, setCartInventory, cartAmount, sea
     const marqueeText = {
         women: "Flash Sale: Up to 50% Off All Women's Fashion at Checkout",
         men: "Flash Sale: Up to 30% Off All Men's Fashion at Checkout",
-        kid: "Flash Sale: Up to 25% Off All Kids' Fashion at Checkout",
+        kids: "Flash Sale: Up to 25% Off All Kids' Fashion at Checkout",
         result: "Clearance Sale: Up to 70% Off on All Items! Limited Stock!"
     }
 
@@ -116,12 +116,20 @@ function Search({ allProducts, setAllProducts, setCartInventory, cartAmount, sea
 
     // Handled the onClick of the button
     function handleAddToCart(product) {
-        setCartInventory(prev => [...prev, product]);
+        // Adding the data to cart
+        setCartInventory(prev => [...prev, {
+            // Only added the products required information
+            name: product.name,
+            price: product.price,
+            section: product.section,
+            image: product.image,
+            // Give it a quantity value
+            quantity: 1,
+        }]);
         // Find the corresponding product and set its button to disabled
         setAllProducts(prevProducts => prevProducts.map(prevProduct => (
             prevProduct.name === product.name ? { ...prevProduct, status: 'disabled' } : prevProduct
         )));
-
     }
 
     // Main search Animation
@@ -156,7 +164,7 @@ function Search({ allProducts, setAllProducts, setCartInventory, cartAmount, sea
 
             {/* Change Section Buttons */}
             <ul className='search__section-selector'>
-                {["women", "men", "kid"].map((section) => (
+                {["women", "men", "kids"].map((section) => (
                     <button
                         key={section}
                         className='search__section-button'
