@@ -7,13 +7,12 @@
     border-right: solid 1px var(--primary-shadow-color);
     overflow: hidden;
     user-select: none;
-    
 }
 
 .marquee__content {
     display: flex;
     gap: var(--padding-very-small);
-    min-width: 100%;
+    width: max-content;
     justify-content: space-around;
     font-family: var(--secondary-font);
     font-size: var(--font-size-small);

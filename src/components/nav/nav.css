@@ -198,6 +198,7 @@
     padding: calc(var(--padding-very-small) / 2) var(--padding-very-small);
     border-top: solid 1px rgba(0, 0, 0, 0.1);
     user-select: none;
+    text-transform: capitalize;
 }
 
 .nav-search__product-name:hover {

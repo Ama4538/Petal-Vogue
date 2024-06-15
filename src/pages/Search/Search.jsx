@@ -46,11 +46,15 @@ function Search() {
 
     // Marquee text for each section
     const marqueeText = {
-        women: "Flash Sale: Up to 50% Off All Women's Fashion at Checkout",
-        men: "Flash Sale: Up to 30% Off All Men's Fashion at Checkout",
-        kids: "Flash Sale: Up to 25% Off All Kids' Fashion at Checkout",
-        result: "Clearance Sale: Up to 70% Off on All Items! Limited Stock!"
+        women: "Exclusive Sale! Use Code WOMEN20 for 20% Off on Women's Collection!",
+        men: "Exclusive Sale! Use Code MEN10 for 10% Off on Men's Collection!",
+        kids: "Exclusive Sale! Use Code KIDS15 for 15% Off on Kids' Collection!",
+        result: "Explore Our Fashion Collection for Women, Men, and Kids. Discover the Latest Trends, Stylish Outfits, and Must Have Accessories for Every Occasion!"
     }
+
+    // Section and category used for searches
+    const searchSection = ["women", "men", "kids"]
+    const searchCategory = ["sunglasses", "bikinis", "t-shirts", "tank tops", "hoodies", "hats", "rain coats", "shirts", "jackets", "shorts", "swimwears", "sweaters", "crop tops"];
 
     // Ref to slide into view after search
     const contentRef = useRef(null);
@@ -78,10 +82,39 @@ function Search() {
     useEffect(() => {
         // Prevent on mount search
         if (searched !== "") {
-            // Gets all product
+            // Change Section
             setActiveSection("result")
-            // Filter all product with the search value
-            setCurrentDisplay(allProducts.filter(product => product.name.toLowerCase().includes(searched.toLowerCase())))
+            // All possible searches
+            let possibleSearches = allProducts.map(product => product.name).concat(searchSection).concat(searchCategory);
+            // Only show unqiue sugguestion
+            let filteredSearch = new Set()
+
+            // Added all possible seaches to filterSearched
+            possibleSearches.forEach(name => {
+                if (name.toLowerCase().includes(searched.toLowerCase())) {
+                    filteredSearch.add(name)
+                }
+            })
+
+            // Check all the current elements in the search and adding their corresponding names
+            filteredSearch.forEach(element => {
+                if (searchSection.includes(element)) {
+                    // Added all section corresponding to the search word
+                    allProducts.forEach(product => {
+                        product.section === element ? filteredSearch.add(product.name) : null
+                    })
+                } else if (searchCategory.includes(element)) {
+                    // Added all category corresponding to the search word
+                    allProducts.forEach(product => {
+                        product.category === element ? filteredSearch.add(product.name) : null
+                    })
+                }
+            })
+
+            // Conver set to array
+            filteredSearch = [...filteredSearch]
+            // Display only products with the name in searched
+            setCurrentDisplay(allProducts.filter(product => filteredSearch.includes(product.name)))
         } else {
             // Default seach return
             setActiveSection("women")
@@ -122,15 +155,36 @@ function Search() {
 
     // Handle the change in category order
     function changeCategory() {
-            if (category.toLowerCase() === "all") {
-                setCurrentDisplay(allProducts.filter(product => product.section === activeSection));
-            } else {
-                setCurrentDisplay(allProducts.filter(product => product.category === category.toLowerCase()));
-            }
+        if (category.toLowerCase() === "all") {
+            setCurrentDisplay(allProducts.filter(product => product.section === activeSection));
+        } else {
+            setCurrentDisplay(allProducts.filter(product => product.category === category.toLowerCase()));
+        }
     }
 
-    // Handled the onClick of the button
+    // Handled the onClick of the button to add to cart
     function handleAddToCart(product) {
+        // Checking if discount exist in the system
+        let discounted = new Set();
+        // Finding only unqiue discounts
+        cartInventory.forEach(product => product.discountAmount > 0 ? discounted.add(JSON.stringify({ section: product.section, discountPercent: product.discountPercent })) : null)
+
+        let discountArray = [];
+        let discountPercent = 0;
+
+        // Finding if discount matches the product section
+        if (discounted.size !== 0) {
+            discounted.forEach(element => {
+                discountArray = discountArray.concat(JSON.parse(element))
+            })
+
+            // Setting the discount values
+            let isDiscounted = discountArray.find(element => element.section === product.section);
+            if (isDiscounted) {
+                discountPercent = isDiscounted.discountPercent
+            }
+        }
+
         // Adding the data to cart
         setCartInventory(prev => [...prev, {
             // Only added the products required information
@@ -140,7 +194,11 @@ function Search() {
             image: product.image,
             // Give it a quantity value
             quantity: 1,
+            // discount
+            discountAmount: product.price * discountPercent,
+            discountPercent: discountPercent
         }]);
+
         // Find the corresponding product and set its button to disabled
         setAllProducts(prevProducts => prevProducts.map(prevProduct => (
             prevProduct.name === product.name ? { ...prevProduct, status: 'disabled' } : prevProduct
@@ -156,7 +214,7 @@ function Search() {
             }
         }
     }
-    
+
     return (
         <motion.section
             className="search"

@@ -10,9 +10,9 @@ function Loader() {
 
     // Redirect to home page after loading animation
     useEffect(() => {
-        if (!loading) {
-            redirect('/home');
-        }
+        // if (!loading) {
+        //     redirect('/home');
+        // }
     }, [loading])
 
     // Container animation

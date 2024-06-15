@@ -14,7 +14,7 @@ function SearchNav({ intoView = null }) {
     const [visible, setVisible] = useState(false);
 
     // State used to manage the current sugguestions
-    const [content, setcontent] = useState(allProducts);
+    const [content, setcontent] = useState([]);
 
     // Ref for clicking off the input
     const navSearchRef = useRef(null);
@@ -24,9 +24,41 @@ function SearchNav({ intoView = null }) {
     const location = useLocation();
     const redirect = useNavigate();
 
+    // Section and category used for searches
+    const searchSection = ["women", "men", "kids"]
+    const searchCategory = ["sunglasses", "bikinis", "t-shirts", "tank tops", "hoodies", "hats", "rain coats", "shirts", "jackets", "shorts", "swimwears", "sweaters", "crop tops"];
+
     // Changing the suggestion
     useEffect(() => {
-        setcontent(allProducts.filter(product => product.name.toLowerCase().includes(searchKeyword.toLowerCase())))
+        // All possible searches
+        let possibleSearches = allProducts.map(product => product.name).concat(searchSection).concat(searchCategory);
+        // Only show unqiue sugguestion
+        let filteredSearch = new Set()
+
+        // Added all possible seaches to filterSearched
+        possibleSearches.forEach(name => {
+            if (name.toLowerCase().includes(searchKeyword.toLowerCase())) {
+                filteredSearch.add(name)
+            }
+        })
+
+        // Check all the current elements in the search and adding their corresponding names
+        filteredSearch.forEach(element => {
+            if (searchSection.includes(element)) {
+                // Added all section corresponding to the search word
+                allProducts.forEach(product => {
+                    product.section === element ? filteredSearch.add(product.name) : null
+                })
+            } else if (searchCategory.includes(element)) {
+                // Added all category corresponding to the search word
+                allProducts.forEach(product => {
+                    product.category === element ? filteredSearch.add(product.name) : null
+                })
+            }
+        })
+
+        // Convert set to array
+        setcontent([...filteredSearch])
     }, [searchKeyword])
 
     // Added a mouse listener to document to check if outside has been clicked
@@ -50,11 +82,12 @@ function SearchNav({ intoView = null }) {
 
     // Handled the onpress of enter
     function handleSearch(event) {
-        setVisible(false)
         setSearched(searchKeyword);
+        // Check if input is empty 
+        const notEmpty = searchKeyword.length > 0
 
         // scroll if into view is viable
-        if (intoView !== null) {
+        if (intoView !== null && notEmpty) {
             intoView.current.scrollIntoView({ behavior: 'smooth' })
         }
 
@@ -64,10 +97,13 @@ function SearchNav({ intoView = null }) {
         }
 
         // Time out for blur to allow for scroll into view
-        setTimeout(() => {
-            setSearchKeyword("");
-            event.target.blur();
-        }, 1000);
+        if (notEmpty) {
+            setVisible(false)
+            setTimeout(() => {
+                setSearchKeyword("");
+                event.target.blur();
+            }, 500);
+        }
     }
 
     return (
@@ -87,8 +123,8 @@ function SearchNav({ intoView = null }) {
                     />
                     <div className='nav-search__display-container' ref={navContentRef}>
                         {/* Prints out all sugguestion */}
-                        {content.map((product) => {
-                            return (<p key={`${product.name}Search`} className='nav-search__product-name'>{product.name}</p>)
+                        {content.map((name) => {
+                            return (<p key={`${name}Search`} className='nav-search__product-name'>{name}</p>)
                         })}
                     </div>
                 </div>
