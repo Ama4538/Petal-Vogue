@@ -42,7 +42,6 @@
     --padding-med: clamp(1.5rem, max(2.25rem, 2.75vmax), max(2.5rem, 3.25vmax));
     --padding-large: clamp(3rem, max(3.5rem, 4vmax), max(4rem, 4.5vmax));
 
-    --background-color: #FDFDF9;
     --primary-shadow-color: #D3D3D3;
     --primary-font-color: #121205;
     --secondary-font-color: #F5F5F5;
@@ -55,4 +54,13 @@
     box-sizing: border-box;
     list-style: none;
     scroll-margin-top: max(3rem, 3.25vmax);
+}
+
+/* Wishlist */
+
+.wishlist {
+    display: flex;
+    flex-direction: column;
+    height: 100dvh;
+    width: 100%;
 }

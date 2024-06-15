@@ -15,15 +15,10 @@ function Cart() {
     const [discountInput, setDiscountInput] = useState("")
     const [discountMessage, setDiscountMessage] = useState("");
 
-    // Main cart animation
-    const cartAnimation = {
-        exit: {
-            opacity: 0,
-            transition: {
-                duration: 0.15,
-            }
-        }
-    }
+    // The carts values
+    let cartSubtotal = getSubTotal();
+    let cartTotal = getTotal();
+    let cartDiscount = parseFloat(cartSubtotal - cartTotal).toFixed(2);
 
     // Possible discount code and their value
     const discountCode = {
@@ -32,10 +27,6 @@ function Cart() {
         KIDS15: 0.15
     }
 
-    // The carts values
-    let cartSubtotal = getSubTotal();
-    let cartTotal = getTotal();
-    let cartDiscount = parseFloat(cartSubtotal - cartTotal).toFixed(2);
 
     // Get subtotal price
     function getSubTotal() {
@@ -156,6 +147,16 @@ function Cart() {
         // Reset input
         setDiscountInput("");
         event.target.blur()
+    }
+
+    // Main cart animation
+    const cartAnimation = {
+        exit: {
+            opacity: 0,
+            transition: {
+                duration: 0.15,
+            }
+        }
     }
 
     return (

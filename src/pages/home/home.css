@@ -5,7 +5,7 @@
     left: 0;
     height: 100vh;
     width: 100%;
-    background-color: var(--background-color);
+    background-color: black;
     overflow: hidden;
 }
 
@@ -43,7 +43,7 @@
 .home-column__pagination {
     height: 3%;
     aspect-ratio: 1 / 1;
-    background-color: var(--background-color);
+    background-color: #FDFDF9;
     border-radius: 1rem;
     transition: height 0.15s ease-in-out;
 }

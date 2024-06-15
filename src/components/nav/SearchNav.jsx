@@ -131,7 +131,7 @@ function SearchNav({ intoView = null }) {
             </div>
             <ul className="nav__list nav__list-icon-container">
                 <CustomLink to="/search" className="nav__list-icon" />
-                <CustomLink to="/home" className="nav__list-icon" />
+                <CustomLink to="/wishlist" className="nav__list-icon" />
                 {/* Manage cart amount display*/}
                 <CustomLink
                     to="/cart"

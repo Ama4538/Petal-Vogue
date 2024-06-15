@@ -8,18 +8,22 @@ function Loader() {
     const [loading, setLoading] = useState(true);
     const redirect = useNavigate();
 
+    // A array used to generate images 
+    const generateImageArray = Array.from({ length: 8 }, (_, index) => index + 1)
+
+    console.log(generateImageArray);
     // Redirect to home page after loading animation
     useEffect(() => {
-        // if (!loading) {
-        //     redirect('/home');
-        // }
+        if (!loading) {
+            redirect('/home');
+        }
     }, [loading])
 
     // Container animation
     const container = {
         show: {
             transition: {
-                staggerChildren: 0.35,
+                staggerChildren: 0.25,
             }
         }
     };
@@ -34,8 +38,9 @@ function Loader() {
             y: 0,
             opacity: 1,
             transition: {
-                delay: 0.6,
+                delay: 2.25,
                 duration: 1.2,
+                ease: [0.16, 0.86, 0.64, 0.90]
             }
         },
     }
@@ -55,7 +60,6 @@ function Loader() {
             }
         },
         exit: {
-            y: -200,
             opacity: 0,
             transition: {
                 duration: 0.6,
@@ -69,12 +73,12 @@ function Loader() {
             variants={container}
             initial="hidden"
             animate="show"
-            exit = "exit"
+            exit="exit"
             onAnimationComplete={() => setLoading(false)}
-        >   
+        >
             {/* Main image used to transition */}
             <motion.div
-                className={`loader__image-container loader__loader-image-1`}
+                className={`loader__image-container loader__image-container-main`}
                 variants={loadingMain}
             >
                 <motion.img
@@ -85,11 +89,17 @@ function Loader() {
                 />
             </motion.div>
 
-            {/* ID is image name */}
-            <LoaderImage variants={loadingItems} id="loader-image-2"></LoaderImage>
-            <LoaderImage variants={loadingItems} id="loader-image-3"></LoaderImage>
-            <LoaderImage variants={loadingItems} id="loader-image-4"></LoaderImage>
-            <LoaderImage variants={loadingItems} id="loader-image-5"></LoaderImage>
+            {generateImageArray.map((_, index) => {
+                return (
+                    <LoaderImage
+                        key={`${index + 1}Loader`}
+                        variants={loadingItems}
+                        id={index + 1}
+                    />
+                )
+            })}
+
+
         </motion.div>
     );
 }
