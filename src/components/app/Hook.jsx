@@ -19,3 +19,9 @@ export function useSearched() {
     const { searched, setSearched } = useContext(AppContext);
     return { searched, setSearched };
 }
+
+export function useWishlistInventory () {
+    const {wishlistInventory, setWishlistInventory} = useContext(AppContext);
+    const wishlistAmount = wishlistInventory.length
+    return {wishlistInventory, setWishlistInventory, wishlistAmount}
+}

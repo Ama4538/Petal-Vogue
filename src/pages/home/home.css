@@ -54,6 +54,7 @@
     width: 100dvw;
     background-position: center 10%;
     background-size: cover;
+    cursor: pointer;
 }
 
 .home-column__slider>.home-column__block:nth-child(2) {

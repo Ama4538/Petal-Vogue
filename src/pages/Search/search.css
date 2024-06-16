@@ -63,15 +63,16 @@
 
 .search-content__filter-container {
     display: flex;
+    gap: var(--padding-very-small);
     margin: 0 var(--padding-large);
     justify-content: space-between;
     border-bottom: solid 1px var(--primary-shadow-color);
 }
 
-.search-content-dropdown-container {
+.search-content__dropdown-container {
     display: flex;
     gap: calc(var(--padding-very-small) / 2);
-    padding: var(--padding-very-small);
+    padding: var(--padding-very-small) 0;
     align-items: center;
     font-size: var(--font-size-small);
     font-family: var(--primary-font);

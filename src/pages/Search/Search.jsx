@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { motion } from 'framer-motion'
+import { color, motion } from 'framer-motion'
 import { useAllProducts, useCartInventory, useSearched } from "../../components/app/Hook.jsx";
 import SearchNav from '../../components/nav/SearchNav.jsx';
 import Banner from '../../components/banner/Banner.jsx';
@@ -91,7 +91,7 @@ function Search() {
 
             // Added all possible seaches to filterSearched
             possibleSearches.forEach(name => {
-                if (name.toLowerCase().includes(searched.toLowerCase())) {
+                if (name.toLowerCase().includes(searched.toLowerCase().trim())) {
                     filteredSearch.add(name)
                 }
             })
@@ -196,7 +196,10 @@ function Search() {
             quantity: 1,
             // discount
             discountAmount: product.price * discountPercent,
-            discountPercent: discountPercent
+            discountPercent: discountPercent,
+            // Selection
+            size: "Small",
+            color: "White"
         }]);
 
         // Find the corresponding product and set its button to disabled
@@ -246,14 +249,22 @@ function Search() {
 
             {/* Filters */}
             <div className="search-content__filter-container">
-                <div className="search-content-dropdown-container">
+                <div className="search-content__dropdown-container">
                     <p className="search-dropdown__title">Category:</p>
-                    <DropDown content={categoryFilter[activeSection]} setSelected={setcategory} resetCondition={resetCategory} ></DropDown>
+                    <DropDown
+                        content={categoryFilter[activeSection]}
+                        setSelected={setcategory}
+                        resetCondition={resetCategory}
+                    />
                 </div>
                 <Marquee text={marqueeText[activeSection]}></Marquee>
-                <div className="search-content-dropdown-container">
+                <div className="search-content__dropdown-container">
                     <p className="search-dropdown__title">Sort By:</p>
-                    <DropDown content={sortByFilter} setSelected={setSortingOrder} resetCondition={resetSortingOrder}></DropDown>
+                    <DropDown
+                        content={sortByFilter}
+                        setSelected={setSortingOrder}
+                        resetCondition={resetSortingOrder}
+                    />
                 </div>
             </div>
 

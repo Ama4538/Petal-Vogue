@@ -1,11 +1,12 @@
 import { useEffect, useRef, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import CustomLink from '../../components/router/CustomLink';
-import { useCartInventory, useAllProducts, useSearched } from '../app/Hook.jsx';
+import { useCartInventory, useAllProducts, useSearched, useWishlistInventory } from '../app/Hook.jsx';
 
 function SearchNav({ intoView = null }) {
     // Custom hook
     const { cartAmount } = useCartInventory()
+    const { wishlistAmount } = useWishlistInventory();
     const { allProducts } = useAllProducts()
     const { setSearched } = useSearched()
 
@@ -37,7 +38,7 @@ function SearchNav({ intoView = null }) {
 
         // Added all possible seaches to filterSearched
         possibleSearches.forEach(name => {
-            if (name.toLowerCase().includes(searchKeyword.toLowerCase())) {
+            if (name.toLowerCase().includes(searchKeyword.toLowerCase().trim())) {
                 filteredSearch.add(name)
             }
         })
@@ -131,7 +132,12 @@ function SearchNav({ intoView = null }) {
             </div>
             <ul className="nav__list nav__list-icon-container">
                 <CustomLink to="/search" className="nav__list-icon" />
-                <CustomLink to="/wishlist" className="nav__list-icon" />
+                <CustomLink
+                    to="/wishlist"
+                    className="nav__list-icon"
+                    dataVisible={wishlistAmount !== 0 ? "visible" : "hidden"}
+                    dataAmount={wishlistAmount}
+                />
                 {/* Manage cart amount display*/}
                 <CustomLink
                     to="/cart"

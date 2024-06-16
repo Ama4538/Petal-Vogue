@@ -1,14 +1,19 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { debounce } from "lodash"
+import { useSearched } from "../../components/app/Hook.jsx";
 import HomeColumnBlock from './HomeColumnBlock.jsx';
 
 function HomeColumn({ section, data }) {
-    // Current Display
-    const displayBanners = section === "women" ? data.slice(1) : data;
+    // Custom Hooks
+    const { setSearched } = useSearched();
 
     // State to manage the current scroll position
     const [scrollPosition, setScrollPosition] = useState(0);
+
+    // Current Display
+    const displayBanners = section === "women" ? data.slice(1) : data;
 
     // variable used to find the max translate value
     const ITEM_SCROLL_HEIGHT = -100;
@@ -16,6 +21,9 @@ function HomeColumn({ section, data }) {
 
     // Handle the generation of pagination
     const paginationArray = Array.from({ length: data.length })
+
+    // Redirect variable
+    const redirect = useNavigate();
 
     // Handle the scrolling animation
     const handleWheel = debounce((event) => {
@@ -27,6 +35,12 @@ function HomeColumn({ section, data }) {
             setScrollPosition(newScrollPosition);
         }
     }, 100)
+
+    // Handle when a block is click redirects and set search
+    function handleOnClick(searchValue) {
+        setSearched(searchValue);
+        redirect("/search");
+    }
 
     // Animation for scroll
     const scrollAnimation = {
@@ -61,7 +75,7 @@ function HomeColumn({ section, data }) {
                 onWheel={handleWheel}
             >
                 {section === "women" ?
-                // Main block used for transtion
+                    // Main block used for transtion
                     <motion.article
                         className="home-column__block"
                         style={{ backgroundImage: `url("/homeimage/women/home-women-background-image-1.jpg")` }}
@@ -69,6 +83,9 @@ function HomeColumn({ section, data }) {
                         transition={{
                             duration: 0.75,
                             ease: [0.16, 0.86, 0.64, 0.90]
+                        }}
+                        onClick={() => {
+                            handleOnClick(data[0].title.substring(0, data[0].title.indexOf(" ")))
                         }}
                     >
                         {/* Handle data for the main block */}
@@ -88,6 +105,7 @@ function HomeColumn({ section, data }) {
                             key={index}
                             section={section}
                             data={element}
+                            clickEvent = {handleOnClick}
                         />
                     )
                 })}

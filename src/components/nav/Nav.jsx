@@ -1,9 +1,10 @@
 import CustomLink from "../router/CustomLink";
-import { useCartInventory } from '../app/Hook.jsx';
+import { useCartInventory, useWishlistInventory } from '../app/Hook.jsx';
 
-function Nav({ handleActiveSection, activeSection}) {
+function Nav({ handleActiveSection, activeSection }) {
     // Custom hook
-    const {cartAmount} = useCartInventory()
+    const { cartAmount } = useCartInventory()
+    const { wishlistAmount } = useWishlistInventory();
 
     return (
         <nav
@@ -25,7 +26,12 @@ function Nav({ handleActiveSection, activeSection}) {
             </ul>
             <ul className="nav__list nav__list-icon-container">
                 <CustomLink to="/search" className="nav__list-icon" />
-                <CustomLink to="/wishlist" className="nav__list-icon" />
+                <CustomLink
+                    to="/wishlist"
+                    className="nav__list-icon"
+                    dataVisible={wishlistAmount !== 0 ? "visible" : "hidden"}
+                    dataAmount={wishlistAmount}
+                />
                 {/* Manage cart amount display*/}
                 <CustomLink
                     to="/cart"

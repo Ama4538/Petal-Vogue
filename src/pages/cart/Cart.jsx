@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion'
-import { useAllProducts, useCartInventory } from "../../components/app/Hook.jsx";
+import { useAllProducts, useCartInventory, useWishlistInventory } from "../../components/app/Hook.jsx";
 import SearchNav from "../../components/nav/SearchNav.jsx";
 import Banner from "../../components/banner/Banner.jsx";
 import Recommendation from '../../components/Recommendation/Recommendation.jsx';
@@ -10,6 +10,7 @@ function Cart() {
     // Custom Hook
     const { setAllProducts } = useAllProducts();
     const { cartInventory, setCartInventory, cartAmount } = useCartInventory();
+    const { setWishlistInventory } = useWishlistInventory()
 
     // State to manage the discount input
     const [discountInput, setDiscountInput] = useState("")
@@ -100,7 +101,10 @@ function Cart() {
             quantity: 1,
             // discount
             discountAmount: product.price * discountPercent,
-            discountPercent: discountPercent
+            discountPercent: discountPercent,
+            // Selection
+            size: "Small",
+            color: "White"
         }]);
 
         // Find the corresponding product and set its button to disabled
@@ -149,6 +153,24 @@ function Cart() {
         event.target.blur()
     }
 
+    // Handled the onClick of the button to Move to wishlist
+    function handleAddTowishlist(product) {
+        setWishlistInventory(prev => [...prev, {
+            // Only added the products required information
+            name: product.name,
+            price: product.price,
+            section: product.section,
+            image: product.image,
+            size: product.size,
+            color: product.color
+        }]);
+
+        setAllProducts(prevProducts => prevProducts.map(prevProduct => (
+            prevProduct.wish === product.name ? { ...prevProduct, wishlist: true } : prevProduct
+        )));
+        removeItem(product)
+    }
+
     // Main cart animation
     const cartAnimation = {
         exit: {
@@ -191,8 +213,8 @@ function Cart() {
                                         <div className="cart-product__information">
                                             <p className="cart-product__name"> {product.name}</p>
                                             <p className="cart-product__additional"> Listed Price: ${product.price} </p>
-                                            <p className="cart-product__additional"> Color: Red</p>
-                                            <p className="cart-product__additional"> Size: Medium</p>
+                                            <p className="cart-product__additional"> Color: {product.color}</p>
+                                            <p className="cart-product__additional"> Size: {product.size}</p>
                                         </div>
                                         <div className="cart-product__information">
                                             <p className="cart-product__price">Subtotal:
@@ -222,7 +244,10 @@ function Cart() {
                                                 onClick={() => removeItem(product)}
                                             > Remove </button>
                                             <button className="cart-product__edit"> Edit </button>
-                                            <button className="cart-product__edit"> Move to wishlist </button>
+                                            <button
+                                                className="cart-product__edit"
+                                                onClick={() => handleAddTowishlist(product)}
+                                            > Move to wishlist </button>
                                         </div>
                                     </div>
                                 </div>

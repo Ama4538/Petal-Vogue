@@ -27,9 +27,10 @@
 .nav__list-icon {
     position: relative;
     height: 100%;
-    width: 17.5%;
+    width: calc(var(--padding-large) / 1.25);
     cursor: pointer;
     transition: 0.25s;
+    
 }
 
 .nav__list {
@@ -97,6 +98,7 @@
     background: url(/icons/default-cart.svg) no-repeat center / contain;
 }
 
+.nav__list-icon-container>.nav__list-icon:nth-child(2)[data-visible = "visible"]::after,
 .nav__list-icon-container>.nav__list-icon:nth-child(3)[data-visible = "visible"]::after {
     position: absolute;
     top: 35%;
@@ -114,6 +116,7 @@
     color: var(--secondary-font-color);
     translate: -50% -50%;
 }
+
 
 /* Animation */
 .nav__buttons:hover,
@@ -182,6 +185,7 @@
     display: none;
     width: 100%;
     aspect-ratio: 2 / 1;
+    background-color: #FDFDF9;
     border: solid 1px var(--primary-shadow-color);
     overflow: auto;
     transform: translateX(-50%);
