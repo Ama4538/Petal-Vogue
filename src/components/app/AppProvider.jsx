@@ -93,7 +93,7 @@ function AppProvider({ children }) {
     useEffect(() => {
         if (cartDataLoaded) {
             localStorage.setItem("currentCart", JSON.stringify(cartInventory));
-        }
+        } 
     }, [cartInventory])
 
     // Add wishlist into storage
@@ -101,7 +101,6 @@ function AppProvider({ children }) {
         if (wishlistDataLoaded) {
             localStorage.setItem("currentwishlist", JSON.stringify(wishlistInventory))
         }
-        console.log(wishlistInventory);
     }, [wishlistInventory])
 
     return (

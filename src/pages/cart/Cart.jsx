@@ -8,9 +8,9 @@ import Recommendation from '../../components/Recommendation/Recommendation.jsx';
 
 function Cart() {
     // Custom Hook
-    const { setAllProducts } = useAllProducts();
+    const { allProducts, setAllProducts } = useAllProducts();
     const { cartInventory, setCartInventory, cartAmount } = useCartInventory();
-    const { setWishlistInventory } = useWishlistInventory()
+    const { wishlistInventory, setWishlistInventory } = useWishlistInventory()
 
     // State to manage the discount input
     const [discountInput, setDiscountInput] = useState("")
@@ -67,52 +67,6 @@ function Cart() {
         setCartInventory(prevCart => prevCart.filter(prevProduct => prevProduct !== product));
     }
 
-    // Handled the onClick of the button to add to cart
-    function handleAddToCart(product) {
-        // Checking if discount exist in the system
-        let discounted = new Set();
-        // Finding only unqiue discounts
-        cartInventory.forEach(product => product.discountAmount > 0 ? discounted.add(JSON.stringify({ section: product.section, discountPercent: product.discountPercent })) : null)
-
-        let discountArray = [];
-        let discountPercent = 0;
-
-        // Finding if discount matches the product section
-        if (discounted.size !== 0) {
-            discounted.forEach(element => {
-                discountArray = discountArray.concat(JSON.parse(element))
-            })
-
-            // Setting the discount values
-            let isDiscounted = discountArray.find(element => element.section === product.section);
-            if (isDiscounted) {
-                discountPercent = isDiscounted.discountPercent
-            }
-        }
-
-        // Adding the data to cart
-        setCartInventory(prev => [...prev, {
-            // Only added the products required information
-            name: product.name,
-            price: product.price,
-            section: product.section,
-            image: product.image,
-            // Give it a quantity value
-            quantity: 1,
-            // discount
-            discountAmount: product.price * discountPercent,
-            discountPercent: discountPercent,
-            // Selection
-            size: "Small",
-            color: "White"
-        }]);
-
-        // Find the corresponding product and set its button to disabled
-        setAllProducts(prevProducts => prevProducts.map(prevProduct => (
-            prevProduct.name === product.name ? { ...prevProduct, status: 'disabled' } : prevProduct
-        )));
-    }
-
     // Handled the discount
     function handleDiscount(event) {
         if (discountCode[discountInput.toUpperCase()] !== undefined) {
@@ -155,19 +109,26 @@ function Cart() {
 
     // Handled the onClick of the button to Move to wishlist
     function handleAddTowishlist(product) {
-        setWishlistInventory(prev => [...prev, {
-            // Only added the products required information
-            name: product.name,
-            price: product.price,
-            section: product.section,
-            image: product.image,
-            size: product.size,
-            color: product.color
-        }]);
+        if (!wishlistInventory.find(wishlistProduct => wishlistProduct.name === product.name)) {
+            let currentProduct = allProducts.find(products => products.name === product.name)
+            setWishlistInventory(prev => [...prev, {
+                // Only added the products required information
+                timeadded: prev.length,
+                name: currentProduct.name,
+                price: currentProduct.price,
+                section: currentProduct.section,
+                image: currentProduct.image,
+                description: currentProduct.description,
+                rating: currentProduct.rating,
+                review: currentProduct.review,
+                size: product.size,
+                color: product.color
+            }]);
 
-        setAllProducts(prevProducts => prevProducts.map(prevProduct => (
-            prevProduct.wish === product.name ? { ...prevProduct, wishlist: true } : prevProduct
-        )));
+            setAllProducts(prevProducts => prevProducts.map(prevProduct => (
+                prevProduct.wish === product.name ? { ...prevProduct, wishlist: true } : prevProduct
+            )));
+        }
         removeItem(product)
     }
 
@@ -282,8 +243,8 @@ function Cart() {
 
                         <div className="cart-summary__promo-container">
                             <p>Have a discount code?</p>
-                            {discountMessage.length !== 0 && discountMessage === "error" ? <p className="cart-promo__error">Invalid or expired discount code</p> : <></>}
-                            {discountMessage.length !== 0 && discountMessage !== "error" ? <p className="cart-promo__success">{discountMessage}</p> : <></>}
+                            {discountMessage.length > 0 && discountMessage === "error" ? <p className="cart-promo__error">Invalid or expired discount code</p> : <></>}
+                            {discountMessage.length > 0 && discountMessage !== "error" ? <p className="cart-promo__success">{discountMessage}</p> : <></>}
                             <input
                                 className="cart-promo__input"
                                 type="text"
@@ -304,9 +265,10 @@ function Cart() {
                     </div>
                 }
 
+                {/* Recommendation */}
                 <div className="cart__recommend-container">
                     <h3 className="cart__title">Check Out These Recommendations</h3>
-                    <Recommendation handleAddToCart={handleAddToCart} />
+                    <Recommendation />
                 </div>
             </article>
         </motion.section>

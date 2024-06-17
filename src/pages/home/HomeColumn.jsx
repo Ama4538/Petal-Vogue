@@ -81,7 +81,7 @@ function HomeColumn({ section, data }) {
                         style={{ backgroundImage: `url("/homeimage/women/home-women-background-image-1.jpg")` }}
                         layoutId="main-image-1"
                         transition={{
-                            duration: 0.75,
+                            duration: 0.65,
                             ease: [0.16, 0.86, 0.64, 0.90]
                         }}
                         onClick={() => {

@@ -26,6 +26,7 @@
 @import './pages/error/error.css';
 @import "./components/Recommendation/recommendation.css";
 @import './pages/cart/cart.css';
+@import './pages/wishlist/wishlist.css';
 
 :root {
     --primary-font: "Libre Baskerville", serif;
@@ -56,93 +57,3 @@
     scroll-margin-top: max(3rem, 3.25vmax);
 }
 
-/* Wishlist */
-
-.wishlist {
-    display: flex;
-    flex-direction: column;
-    height: 100dvh;
-    width: 100%;
-}
-
-.wishlist__content-container {
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-    margin: 0 var(--padding-large);
-}
-
-.wishlist__banner-container {
-    padding: var(--padding-small) 0;
-    height: max(22.5rem, 22.5vmax);
-}
-
-.wishlist__banner-container >.banner {
-    background-position: center;
-}
-
-.wishlist__title {
-    padding: var(--padding-small) 0;
-    font-family: var(--primary-font);
-    font-size: var(--font-size-large);
-    font-weight: 400;
-    border-bottom: solid 1px var(--primary-shadow-color);
-    text-transform: uppercase;
-}
-
-.wishlist__filter-container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    font-size: var(--font-size-small);
-    font-family: var(--primary-font);
-    border-bottom: solid 1px var(--primary-shadow-color);
-}
-
-
-.wishlist__filter-container> div:nth-child(1) {
-    padding: var(--padding-very-small);
-    background-color: red;
-}
-
-.wishlist-filter__dropdown-container{
-    display: flex;
-    gap: calc(var(--padding-very-small) / 2);
-    padding: var(--padding-very-small) 0;
-    align-items: center;
-}
-
-.wishlist__display-container {
-    display: flex;
-    flex-direction: column;
-}
-
-/* Product Display */
-
-.wishlist-product__img-container {
-    position: relative;
-    display: flex;
-    align-items: center;
-    width: max(9.5rem, 10vmax);
-    aspect-ratio: 1 / 1;
-    overflow: hidden;
-}
-
-.wishlist-product__img-container::before {
-    position: absolute;
-    z-index: 1;
-    top: 0;
-    left: 0;
-    width: 100%;
-    aspect-ratio: 1 / 1;
-    background: radial-gradient(circle,
-            transparent,
-            rgba(0, 0, 0, 0.2));
-    content: "";
-}
-
-.wishlist-product__img{
-    width: 100%;
-    aspect-ratio: 1 / 1;
-    object-fit: cover;
-}

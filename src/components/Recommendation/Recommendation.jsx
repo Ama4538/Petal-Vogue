@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAllProducts, useCartInventory } from "../../components/app/Hook.jsx";
+import { useAllProducts, useCartInventory, useWishlistInventory } from "../../components/app/Hook.jsx";
 import Product from "../product/Product.jsx"
 
-function Recommendation({ handleAddToCart }) {
+function Recommendation() {
     // Custom Hook
     const { allProducts } = useAllProducts();
     const { cartInventory } = useCartInventory();
+    const { wishlistInventory } = useWishlistInventory()
 
     // Current display for recommendation
     const [currentDisplay, setCurrentDisplay] = useState([])
@@ -19,10 +20,14 @@ function Recommendation({ handleAddToCart }) {
 
     // Handle the recommondation system on mount
     useEffect(() => {
-        // Most common section in cart
+        // cart and wishlist add sections
         let commonSection = new Set();
         if (cartInventory.length > 0) {
             cartInventory.forEach(product => {
+                commonSection.add(product.section)
+            });
+        } else if (wishlistInventory.length > 0) {
+            wishlistInventory.forEach(product => {
                 commonSection.add(product.section)
             });
         } else {
@@ -38,7 +43,7 @@ function Recommendation({ handleAddToCart }) {
             commonSection.forEach(section => {
                 possibleDisplay = possibleDisplay.concat(
                     allProducts.filter(
-                        product => product.section === section && product.status != "disabled"
+                        product => product.section === section && product.wishlist === false && product.status !== "disabled"
                     )
                 );
             })

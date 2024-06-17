@@ -9,8 +9,7 @@ import Marquee from '../../components/marquee/Marquee.jsx';
 
 function Search() {
     // Custom Hooks
-    const { allProducts, setAllProducts } = useAllProducts();
-    const { cartInventory, setCartInventory } = useCartInventory();
+    const { allProducts } = useAllProducts();
     const { searched } = useSearched();
 
     // State used to manage current section
@@ -162,52 +161,6 @@ function Search() {
         }
     }
 
-    // Handled the onClick of the button to add to cart
-    function handleAddToCart(product) {
-        // Checking if discount exist in the system
-        let discounted = new Set();
-        // Finding only unqiue discounts
-        cartInventory.forEach(product => product.discountAmount > 0 ? discounted.add(JSON.stringify({ section: product.section, discountPercent: product.discountPercent })) : null)
-
-        let discountArray = [];
-        let discountPercent = 0;
-
-        // Finding if discount matches the product section
-        if (discounted.size !== 0) {
-            discounted.forEach(element => {
-                discountArray = discountArray.concat(JSON.parse(element))
-            })
-
-            // Setting the discount values
-            let isDiscounted = discountArray.find(element => element.section === product.section);
-            if (isDiscounted) {
-                discountPercent = isDiscounted.discountPercent
-            }
-        }
-
-        // Adding the data to cart
-        setCartInventory(prev => [...prev, {
-            // Only added the products required information
-            name: product.name,
-            price: product.price,
-            section: product.section,
-            image: product.image,
-            // Give it a quantity value
-            quantity: 1,
-            // discount
-            discountAmount: product.price * discountPercent,
-            discountPercent: discountPercent,
-            // Selection
-            size: "Small",
-            color: "White"
-        }]);
-
-        // Find the corresponding product and set its button to disabled
-        setAllProducts(prevProducts => prevProducts.map(prevProduct => (
-            prevProduct.name === product.name ? { ...prevProduct, status: 'disabled' } : prevProduct
-        )));
-    }
-
     // Main search Animation
     const searchAnimation = {
         exit: {
@@ -287,7 +240,6 @@ function Search() {
                     {currentDisplay.map((product) => (
                         <Product
                             product={product}
-                            handleAddToCart={() => handleAddToCart(product)}
                             key={product.name} // Assuming 'name' is unique for each product
                         />
                     ))}

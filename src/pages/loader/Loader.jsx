@@ -11,7 +11,6 @@ function Loader() {
     // A array used to generate images 
     const generateImageArray = Array.from({ length: 8 }, (_, index) => index + 1)
 
-    console.log(generateImageArray);
     // Redirect to home page after loading animation
     useEffect(() => {
         if (!loading) {
@@ -23,7 +22,7 @@ function Loader() {
     const container = {
         show: {
             transition: {
-                staggerChildren: 0.25,
+                staggerChildren: 0.125,
             }
         }
     };
@@ -38,8 +37,8 @@ function Loader() {
             y: 0,
             opacity: 1,
             transition: {
-                delay: 2.25,
-                duration: 1.2,
+                delay: 1.125,
+                duration: 1,
                 ease: [0.16, 0.86, 0.64, 0.90]
             }
         },
