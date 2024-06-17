@@ -6,6 +6,7 @@ import Banner from '../../components/banner/Banner.jsx';
 import Product from '../../components/product/Product.jsx';
 import DropDown from '../../components/dropdown/DropDown.jsx';
 import Marquee from '../../components/marquee/Marquee.jsx';
+import ScrollToTopOnMount from "../../components/app/ScrollToTopOnMount.jsx";
 
 function Search() {
     // Custom Hooks
@@ -177,6 +178,7 @@ function Search() {
             variants={searchAnimation}
             exit="exit"
         >
+            <ScrollToTopOnMount />
             <SearchNav intoView={contentRef} />
             <div className='search__banner-container'>
                 <Banner

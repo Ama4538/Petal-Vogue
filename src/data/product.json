@@ -150,13 +150,13 @@
             },
             {
                 "id": 1,
-                "name": "Adventure Cargo Shorts",
+                "name": "Adventure Ready Shorts",
                 "price": 25.99,
                 "category": "shorts",
                 "description": "Durable and pocket-friendly design",
                 "rating": 4.6,
                 "review": 487,
-                "image": "adventure-cargo-shorts.jpg",
+                "image": "adventure-ready-shorts.jpg",
                 "section": "kids"
             },
             {
@@ -172,13 +172,13 @@
             },
             {
                 "id": 3,
-                "name": "Playtime Mesh Shorts",
+                "name": "Playtime Pals Shorts",
                 "price": 18.99,
                 "category": "shorts",
                 "description": "Lightweight and breathable comfort",
                 "rating": 4.4,
                 "review": 614,
-                "image": "playtime-mesh-shorts.jpg",
+                "image": "playtime-pals-shorts.jpg",
                 "section": "kids"
             },
             {
@@ -194,13 +194,13 @@
             },
             {   
                 "id" : 5,
-                "name": "Splash Zone Shorts",
+                "name": "Denim Delight Shorts",
                 "price": 18.99,
                 "category": "shorts",
-                "description": "Perfect for water play",
+                "description": "Light blue, ready for anything",
                 "rating": 4.3,
                 "review": 482,
-                "image": "splash-zone-shorts.jpg",
+                "image": "denim-delight-shorts.jpg",
                 "section": "kids"
             }
         ]

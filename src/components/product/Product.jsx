@@ -1,12 +1,14 @@
-import { useEffect, useState } from "react";
-import StarGeneration from "./StarGeneration";
+import { useState } from "react";
+import { Link } from 'react-router-dom';
 import { useAllProducts, useCartInventory, useWishlistInventory } from "../app/Hook";
+import StarGeneration from "./StarGeneration";
+
 
 function Product({ product }) {
     // Custom Hook
     const { setAllProducts } = useAllProducts();
     const { cartInventory, setCartInventory } = useCartInventory();
-    const { wishlistInventory, setWishlistInventory } = useWishlistInventory()
+    const { setWishlistInventory } = useWishlistInventory()
 
     // Status used to manage the button
     const [cartStatus, setCartStatus] = useState(product.status)
@@ -104,21 +106,27 @@ function Product({ product }) {
     return (
         <div className="product-card" >
             {/* Product img */}
-            <div className="product-card__img-container">
+            {/* Link to product page */}
+            <Link
+                to={`/product/${product.name.toLowerCase().replaceAll(" ", "-").replaceAll("'", "")}`}
+                className="product-card__img-container"
+            >
                 <img
                     className="product-card__img"
                     src={`./productimage/${product.section}/${product.image}`}
                     alt={product.image} />
-                <button
-                    className="product-card__wishlist-button"
-                    onClick={() => { handleAddToWishlist() }}
-                    data-status={wishlistStatus}
-                />
-            </div>
-
+            </Link>
+            <button
+                className="product-card__wishlist-button"
+                onClick={() => { handleAddToWishlist() }}
+                data-status={wishlistStatus}
+            />
             {/* Product information */}
             <div className="product-card__content-container">
-                <p className="product-card__name">{product.name}</p>
+                <Link
+                    to={`/product/${product.name.toLowerCase().replaceAll(" ", "-").replaceAll("'", "")}`}
+                    className="product-card__name"
+                >{product.name}</Link>
                 <p className="product-card__description">{product.description}</p>
                 <p className="product-card__price">{`$${product.price}`}</p>
                 <div className="product-card__rating-container">

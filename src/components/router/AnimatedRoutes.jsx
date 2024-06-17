@@ -7,6 +7,7 @@ import Search from "../../pages/search/Search.jsx";
 import Error from "../../pages/error/Error.jsx";
 import Cart from "../../pages/cart/Cart.jsx";
 import Wishlist from "../../pages/wishlist/Wishlist.jsx";
+import ProductPage from "../../pages/product-page/ProductPage.jsx";
 
 function AnimatedRoutes() {
     // Listens to url changes
@@ -21,6 +22,7 @@ function AnimatedRoutes() {
                 <Route path="/search" element={<Search />} />
                 <Route path="/cart" element={<Cart />} />
                 <Route path="/wishlist" element={<Wishlist />} />
+                <Route path="/product/:productID" element={<ProductPage />} />
                 <Route path="*" element={<Error />} />
             </Routes>
         </AnimatePresence>

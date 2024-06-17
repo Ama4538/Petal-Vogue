@@ -6,6 +6,8 @@ import Banner from "../../components/banner/Banner";
 import DropDown from '../../components/dropdown/DropDown.jsx';
 import StarGeneration from "../../components/product/StarGeneration.jsx";
 import Recommendation from "../../components/Recommendation/Recommendation.jsx";
+import ScrollToTopOnMount from "../../components/app/ScrollToTopOnMount.jsx";
+import { Link } from "react-router-dom";
 
 function Wishlist() {
     // Custom Hook
@@ -142,6 +144,7 @@ function Wishlist() {
             variants={wishListAnimation}
             exit="exit"
         >
+            <ScrollToTopOnMount />
             <SearchNav />
             <article className="wishlist__content-container">
                 <div className="wishlist__banner-container">
@@ -172,12 +175,15 @@ function Wishlist() {
                         (currentDisplay.map(product => {
                             return (
                                 <div className="wishlist-display__product" key={`${product.name}wishlist`}>
-                                    <div className="wishlist-product__img-container">
+                                    <Link
+                                        to={`/product/${product.name.toLowerCase().replaceAll(" ", "-").replaceAll("'", "")}`}
+                                        className="wishlist-product__img-container"
+                                    >
                                         <img
                                             src={`./productimage/${product.section}/${product.image}`}
                                             alt={product.image}
                                             className="wishlist-product__img" />
-                                    </div>
+                                    </Link>
                                     <div className="wishlist-product__content-container">
                                         <div className="wishlist-product__information">
                                             <p className="wishlist-product__name"> {product.name}</p>

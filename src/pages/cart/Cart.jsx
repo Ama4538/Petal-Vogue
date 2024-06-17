@@ -4,7 +4,8 @@ import { useAllProducts, useCartInventory, useWishlistInventory } from "../../co
 import SearchNav from "../../components/nav/SearchNav.jsx";
 import Banner from "../../components/banner/Banner.jsx";
 import Recommendation from '../../components/Recommendation/Recommendation.jsx';
-
+import ScrollToTopOnMount from "../../components/app/ScrollToTopOnMount.jsx";
+import { Link } from 'react-router-dom';
 
 function Cart() {
     // Custom Hook
@@ -148,6 +149,7 @@ function Cart() {
             variants={cartAnimation}
             exit="exit"
         >
+            <ScrollToTopOnMount />
             <SearchNav />
             <article className="cart__content-container">
                 <div className='cart__banner-container'>
@@ -164,12 +166,15 @@ function Cart() {
                         {cartInventory.map(product => {
                             return (
                                 <div className="cart-display__product" key={`${product.name}Cart`}>
-                                    <div className="cart-product__img-container">
+                                    <Link
+                                        to={`/product/${product.name.toLowerCase().replaceAll(" ", "-").replaceAll("'", "")}`}
+                                        className="cart-product__img-container"
+                                    >
                                         <img
                                             src={`./productimage/${product.section}/${product.image}`}
                                             alt={product.image}
                                             className="cart-product__img" />
-                                    </div>
+                                    </Link>
                                     <div className="cart-product__content-container">
                                         <div className="cart-product__information">
                                             <p className="cart-product__name"> {product.name}</p>
