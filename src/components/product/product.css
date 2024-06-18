@@ -102,11 +102,6 @@
     transition: 0.25s;
 }
 
-.product-card__button[data-status = "disabled"] {
-    background-color: transparent;
-    cursor: default;
-}
-
 .product-card__wishlist-button {
     position: absolute;
     top: 2.5%;
@@ -137,7 +132,7 @@
 
 
 /* Animation */
-.product-card__button[data-status = enabled]:hover {
+.product-card__button:hover {
     color: var(--secondary-font-color);
     background-color: var(--active-color);
     translate: 0 -7.5%;

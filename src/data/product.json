@@ -10,7 +10,9 @@
                 "rating": 4.6,
                 "review": 619,
                 "image": "mackenzie-sunset-mirage.jpg",
-                "section": "women"
+                "section": "women",
+                "colorrange": ["yellow", "amber", "orange", "red", "maroon"],
+                "sizes": ["S", "M", "L", "XL"]
             },
             {
                 "id": 1,
@@ -21,7 +23,9 @@
                 "rating": 4.3,
                 "review": 527,
                 "image": "mackenzie-ocean-breeze.jpg",
-                "section": "women"
+                "section": "women",
+                "colorrange": ["navy", "blue", "yellow", "amber", "orange"],
+                "sizes": ["S", "M", "L"]
             },
             {
                 "id": 2,
@@ -32,7 +36,9 @@
                 "rating": 4.7,
                 "review": 936,
                 "image": "mackenzie-desert-horizon.jpg",
-                "section": "women"
+                "section": "women",
+                "colorrange": ["black", "grey", "navy", "beige", "yellow", "amber"],
+                "sizes": ["M", "L", "XL"]
             },
             {
                 "id": 3,
@@ -43,7 +49,9 @@
                 "rating": 4.5,
                 "review": 295,
                 "image": "mackenzie-mountain-echo.jpg",
-                "section": "women"
+                "section": "women",
+                "colorrange": ["black", "grey", "amber", "maroon"],
+                "sizes": ["XS", "S", "M", "L", "XL"]
             },
             {
                 "id": 4,
@@ -54,7 +62,9 @@
                 "rating": 4.4,
                 "review": 127,
                 "image": "mackenzie-urban-shade.jpg",
-                "section": "women"
+                "section": "women",
+                "colorrange": ["grey", "navy", "sky", "beige", "orange", "red"],
+                "sizes": ["L", "XL", "XXL"]
             },
             {
                 "id": 5,
@@ -65,7 +75,9 @@
                 "rating": 4.8,
                 "review": 154,
                 "image": "mackenzie-tropical-dawn.jpg",
-                "section": "women"
+                "section": "women",
+                "colorrange": ["beige", "yellow", "amber", "orange", "red", "maroon"],
+                "sizes": ["XXS", "XS", "S", "M"]
             }
         ],
         "men": [
@@ -78,7 +90,9 @@
                 "rating": 4.3,
                 "review": 738,
                 "image": "urban-pulse-hoodie.jpg",
-                "section": "men"
+                "section": "men",
+                "colorrange": ["black", "grey", "navy", "blue"],
+                "sizes": ["XS", "S", "M", "L", "XL"]
             },
             {
                 "id": 2,
@@ -89,7 +103,9 @@
                 "rating": 4.6,
                 "review": 912,
                 "image": "metro-flex-hoodie.jpg",
-                "section": "men"
+                "section": "men",
+                "colorrange": ["blue", "orange", "maroon"],
+                "sizes": ["M", "L", "XL", "XXL"]
             },
             {
                 "id": 3,
@@ -100,7 +116,9 @@
                 "rating": 4.7,
                 "review": 847,
                 "image": "midnight-dream-hoodie.jpg",
-                "section": "men"
+                "section": "men",
+                "colorrange": ["black", "grey", "navy", "blue", "red", "maroon"],
+                "sizes": ["XXS", "XS", "S", "M", "L"]
             },
             {
                 "id": 4,
@@ -111,7 +129,9 @@
                 "rating": 4.3,
                 "review": 624,
                 "image": "cozy-cloud-hoodie.jpg",
-                "section": "men"
+                "section": "men",
+                "colorrange": ["sky", "beige", "yellow"],
+                "sizes": ["M", "L", "XL", "XXL"]
             },
             {
                 "id": 5,
@@ -122,7 +142,9 @@
                 "rating": 4.7,
                 "review": 718,
                 "image": "adventure-seeker-hoodie.jpg",
-                "section": "men"
+                "section": "men",
+                "colorrange": ["black", "grey", "navy", "beige","yellow", "amber", "maroon"],
+                "sizes": ["XS", "S", "M", "L", "XL", "XXL"]
             },
             {
                 "id": 6,
@@ -133,7 +155,9 @@
                 "rating": 4.6,
                 "review": 839,
                 "image": "arctic-chill-hoodie.jpg",
-                "section": "men"
+                "section": "men",
+                "colorrange": ["black", "grey", "beige", "orange", "maroon"],
+                "sizes": ["S", "M", "L"]
             }
         ],
         "kids": [
@@ -146,7 +170,9 @@
                 "rating": 4.5,
                 "review": 312,
                 "image": "sunny-day-shorts.jpg",
-                "section": "kids"
+                "section": "kids",
+                "colorrange": ["sky", "beige", "yellow"],
+                "sizes": ["XS", "S", "M"]
             },
             {
                 "id": 1,
@@ -157,7 +183,9 @@
                 "rating": 4.6,
                 "review": 487,
                 "image": "adventure-ready-shorts.jpg",
-                "section": "kids"
+                "section": "kids",
+                "colorrange": ["black", "grey", "blue", "amber"],
+                "sizes": ["S", "M", "L"]
             },
             {
                 "id": 2,
@@ -168,7 +196,9 @@
                 "rating": 4.3,
                 "review": 529,
                 "image": "beach-fun-shorts.jpg",
-                "section": "kids"
+                "section": "kids",
+                "colorrange": ["yellow", "amber", "orange", "red"],
+                "sizes": ["M", "L", "XL"]
             },
             {
                 "id": 3,
@@ -179,7 +209,9 @@
                 "rating": 4.4,
                 "review": 614,
                 "image": "playtime-pals-shorts.jpg",
-                "section": "kids"
+                "section": "kids",
+                "colorrange": ["navy", "blue", "sky", "beige", "yellow"],
+                "sizes": ["XXS", "XS", "S", "M"]
             },
             {
                 "id": 4,
@@ -190,7 +222,9 @@
                 "rating": 4.7,
                 "review": 395,
                 "image": "urban-explorer-shorts.jpg",
-                "section": "kids"
+                "section": "kids",
+                "colorrange": ["black", "grey", "navy", "blue", "sky"],
+                "sizes": ["XXS", "XS", "S", "M"]
             },
             {   
                 "id" : 5,
@@ -201,7 +235,9 @@
                 "rating": 4.3,
                 "review": 482,
                 "image": "denim-delight-shorts.jpg",
-                "section": "kids"
+                "section": "kids",
+                "colorrange": ["black", "grey", "navy", "blue", "sky"],
+                "sizes": ["S", "M", "L", "XL"]
             }
         ]
     }

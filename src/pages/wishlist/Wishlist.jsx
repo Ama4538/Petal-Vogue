@@ -39,7 +39,10 @@ function Wishlist() {
 
     // Handled the onClick of the button to add to cart
     function handleAddToCart(product) {
-        if (!cartInventory.find(cartProduct => cartProduct.name === product.name)) {
+        if (!cartInventory.find(cartProduct => cartProduct.name === product.name
+            && cartProduct.size === product.size
+            && cartProduct.color === product.color
+        )) {
             // Checking if discount exist in the system
             let discounted = new Set();
             // Finding only unqiue discounts
@@ -74,14 +77,14 @@ function Wishlist() {
                 discountAmount: product.price * discountPercent,
                 discountPercent: discountPercent,
                 // Selection
-                size: "Small",
-                color: "White"
+                size: product.size,
+                color: product.color
             }]);
         }
 
         // Find the corresponding product and set its button to disabled
         setAllProducts(prevProducts => prevProducts.map(prevProduct => (
-            prevProduct.name === product.name ? { ...prevProduct, status: 'disabled', wishlist: false } : prevProduct
+            prevProduct.name === product.name ? { ...prevProduct, wishlist: false } : prevProduct
         )));
 
         // Remove it from wishlist
@@ -174,7 +177,7 @@ function Wishlist() {
                     {wishlistAmount > 0 ?
                         (currentDisplay.map(product => {
                             return (
-                                <div className="wishlist-display__product" key={`${product.name}wishlist`}>
+                                <div className="wishlist-display__product" key={`${product.name}-${product.size}-${product.color}-wishlist`}>
                                     <Link
                                         to={`/product/${product.name.toLowerCase().replaceAll(" ", "-").replaceAll("'", "")}`}
                                         className="wishlist-product__img-container"
@@ -186,7 +189,10 @@ function Wishlist() {
                                     </Link>
                                     <div className="wishlist-product__content-container">
                                         <div className="wishlist-product__information">
-                                            <p className="wishlist-product__name"> {product.name}</p>
+                                            <Link
+                                                to={`/product/${product.name.toLowerCase().replaceAll(" ", "-").replaceAll("'", "")}`}
+                                                className="wishlist-product__name"
+                                            > {product.name}</Link>
                                             <p className="wishlist-product__description">  {product.description}</p>
                                             <p className="wishlist-product__additional"> Price: ${product.price} </p>
                                             <p className="wishlist-product__additional"> Color: {product.color} </p>

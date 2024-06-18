@@ -102,9 +102,10 @@
     position: absolute;
     top: 35%;
     right: -5%;
-    display: grid;
+    display: flex;
     height: var(--font-size-very-small);
-    place-items: center;
+    align-items: center;
+    justify-content: center;
     font-family: var(--secondary-font);
     font-size: calc(var(--font-size-very-small) / 1.5);
     font-weight: 700;

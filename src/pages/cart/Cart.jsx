@@ -17,6 +17,10 @@ function Cart() {
     const [discountInput, setDiscountInput] = useState("")
     const [discountMessage, setDiscountMessage] = useState("");
 
+    // State used to manage message
+    const [cartMessage, setCartMessage] = useState("")
+
+
     // The carts values
     let cartSubtotal = getSubTotal();
     let cartTotal = getTotal();
@@ -59,13 +63,8 @@ function Cart() {
 
     // Handle removing the item from cart
     function removeItem(product) {
-        // Reenable the product
-        setAllProducts(prevProducts => prevProducts.map(prevProduct =>
-            prevProduct.name === product.name
-                ? { ...prevProduct, status: "enabled" }
-                : prevProduct
-        ))
         setCartInventory(prevCart => prevCart.filter(prevProduct => prevProduct !== product));
+        setCartMessage(`${product.name} has been removed from cart`)
     }
 
     // Handled the discount
@@ -110,7 +109,11 @@ function Cart() {
 
     // Handled the onClick of the button to Move to wishlist
     function handleAddTowishlist(product) {
-        if (!wishlistInventory.find(wishlistProduct => wishlistProduct.name === product.name)) {
+        if (!wishlistInventory.find(wishlistProduct => 
+            wishlistProduct.name === product.name
+            && wishlistProduct.size === product.size
+            && wishlistProduct.color === product.color
+        )) {
             let currentProduct = allProducts.find(products => products.name === product.name)
             setWishlistInventory(prev => [...prev, {
                 // Only added the products required information
@@ -131,6 +134,7 @@ function Cart() {
             )));
         }
         removeItem(product)
+        setCartMessage(`${product.name} has been moved to wishlist`)
     }
 
     // Main cart animation
@@ -159,13 +163,17 @@ function Cart() {
                         section={"exit"}
                     ></Banner>
                 </div>
-                <h2 className="cart__title"> Shopping Cart</h2>
+                <h2 className="cart__title"> Shopping Cart
+                    {cartMessage.length > 0
+                        ? <span className={cartMessage.includes("remove") ? "cart-message__remove" : "cart-message__moved"}>{cartMessage}</span>
+                        : <> </>}
+                </h2>
                 {cartInventory.length !== 0 ? <div className="cart__content">
                     <div className="cart__display">
                         {/* Printing out product information if cart is not empty*/}
                         {cartInventory.map(product => {
                             return (
-                                <div className="cart-display__product" key={`${product.name}Cart`}>
+                                <div className="cart-display__product" key={`${product.name}-${product.size}-${product.color}-Cart`}>
                                     <Link
                                         to={`/product/${product.name.toLowerCase().replaceAll(" ", "-").replaceAll("'", "")}`}
                                         className="cart-product__img-container"
@@ -177,7 +185,10 @@ function Cart() {
                                     </Link>
                                     <div className="cart-product__content-container">
                                         <div className="cart-product__information">
-                                            <p className="cart-product__name"> {product.name}</p>
+                                            <Link
+                                                to={`/product/${product.name.toLowerCase().replaceAll(" ", "-").replaceAll("'", "")}`}
+                                                className="cart-product__name"
+                                            > {product.name}</Link>
                                             <p className="cart-product__additional"> Listed Price: ${product.price} </p>
                                             <p className="cart-product__additional"> Color: {product.color}</p>
                                             <p className="cart-product__additional"> Size: {product.size}</p>

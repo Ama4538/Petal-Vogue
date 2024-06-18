@@ -1,72 +1,19 @@
 import { useState } from "react";
-import { Link } from 'react-router-dom';
-import { useAllProducts, useCartInventory, useWishlistInventory } from "../app/Hook";
+import { Link, useNavigate } from 'react-router-dom';
+import { useAllProducts, useWishlistInventory } from "../app/Hook";
 import StarGeneration from "./StarGeneration";
 
 
 function Product({ product }) {
     // Custom Hook
     const { setAllProducts } = useAllProducts();
-    const { cartInventory, setCartInventory } = useCartInventory();
     const { setWishlistInventory } = useWishlistInventory()
 
+    // use to naviage to the product page while keeping the button nature color
+    const redirect = useNavigate();
+
     // Status used to manage the button
-    const [cartStatus, setCartStatus] = useState(product.status)
     const [wishlistStatus, setWishlistStatus] = useState(product.wishlist)
-
-    // Text for each status
-    const textStatus = {
-        disabled: "Added To Cart",
-        enabled: "Add to Cart"
-    }
-
-    // Handled the onClick of the button to add to cart
-    function handleAddToCart() {
-        // Checking if discount exist in the system
-        let discounted = new Set();
-        // Finding only unqiue discounts
-        cartInventory.forEach(product => product.discountAmount > 0 ? discounted.add(JSON.stringify({ section: product.section, discountPercent: product.discountPercent })) : null)
-
-        let discountArray = [];
-        let discountPercent = 0;
-
-        // Finding if discount matches the product section
-        if (discounted.size !== 0) {
-            discounted.forEach(element => {
-                discountArray = discountArray.concat(JSON.parse(element))
-            })
-
-            // Setting the discount values
-            let isDiscounted = discountArray.find(element => element.section === product.section);
-            if (isDiscounted) {
-                discountPercent = isDiscounted.discountPercent
-            }
-        }
-
-        // Adding the data to cart
-        setCartInventory(prev => [...prev, {
-            // Only added the products required information
-            name: product.name,
-            price: product.price,
-            section: product.section,
-            image: product.image,
-            // Give it a quantity value
-            quantity: 1,
-            // discount
-            discountAmount: product.price * discountPercent,
-            discountPercent: discountPercent,
-            // Selection
-            size: "Not Selected",
-            color: "Not Selected"
-        }]);
-
-        // Find the corresponding product and set its button to disabled
-        setAllProducts(prevProducts => prevProducts.map(prevProduct => (
-            prevProduct.name === product.name ? { ...prevProduct, status: 'disabled' } : prevProduct
-        )));
-
-        setCartStatus("disabled");
-    }
 
     // Handled the onClick of the button to add to wishlist
     function handleAddToWishlist() {
@@ -103,6 +50,12 @@ function Product({ product }) {
         }
     }
 
+    // Handle the button press to add to cart
+    function handleAddToCartButton() {
+        // redirect to product page
+        redirect(`/product/${product.name.toLowerCase().replaceAll(" ", "-").replaceAll("'", "")}`)
+    }
+
     return (
         <div className="product-card" >
             {/* Product img */}
@@ -133,10 +86,8 @@ function Product({ product }) {
                     <StarGeneration product={product} />
                     <button
                         className="product-card__button"
-                        // If enable allow to be clicked
-                        onClick={cartStatus === "enabled" ? handleAddToCart : null}
-                        data-status={cartStatus}
-                    >{textStatus[cartStatus]}</button>
+                        onClick={() => {handleAddToCartButton()}}
+                    >Add to Cart</button>
                 </div>
 
             </div>

@@ -1,4 +1,4 @@
-function StarGeneration({ product }) {
+function StarGeneration({ product, displayRating = true }) {
     // Max star rating
     const MAX_STARS = 5;
 
@@ -23,7 +23,7 @@ function StarGeneration({ product }) {
                         : <div className="product__star--empty" key={index}></div>
                 )
             })}
-            <p className="product__rating">{`${product.rating} (${product.review})`}</p>
+            {displayRating ? <p className="product__rating">{`${product.rating} (${product.review})`}</p> : null}
         </div>
     )
 }

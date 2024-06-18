@@ -8,8 +8,6 @@ function AppProvider({ children }) {
     const productArray = [].concat(...Object.values(product));
     const [allProducts, setAllProducts] = useState(productArray.map(product => ({
         ...product,
-        // Status of the button
-        status: "enabled",
         wishlist: false
     })));
 
