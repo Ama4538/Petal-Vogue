@@ -1,13 +1,7 @@
-import { useState } from "react";
 import { Link, useNavigate } from 'react-router-dom';
-import { useWishlistInventory } from "../app/Hook";
 import StarGeneration from "./StarGeneration";
 
-
 function Product({ product, changeEditStatus}) {
-    // Custom Hook
-    const { setWishlistInventory, wishlistInventory } = useWishlistInventory()
-
     // use to naviage to the product page while keeping the button nature color
     const redirect = useNavigate();
 

@@ -40,7 +40,7 @@ function Recommendation({ changeEditStatus }) {
         }
 
         // Cart and wishlist is empty
-        if (commonSection.size > 0) {
+        if (commonSection.size === 0) {
             commonSection = new Set(["women", "men", "kids"]);
         }
 
@@ -62,7 +62,7 @@ function Recommendation({ changeEditStatus }) {
                 );
             })
         }
-
+        
         // Display with only unqiue product
         let displaySet = new Set();
         // Check to see if we are not pulling more product then in the recommnedation system

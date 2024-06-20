@@ -7,10 +7,11 @@ import Recommendation from '../../components/Recommendation/Recommendation.jsx';
 import ScrollToTopOnMount from "../../components/app/ScrollToTopOnMount.jsx";
 import { Link } from 'react-router-dom';
 import EditScreen from '../../components/editscreen/EditScreen.jsx';
+import EditMessageDisplay from "../../components/editscreen/EditMessageDisplay.jsx";
 
 function Cart() {
     // Custom Hook
-    const { allProducts, setAllProducts } = useAllProducts();
+    const { allProducts } = useAllProducts();
     const { cartInventory, setCartInventory, cartAmount } = useCartInventory();
     const { wishlistInventory, setWishlistInventory } = useWishlistInventory()
 
@@ -25,6 +26,8 @@ function Cart() {
     const [edit, setEdit] = useState(false)
     const [editProduct, setEditProduct] = useState(null);
     const [clickedFrom, setClickedFrom] = useState("cart");
+    const [confirmMessage, setConfirmMessage] = useState("");
+    const [messageVisible, setMessageVisible] = useState(false);
 
     // The carts values
     let cartSubtotal = getSubTotal();
@@ -47,6 +50,16 @@ function Cart() {
         }
     }, [edit])
 
+    // Timer for confirm message
+    useEffect(() => {
+        if (confirmMessage.length > 0) {
+            setMessageVisible(true)
+            setTimeout(() => {
+                setMessageVisible(false)
+            }, 2500)
+        }
+    }, [confirmMessage])
+
     // Update the current product being edited and change the edit status
     function changeEditStatus(product, clickedFrom) {
         setClickedFrom(clickedFrom)
@@ -62,6 +75,11 @@ function Cart() {
     // Function to pass to children setCartMessage
     function changeCartMessage(data) {
         setCartMessage(data)
+    }
+
+    // Function to pass to children to change confirm Message
+    function changeConfirmMessage(data) {
+        setConfirmMessage(data)
     }
 
     // Get subtotal price
@@ -159,9 +177,6 @@ function Cart() {
                 color: product.color
             }]);
 
-            setAllProducts(prevProducts => prevProducts.map(prevProduct => (
-                prevProduct.wish === product.name ? { ...prevProduct, wishlist: true } : prevProduct
-            )));
         }
         removeItem(product)
         setCartMessage(`${product.name} has been moved to wishlist`)
@@ -190,7 +205,13 @@ function Cart() {
                 product={editProduct}
                 clickedFrom={clickedFrom}
                 message={changeCartMessage}
+                changeConfirmMessage={changeConfirmMessage}
             /> : <></>}
+            <EditMessageDisplay
+                text={confirmMessage}
+                dataVisible={messageVisible ? true : false}
+            />
+
             <article className="cart__content-container">
                 <div className='cart__banner-container'>
                     <Banner
@@ -323,7 +344,7 @@ function Cart() {
                 {/* Recommendation */}
                 <div className="cart__recommend-container">
                     <h3 className="cart__title">Check Out These Recommendations</h3>
-                    <Recommendation changeEditStatus={changeEditStatus}/>
+                    <Recommendation changeEditStatus={changeEditStatus} />
                 </div>
             </article>
         </motion.section>

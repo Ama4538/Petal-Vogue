@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion"
-import { useAllProducts, useCartInventory, useWishlistInventory } from "../../components/app/Hook";
+import { useCartInventory, useWishlistInventory } from "../../components/app/Hook";
 import SearchNav from "../../components/nav/SearchNav";
 import Banner from "../../components/banner/Banner";
 import DropDown from '../../components/dropdown/DropDown.jsx';
@@ -9,12 +9,12 @@ import Recommendation from "../../components/Recommendation/Recommendation.jsx";
 import ScrollToTopOnMount from "../../components/app/ScrollToTopOnMount.jsx";
 import { Link } from "react-router-dom";
 import EditScreen from '../../components/editscreen/EditScreen.jsx';
+import EditMessageDisplay from "../../components/editscreen/EditMessageDisplay.jsx";
 
 function Wishlist() {
     // Custom Hook
     const { wishlistInventory, setWishlistInventory, wishlistAmount } = useWishlistInventory()
     const { cartInventory, setCartInventory } = useCartInventory();
-    const { setAllProducts } = useAllProducts();
 
     // State to manage sorting
     const [sortingOrder, setSortingOrder] = useState("Newly Listed");
@@ -30,6 +30,8 @@ function Wishlist() {
     const [edit, setEdit] = useState(false)
     const [editProduct, setEditProduct] = useState(null);
     const [clickedFrom, setClickedFrom] = useState("wishlist");
+    const [confirmMessage, setConfirmMessage] = useState("");
+    const [messageVisible, setMessageVisible] = useState(false);
 
     // Check if edit screen should appear
     useEffect(() => {
@@ -46,6 +48,16 @@ function Wishlist() {
         changeSortingOrder()
     }, [wishlistInventory])
 
+    // Timer for confirm message
+    useEffect(() => {
+        if (confirmMessage.length > 0) {
+            setMessageVisible(true)
+            setTimeout(() => {
+                setMessageVisible(false)
+            }, 2500)
+        }
+    }, [confirmMessage])
+
     // When sorting order change call needed functions
     useEffect(() => {
         // Sort the current display category
@@ -56,6 +68,7 @@ function Wishlist() {
     function changeEditStatus(product, clickedFrom) {
         setClickedFrom(clickedFrom)
         setEditProduct(product)
+        setWishlistMessage("")
         setEdit(true);
     }
 
@@ -64,16 +77,25 @@ function Wishlist() {
         setEdit(data)
     }
 
+    // Function to pass to children to change confirm Message
+    function changeConfirmMessage(data) {
+        setConfirmMessage(data)
+    }
+
     // Function to pass to children setCartMessage
     function changeCartMessage(data) {
         setWishlistMessage(data)
     }
 
+    // Funcation to pass to childred setCurrentDisplay
+    function changeCurrentDisplay(data) {
+        setCurrentDisplay(data)
+    }
+
     // Handled the onClick of the button to add to cart
     function handleAddToCart(product) {
         if (product.size === "Not Selected" || product.color === "Not Selected") {
-            // ADDED ADD TO CART CHECKER OPENING EDIT SCREEN AND MAKE IT PUT THE PRODUCT IN THE SCREEN THEN REMOVE IT FROM WISHLIST IF NOT CANCEL
-            // ADDED NOTIFCATION BANNER 
+            changeEditStatus(product, "wishcart")
         } else {
             if (!cartInventory.find(cartProduct => cartProduct.name === product.name
                 && cartProduct.size === product.size
@@ -116,31 +138,31 @@ function Wishlist() {
                     size: product.size,
                     color: product.color
                 }]);
+            } else {
+                // Added the addition into the cart if already there
+                setCartInventory(prevCartProducts =>
+                    prevCartProducts.map(cartProduct =>
+                        cartProduct.name === product.name && cartProduct.size === product.size && cartProduct.color === product.color
+                            ? { ...cartProduct, quantity: cartProduct.quantity + 1 }
+                            : cartProduct
+                    )
+                );
             }
+
+            // Remove it from wishlist
+            setWishlistInventory((prevWishlist => prevWishlist.filter(prevProduct => prevProduct !== product)))
+
+            // Remove it from display
+            setCurrentDisplay((prevWishlist => prevWishlist.filter(prevProduct => prevProduct !== product)))
+
+            // Update message 
+            setWishlistMessage(`${product.name} has been added to cart`);
         }
 
-        // Find the corresponding product and set its button to disabled
-        setAllProducts(prevProducts => prevProducts.map(prevProduct => (
-            prevProduct.name === product.name ? { ...prevProduct, wishlist: false } : prevProduct
-        )));
-
-        // Remove it from wishlist
-        setWishlistInventory((prevWishlist => prevWishlist.filter(prevProduct => prevProduct !== product)))
-
-        // Remove it from display
-        setCurrentDisplay((prevWishlist => prevWishlist.filter(prevProduct => prevProduct !== product)))
-
-        // Update message 
-        setWishlistMessage(`${product.name} has been added to cart`);
     }
 
     // Handle removing the item from wishlist
     function removeItem(product) {
-        // Reenable the product
-        setAllProducts(prevProducts => prevProducts.map(prevProduct => (
-            prevProduct.name === product.name ? { ...prevProduct, wishlist: false } : prevProduct
-        )));
-
         // Remove it from wishlist
         setWishlistInventory((prevWishlist => prevWishlist.filter(prevProduct => prevProduct !== product)))
 
@@ -186,11 +208,18 @@ function Wishlist() {
         >
             <ScrollToTopOnMount />
             <SearchNav />
+            <EditMessageDisplay
+                text={confirmMessage}
+                dataVisible={messageVisible ? true : false}
+            />
+
             {edit ? <EditScreen
                 setEditScreen={changeEditScreen}
                 product={editProduct}
                 clickedFrom={clickedFrom}
                 message={changeCartMessage}
+                changeCurrentDisplay={changeCurrentDisplay}
+                changeConfirmMessage={changeConfirmMessage}
             /> : <></>}
             <article className="wishlist__content-container">
                 <div className="wishlist__banner-container">

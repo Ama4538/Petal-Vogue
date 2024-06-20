@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { color, motion } from 'framer-motion'
-import { useAllProducts, useCartInventory, useSearched } from "../../components/app/Hook.jsx";
+import { useAllProducts, useSearched } from "../../components/app/Hook.jsx";
 import SearchNav from '../../components/nav/SearchNav.jsx';
 import Banner from '../../components/banner/Banner.jsx';
 import Product from '../../components/product/Product.jsx';
@@ -8,6 +8,7 @@ import DropDown from '../../components/dropdown/DropDown.jsx';
 import Marquee from '../../components/marquee/Marquee.jsx';
 import ScrollToTopOnMount from "../../components/app/ScrollToTopOnMount.jsx";
 import EditScreen from '../../components/editscreen/EditScreen.jsx';
+import EditMessageDisplay from "../../components/editscreen/EditMessageDisplay.jsx";
 
 function Search() {
     // Custom Hooks
@@ -63,6 +64,8 @@ function Search() {
     // State used to mange editing
     const [edit, setEdit] = useState(false)
     const [editProduct, setEditProduct] = useState(null);
+    const [confirmMessage, setConfirmMessage] = useState("");
+    const [messageVisible, setMessageVisible] = useState(false);
 
     // Check if edit screen should appear
     useEffect(() => {
@@ -72,6 +75,16 @@ function Search() {
             document.body.style.overflow = "auto"
         }
     }, [edit])
+
+    // Timer for confirm message
+    useEffect(() => {
+        if (confirmMessage.length > 0) {
+            setMessageVisible(true)
+            setTimeout(() => {
+                setMessageVisible(false)
+            }, 2500)
+        }
+    }, [confirmMessage])
 
     // When category change call needed functions
     useEffect(() => {
@@ -146,6 +159,10 @@ function Search() {
         setEdit(data)
     }
 
+    // Function to pass to children to change confirm Message
+    function changeConfirmMessage(data) {
+        setConfirmMessage(data)
+    }
 
     // Handles the section changes
     function handleClick(section) {
@@ -210,8 +227,12 @@ function Search() {
                 setEditScreen={changeEditScreen}
                 product={editProduct}
                 clickedFrom={"default"}
+                changeConfirmMessage={changeConfirmMessage}
             /> : <></>}
-
+            <EditMessageDisplay
+                text={confirmMessage}
+                dataVisible={messageVisible ? true : false}
+            />
 
             <div className='search__banner-container'>
                 <Banner

@@ -6,11 +6,7 @@ export const AppContext = createContext();
 function AppProvider({ children }) {
     // State used to manage the products status
     const productArray = [].concat(...Object.values(product));
-    const [allProducts, setAllProducts] = useState(productArray.map(product => ({
-        ...product,
-        wishlist: false
-    })));
-
+    const [allProducts, setAllProducts] = useState(productArray)
     // Manage the search state for the searchNav
     const [searched, setSearched] = useState("")
 

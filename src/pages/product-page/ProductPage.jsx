@@ -8,6 +8,7 @@ import ProductReview from "./ProductReview.jsx";
 import SimilarProduct from "../../components/Recommendation/SimilarProduct.jsx";
 import Recommendation from "../../components/Recommendation/Recommendation.jsx";
 import EditScreen from '../../components/editscreen/EditScreen.jsx';
+import EditMessageDisplay from "../../components/editscreen/EditMessageDisplay.jsx";
 
 function ProductPage({ reviews }) {
     // Custom Hook
@@ -27,6 +28,8 @@ function ProductPage({ reviews }) {
     // State used to mange editing
     const [edit, setEdit] = useState(false)
     const [editProduct, setEditProduct] = useState(null);
+    const [confirmMessage, setConfirmMessage] = useState("");
+    const [messageVisible, setMessageVisible] = useState(false);
 
     // The product ID
     const { productID } = useParams();
@@ -70,10 +73,25 @@ function ProductPage({ reviews }) {
         }
     }, [edit])
 
+    // Timer for confirm message
+    useEffect(() => {
+        if (confirmMessage.length > 0) {
+            setMessageVisible(true)
+            setTimeout(() => {
+                setMessageVisible(false)
+            }, 2500)
+        }
+    }, [confirmMessage])
+
     // Update the current product being edited and change the edit status
     function changeEditStatus(product) {
         setEditProduct(product)
         setEdit(true);
+    }
+
+    // Function to pass to children to change confirm Message
+    function changeConfirmMessage(data) {
+        setConfirmMessage(data)
     }
 
     // Function to pass to children to change edit
@@ -170,7 +188,6 @@ function ProductPage({ reviews }) {
             setCartAmountSame(cartAmountSame + 1);
             setProductMessage(`Product has been added to cart (${cartAmountSame})`)
         }
-
     }
 
     return (
@@ -181,7 +198,12 @@ function ProductPage({ reviews }) {
                 setEditScreen={changeEditScreen}
                 product={editProduct}
                 clickedFrom={"default"}
+                changeConfirmMessage={changeConfirmMessage}
             /> : <></>}
+            <EditMessageDisplay
+                text={confirmMessage}
+                dataVisible={messageVisible ? true : false}
+            />
 
             <article className="productpage__content-display">
                 <div
@@ -263,7 +285,7 @@ function ProductPage({ reviews }) {
                     </div>
 
                     {productMessage.length > 0
-                        ? <p className="productpage__message">{productMessage}</p>
+                        ? <p className={`productpage__message ${productMessage.includes("already") ? "productpage__message--red" : "" }`}>{productMessage}</p>
                         : null}
 
                     <button

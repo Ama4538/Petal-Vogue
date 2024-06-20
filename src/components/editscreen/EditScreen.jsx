@@ -1,19 +1,19 @@
 import { useEffect, useRef, useState } from "react";
 import { useAllProducts, useCartInventory, useWishlistInventory } from "../../components/app/Hook.jsx";
+import { motion } from "framer-motion"
 
-function EditScreen({ setEditScreen, product, clickedFrom, message = null }) {
+function EditScreen({ setEditScreen, product, clickedFrom, message = null, changeCurrentDisplay = null, changeConfirmMessage = null }) {
     // Custom Hook
     const { allProducts } = useAllProducts();
     const { cartInventory, setCartInventory } = useCartInventory();
     const { wishlistInventory, setWishlistInventory } = useWishlistInventory();
-    const { setAllProducts } = useAllProducts();
 
     // Variables 
     let originalColor = "Not Selected";
     let originalSize = "Not Selected";
 
     // Prevent from Checking if clicked everywhere but cart and wishlist
-    if (clickedFrom !== "default") {
+    if (clickedFrom !== "default" && clickedFrom !== "wishcart") {
         originalColor = product.color;
         originalSize = product.size.split(" ")[1];
     }
@@ -23,7 +23,9 @@ function EditScreen({ setEditScreen, product, clickedFrom, message = null }) {
     const [selectedSize, setSelectedSize] = useState(originalSize);
 
     // State used to manage the message
-    const [editMessage, setEditMessage] = useState("");
+    const [editMessage, setEditMessage] = useState(clickedFrom === "wishcart"
+        ? "Please select both a color and a size to add this item to your cart" : ""
+    );
 
     // All possible color
     const colors = {
@@ -73,7 +75,7 @@ function EditScreen({ setEditScreen, product, clickedFrom, message = null }) {
             // Not inside the cart and is different remove old product add with the changed values
 
             if (editMessage.length <= 0 && product.quantity > 1) {
-                setEditMessage("The current product being altered has multiple copies. Continuing will affect all of them")
+                setEditMessage("The current product being altered has multiple copies. Continuing will affect all of them.")
             } else {
                 setCartInventory(prevCart =>
                     prevCart.map(cartProduct =>
@@ -81,7 +83,7 @@ function EditScreen({ setEditScreen, product, clickedFrom, message = null }) {
                             : cartProduct
                     ))
                 setEditScreen(false);
-                message(`${product.name} has been successfully edited`);
+                message(`${product.name} has been successfully edited.`);
             }
         } else if ((product.size === selectedSize || product.color === selectedColor)
             && cartInventory.find(cartProduct => cartProduct.name === currentProduct.name
@@ -89,7 +91,7 @@ function EditScreen({ setEditScreen, product, clickedFrom, message = null }) {
                 && cartProduct.color === selectedColor)) {
             // Product is the same
             setEditScreen(false);
-            message(`No changes detected. ${product.name} has remained the same`);
+            message(`No changes detected. ${product.name} has remained the same.`);
         }
         else if (cartInventory.find(cartProduct => cartProduct.name === currentProduct.name
             && cartProduct.size === `${currentProduct.section} ${selectedSize}`
@@ -106,7 +108,7 @@ function EditScreen({ setEditScreen, product, clickedFrom, message = null }) {
                     : cartProduct)
                 setCartInventory(prevCart)
                 setEditScreen(false);
-                message(`${product.name} has been successfully edited`);
+                message(`${product.name} has been successfully edited.`);
             }
         }
     }
@@ -128,24 +130,23 @@ function EditScreen({ setEditScreen, product, clickedFrom, message = null }) {
                         : cartProduct
                 ))
             setEditScreen(false);
-            message(`${product.name} has been successfully edited`);
+            message(`${product.name} has been successfully edited.`);
         } else if (!wishlistInventoryWithoutItem.find(cartProduct => cartProduct.name === currentProduct.name
             && cartProduct.size === `${currentProduct.section} ${selectedSize}`
             && cartProduct.color === selectedColor)) {
             // Product is the same
             setEditScreen(false);
-            message(`No changes detected. ${product.name} has remained the same`);
+            message(`No changes detected. ${product.name} has remained the same.`);
         } else {
-            setEditMessage("This product is already in your wishlist and cannot be added again")
+            setEditMessage("This product is already in your wishlist and cannot be added again.")
         }
     }
 
+    // Handle update if clicked from everywhere else
     function updateProductFromDefault() {
         // Error message if no color/size is selected
-        if (selectedColor === "Not Selected" || selectedSize === "Not Selected") {
-            setEditMessage("Please select both a color and a size to add this item to your wishlist")
-        } else if (!wishlistInventory.find(cartProduct => cartProduct.name === currentProduct.name
-            && cartProduct.size === `${currentProduct.section} ${selectedSize}`
+        if (!wishlistInventory.find(cartProduct => cartProduct.name === currentProduct.name
+            && (cartProduct.size === `${currentProduct.section} ${selectedSize}` || cartProduct.size === selectedSize)
             && cartProduct.color === selectedColor)) {
             // Add product to wishlist if not founded
             setWishlistInventory(prev => [...prev, {
@@ -158,21 +159,105 @@ function EditScreen({ setEditScreen, product, clickedFrom, message = null }) {
                 description: product.description,
                 rating: product.rating,
                 review: product.review,
-                size: `${currentProduct.section} ${selectedSize}`,
+                size: selectedColor === "Not Selected" ? selectedSize : `${currentProduct.section} ${selectedSize}`,
                 color: selectedColor
             }]);
-
-            setAllProducts(prevProducts => prevProducts.map(prevProduct => (
-                prevProduct.name === product.name ? { ...prevProduct, wishlist: true } : prevProduct
-            )));
+            changeConfirmMessage(`${product.name} has successfully added to your wishlist.`)
             setEditScreen(false);
         } else {
-            setEditMessage("This product is already in your wishlist and cannot be added again")
+            setEditMessage("This product is already in your wishlist and cannot be added again.")
+        }
+    }
+
+    // Handle adding to cart from wishlist if data is not selected
+    function addProductToCart() {
+        if (selectedColor === "Not Selected" || selectedSize === "Not Selected") {
+            setEditMessage("Please select both a color and a size to add this item to your cart.")
+        } else {
+            // Checking if selected product is already in
+            if (!cartInventory.find(cartProduct => cartProduct.name === product.name
+                && cartProduct.size === product.size
+                && cartProduct.color === product.color
+            )) {
+                // Checking if discount exist in the system
+                let discounted = new Set();
+                // Finding only unqiue discounts
+                cartInventory.forEach(product => product.discountAmount > 0 ? discounted.add(JSON.stringify({ section: product.section, discountPercent: product.discountPercent })) : null)
+
+                let discountArray = [];
+                let discountPercent = 0;
+
+                // Finding if discount matches the product section
+                if (discounted.size !== 0) {
+                    discounted.forEach(element => {
+                        discountArray = discountArray.concat(JSON.parse(element))
+                    })
+
+                    // Setting the discount values
+                    let isDiscounted = discountArray.find(element => element.section === product.section);
+                    if (isDiscounted) {
+                        discountPercent = isDiscounted.discountPercent
+                    }
+                }
+
+                // Adding the data to cart
+                setCartInventory(prev => [...prev, {
+                    // Only added the products required information
+                    name: product.name,
+                    price: product.price,
+                    section: product.section,
+                    image: product.image,
+                    // Give it a quantity value
+                    quantity: 1,
+                    // discount
+                    discountAmount: product.price * discountPercent,
+                    discountPercent: discountPercent,
+                    // Selection
+                    size: `${currentProduct.section} ${selectedSize}`,
+                    color: selectedColor
+                }]);
+            } else {
+                // Added the addition into the cart if already there
+                setCartInventory(prevCartProducts =>
+                    prevCartProducts.map(cartProduct =>
+                        cartProduct.name === product.name && cartProduct.size === product.size && cartProduct.color === product.color
+                            ? { ...cartProduct, quantity: cartProduct.quantity + 1 }
+                            : cartProduct
+                    )
+                );
+            }
+            // Remove it from wishlist
+            setWishlistInventory((prevWishlist => prevWishlist.filter(prevProduct => prevProduct !== product)))
+
+            // Remove it from display
+            changeCurrentDisplay((prevWishlist => prevWishlist.filter(prevProduct => prevProduct !== product)))
+
+            // Message used to add to cart from wishlist
+            message(`${product.name} has been added to cart.`);
+            setEditScreen(false);
+        }
+    }
+
+    // Main edit Animation
+    const editAnimation = {
+        start: {
+            opacity: 0,
+        },
+        enter: {
+            opacity: 1,
+            transition: {
+                duration: 0.15,
+            }
         }
     }
 
     return (
-        <div className="editproduct__container">
+        <motion.div
+            className="editproduct__container"
+            variants={editAnimation}
+            initial="start"
+            animate="enter"
+        >
             <div
                 className="editproduct__display"
                 ref={displayRef}
@@ -247,17 +332,24 @@ function EditScreen({ setEditScreen, product, clickedFrom, message = null }) {
                                         updateProductFromCart()
                                     } else if (clickedFrom === "wishlist") {
                                         updateProductFromWishlist();
-                                    } else {
+                                    } else if (clickedFrom === "default") {
                                         updateProductFromDefault();
+                                    } else {
+                                        addProductToCart()
                                     }
                                 }}
-                            >{clickedFrom === "default" ? 'Add to Wishlist' : 'Update Product'}</button>
+                            >{clickedFrom === "default"
+                                ? 'Add to Wishlist'
+                                : clickedFrom === "wishcart"
+                                    ? "Add to Cart"
+                                    : "Update Product"}
+                            </button>
                         </div>
                     </div>
 
                 </div>
             </div>
-        </div>
+        </motion.div >
     )
 }
 

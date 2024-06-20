@@ -145,6 +145,10 @@
     color: #306844;
 }
 
+.productpage__message--red{
+    color: #8B0000;
+}
+
 .productpage__button {
     padding: calc(var(--padding-very-small) / 1.5);
     width: 75%;
