@@ -1,4 +1,4 @@
-function Marquee({ text }) {
+function Marquee({ text, extended = false }) {
     // Create array for each word
     const textArray = text.split(" ");
 
@@ -20,6 +20,17 @@ function Marquee({ text }) {
                     )
                 })}
             </ul>
+
+            {extended
+                ? <ul className="marquee__content">
+                    {textArray.map((element, index) => {
+                        return (
+                            <li key={index + textArray.length * 2}>{element}</li>
+                        )
+                    })}
+                </ul>
+                : <></>}
+
         </div>
     )
 }

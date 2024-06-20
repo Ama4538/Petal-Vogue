@@ -24,7 +24,7 @@ function Nav({ handleActiveSection, activeSection }) {
                     </li>
                 ))}
             </ul>
-            <ul className="nav__list nav__list-icon-container">
+            <div className="nav__list nav__list-icon-container">
                 <CustomLink to="/search" className="nav__list-icon" />
                 <CustomLink
                     to="/wishlist"
@@ -39,7 +39,7 @@ function Nav({ handleActiveSection, activeSection }) {
                     dataVisible={cartAmount !== 0 ? "visible" : "hidden"}
                     dataAmount={cartAmount}
                 />
-            </ul>
+            </div>
         </nav >
     )
 }

@@ -96,5 +96,167 @@
                 "statement": "Add a touch of fun and flair to their wardrobe with our playful crop tops."
             }
         ]
-    }
+    },
+    "reviews": [
+        {
+            "name": "Sarah Johnson",
+            "title": "Comfortable and versatile",
+            "rating": "5",
+            "location": "United States",
+            "date": "April 12, 2024",
+            "review": "This item fits perfectly and looks great with any outfit. Highly recommended!"
+        },
+        {
+            "name": "Michael Brown",
+            "title": "Perfect Fit and Style",
+            "rating": "5",
+            "location": "Canada",
+            "date": "March 8, 2024",
+            "review": "I am very impressed with the quality and comfort of this product. It is well-made and can be dressed up or down, making it a versatile addition to my wardrobe."
+        },
+        {
+            "name": "Jessica Williams",
+            "title": "Highly Impressed",
+            "rating": "5",
+            "location": "United Kingdom",
+            "date": "June 3, 2024",
+            "review": "This is one of my favorite pieces. It's stylish, fits well, and the material feels amazing. I can wear it to work or for a casual day out. Great buy!"
+        },
+        {
+            "name": "David Miller",
+            "title": "My Favorite Wardrobe Addition",
+            "rating": "5",
+            "location": "Australia",
+            "date": "February 18, 2024",
+            "review": "A fantastic product! It's incredibly comfortable and fits just right. The versatility of this item allows me to wear it for various occasions. Absolutely love it!"
+        },
+        {
+            "name": "Emily Davis",
+            "title": "Incredibly Comfortable",
+            "rating": "5",
+            "location": "Germany",
+            "date": "January 22, 2024",
+            "review": "This product exceeded my expectations. The fit is perfect, and the material is both soft and durable. It's a versatile piece that I can pair with many different outfits. Definitely a must-have!"
+        },
+        {
+            "name": "John Smith",
+            "title": "Stylish and Versatile",
+            "rating": "5",
+            "location": "France",
+            "date": "May 15, 2024",
+            "review": "This item is fantastic. It's comfortable, versatile, and looks great with any outfit. I've received many compliments when wearing it."
+        },
+        {
+            "name": "Laura Johnson",
+            "title": "A Must-Have",
+            "rating": "5",
+            "location": "Italy",
+            "date": "July 10, 2024",
+            "review": "I love this piece! It's so comfortable and can be worn in so many different ways. Highly recommended for anyone looking for a versatile addition to their wardrobe."
+        },
+        {
+            "name": "Robert Wilson",
+            "title": "Great for Any Occasion",
+            "rating": "4",
+            "location": "Spain",
+            "date": "August 22, 2024",
+            "review": "This product is great. It fits perfectly and is extremely comfortable. I can wear it to work or for a casual day out. Very happy with my purchase."
+        },
+        {
+            "name": "Sophia Martinez",
+            "title": "Exceptional Quality",
+            "rating": "5",
+            "location": "Brazil",
+            "date": "September 15, 2024",
+            "review": "This is a great product! It's stylish, comfortable, and can be worn with almost anything. Definitely a must-have in your wardrobe."
+        },
+        {
+            "name": "James Anderson",
+            "title": "Versatile and Stylish",
+            "rating": "4",
+            "location": "South Africa",
+            "date": "October 3, 2024",
+            "review": "I love how versatile this item is. It's comfortable and fits perfectly. I've worn it on multiple occasions and it always looks great."
+        },
+        {
+            "name": "Mia Thompson",
+            "title": "Comfortable and Well-Made",
+            "rating": "5",
+            "location": "Japan",
+            "date": "November 20, 2024",
+            "review": "This item is wonderful. It's so comfortable and versatile. I can pair it with so many different outfits. Very pleased with my purchase."
+        },
+        {
+            "name": "Liam Lee",
+            "title": "Perfect for Everyday Wear",
+            "rating": "4",
+            "location": "South Korea",
+            "date": "December 5, 2024",
+            "review": "Great product! It fits well and is very comfortable. I can wear it in a variety of settings and always feel great in it."
+        },
+        {
+            "name": "Olivia Kim",
+            "title": "Fits Like a Dream",
+            "rating": "5",
+            "location": "China",
+            "date": "January 18, 2024",
+            "review": "This piece is amazing. It's very comfortable and versatile. I can wear it to work, for casual outings, and even to formal events."
+        },
+        {
+            "name": "Benjamin Garcia",
+            "title": "Highly Recommended",
+            "rating": "5",
+            "location": "Mexico",
+            "date": "February 14, 2024",
+            "review": "I am extremely satisfied with this product. It's comfortable, fits perfectly, and is very versatile. Highly recommended!"
+        },
+        {
+            "name": "Emma Wilson",
+            "title": "Great Value and Comfort",
+            "rating": "3",
+            "location": "India",
+            "date": "March 9, 2024",
+            "review": "I love this product! It's comfortable, fits well, and is very versatile. I can wear it with many different outfits. Definitely worth the purchase."
+        },
+        {
+            "name": "Lucas Martinez",
+            "title": "Fantastic Quality",
+            "rating": "5",
+            "location": "Argentina",
+            "date": "April 27, 2024",
+            "review": "Fantastic product! It's very comfortable and versatile. I've worn it on several occasions and always receive compliments. Highly recommend!"
+        },
+        {
+            "name": "Hannah Rodriguez",
+            "title": "Good but Not Perfect",
+            "rating": "3",
+            "location": "Chile",
+            "date": "May 5, 2024",
+            "review": "The product is comfortable and stylish, but the fit could be better. It's still a good purchase for casual wear."
+        },
+        {
+            "name": "Ethan King",
+            "title": "Very Satisfied",
+            "rating": "4",
+            "location": "New Zealand",
+            "date": "June 19, 2024",
+            "review": "Overall, I'm very satisfied with this product. It's comfortable and fits well. I would recommend it to others."
+        },
+        {
+            "name": "Ava Green",
+            "title": "Nice and Comfortable",
+            "rating": "4",
+            "location": "Sweden",
+            "date": "July 22, 2024",
+            "review": "This item is nice and comfortable. It looks good with different outfits, making it a versatile choice for my wardrobe."
+        },
+        {
+            "name": "William Clark",
+            "title": "Decent Product",
+            "rating": "3",
+            "location": "Norway",
+            "date": "August 3, 2024",
+            "review": "The product is decent. It's comfortable, but the material is not as durable as I expected. Still, it's a good choice for casual wear."
+        }
+    ]
 }

@@ -130,7 +130,7 @@ function SearchNav({ intoView = null }) {
                     </div>
                 </div>
             </div>
-            <ul className="nav__list nav__list-icon-container">
+            <div className="nav__list nav__list-icon-container">
                 <CustomLink to="/search" className="nav__list-icon" />
                 <CustomLink
                     to="/wishlist"
@@ -145,7 +145,7 @@ function SearchNav({ intoView = null }) {
                     dataVisible={cartAmount !== 0 ? "visible" : "hidden"}
                     dataAmount={cartAmount}
                 />
-            </ul>
+            </div>
         </nav>
     )
 }

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion'
 import { useAllProducts, useCartInventory, useWishlistInventory } from "../../components/app/Hook.jsx";
 import SearchNav from "../../components/nav/SearchNav.jsx";
@@ -6,6 +6,7 @@ import Banner from "../../components/banner/Banner.jsx";
 import Recommendation from '../../components/Recommendation/Recommendation.jsx';
 import ScrollToTopOnMount from "../../components/app/ScrollToTopOnMount.jsx";
 import { Link } from 'react-router-dom';
+import EditScreen from '../../components/editscreen/EditScreen.jsx';
 
 function Cart() {
     // Custom Hook
@@ -20,6 +21,10 @@ function Cart() {
     // State used to manage message
     const [cartMessage, setCartMessage] = useState("")
 
+    // State used to mange editing
+    const [edit, setEdit] = useState(false)
+    const [editProduct, setEditProduct] = useState(null);
+    const [clickedFrom, setClickedFrom] = useState("cart");
 
     // The carts values
     let cartSubtotal = getSubTotal();
@@ -33,6 +38,31 @@ function Cart() {
         KIDS15: 0.15
     }
 
+    // Check if edit screen should appear
+    useEffect(() => {
+        if (edit) {
+            document.body.style.overflow = "hidden"
+        } else {
+            document.body.style.overflow = "auto"
+        }
+    }, [edit])
+
+    // Update the current product being edited and change the edit status
+    function changeEditStatus(product, clickedFrom) {
+        setClickedFrom(clickedFrom)
+        setEditProduct(product)
+        setEdit(true);
+    }
+
+    // Function to pass to children to change edit
+    function changeEditScreen(data) {
+        setEdit(data)
+    }
+
+    // Function to pass to children setCartMessage
+    function changeCartMessage(data) {
+        setCartMessage(data)
+    }
 
     // Get subtotal price
     function getSubTotal() {
@@ -109,7 +139,7 @@ function Cart() {
 
     // Handled the onClick of the button to Move to wishlist
     function handleAddTowishlist(product) {
-        if (!wishlistInventory.find(wishlistProduct => 
+        if (!wishlistInventory.find(wishlistProduct =>
             wishlistProduct.name === product.name
             && wishlistProduct.size === product.size
             && wishlistProduct.color === product.color
@@ -155,6 +185,12 @@ function Cart() {
         >
             <ScrollToTopOnMount />
             <SearchNav />
+            {edit ? <EditScreen
+                setEditScreen={changeEditScreen}
+                product={editProduct}
+                clickedFrom={clickedFrom}
+                message={changeCartMessage}
+            /> : <></>}
             <article className="cart__content-container">
                 <div className='cart__banner-container'>
                     <Banner
@@ -220,7 +256,10 @@ function Cart() {
                                                 className="cart-product__edit"
                                                 onClick={() => removeItem(product)}
                                             > Remove </button>
-                                            <button className="cart-product__edit"> Edit </button>
+                                            <button
+                                                className="cart-product__edit"
+                                                onClick={() => { changeEditStatus(product) }}
+                                            > Edit </button>
                                             <button
                                                 className="cart-product__edit"
                                                 onClick={() => handleAddTowishlist(product)}
@@ -284,7 +323,7 @@ function Cart() {
                 {/* Recommendation */}
                 <div className="cart__recommend-container">
                     <h3 className="cart__title">Check Out These Recommendations</h3>
-                    <Recommendation />
+                    <Recommendation changeEditStatus={changeEditStatus}/>
                 </div>
             </article>
         </motion.section>

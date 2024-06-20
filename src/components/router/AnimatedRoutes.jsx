@@ -1,6 +1,6 @@
 import { Route, Routes, useLocation } from "react-router-dom";
 import { AnimatePresence } from 'framer-motion';
-import { home } from "../../data/data.json"
+import { home, reviews } from "../../data/data.json"
 import Loader from "../../pages/loader/Loader.jsx"
 import Home from "../../pages/home/Home.jsx";
 import Search from "../../pages/search/Search.jsx";
@@ -22,7 +22,7 @@ function AnimatedRoutes() {
                 <Route path="/search" element={<Search />} />
                 <Route path="/cart" element={<Cart />} />
                 <Route path="/wishlist" element={<Wishlist />} />
-                <Route path="/product/:productID" element={<ProductPage />} />
+                <Route path="/product/:productID" element={<ProductPage reviews = {reviews} />} />
                 <Route path="*" element={<Error />} />
             </Routes>
         </AnimatePresence>

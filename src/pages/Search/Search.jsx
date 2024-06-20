@@ -7,6 +7,7 @@ import Product from '../../components/product/Product.jsx';
 import DropDown from '../../components/dropdown/DropDown.jsx';
 import Marquee from '../../components/marquee/Marquee.jsx';
 import ScrollToTopOnMount from "../../components/app/ScrollToTopOnMount.jsx";
+import EditScreen from '../../components/editscreen/EditScreen.jsx';
 
 function Search() {
     // Custom Hooks
@@ -58,6 +59,19 @@ function Search() {
 
     // Ref to slide into view after search
     const contentRef = useRef(null);
+
+    // State used to mange editing
+    const [edit, setEdit] = useState(false)
+    const [editProduct, setEditProduct] = useState(null);
+
+    // Check if edit screen should appear
+    useEffect(() => {
+        if (edit) {
+            document.body.style.overflow = "hidden"
+        } else {
+            document.body.style.overflow = "auto"
+        }
+    }, [edit])
 
     // When category change call needed functions
     useEffect(() => {
@@ -121,6 +135,18 @@ function Search() {
         }
     }, [searched])
 
+    // Update the current product being edited and change the edit status
+    function changeEditStatus(product) {
+        setEditProduct(product)
+        setEdit(true);
+    }
+
+    // Function to pass to children to change edit
+    function changeEditScreen(data) {
+        setEdit(data)
+    }
+
+
     // Handles the section changes
     function handleClick(section) {
         setActiveSection(section);
@@ -180,6 +206,13 @@ function Search() {
         >
             <ScrollToTopOnMount />
             <SearchNav intoView={contentRef} />
+            {edit ? <EditScreen
+                setEditScreen={changeEditScreen}
+                product={editProduct}
+                clickedFrom={"default"}
+            /> : <></>}
+
+
             <div className='search__banner-container'>
                 <Banner
                     title={bannerText[activeSection][0]}
@@ -243,6 +276,7 @@ function Search() {
                         <Product
                             product={product}
                             key={product.name} // Assuming 'name' is unique for each product
+                            changeEditStatus={changeEditStatus}
                         />
                     ))}
                 </article>

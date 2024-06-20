@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useAllProducts, useCartInventory, useWishlistInventory } from "../../components/app/Hook.jsx";
 import Product from "../product/Product.jsx"
 
-function Recommendation() {
+function Recommendation({ changeEditStatus }) {
     // Custom Hook
     const { allProducts } = useAllProducts();
     const { cartInventory } = useCartInventory();
@@ -22,28 +22,42 @@ function Recommendation() {
     useEffect(() => {
         // cart and wishlist add sections
         let commonSection = new Set();
+        // Not include into the system
+        let notIncluded = new Set();
+
         if (cartInventory.length > 0) {
             cartInventory.forEach(product => {
                 commonSection.add(product.section)
+                notIncluded.add(product.name)
             });
-        } else if (wishlistInventory.length > 0) {
+        }
+
+        if (wishlistInventory.length > 0) {
             wishlistInventory.forEach(product => {
                 commonSection.add(product.section)
+                notIncluded.add(product.name)
             });
-        } else {
-            // Cart is empty
+        }
+
+        // Cart and wishlist is empty
+        if (commonSection.size > 0) {
             commonSection = new Set(["women", "men", "kids"]);
         }
+
+        // Array the notIncluded set
+        const notIncludedArray = [...notIncluded]
 
         // All possible product display without any already inside the cart
         let possibleDisplay = [];
         if (commonSection.length === 3) {
-            possibleDisplay = possibleDisplay.concat(allProducts.filter(product => product.status != "disabled"));
+            possibleDisplay = allProducts.filter(
+                product => !(notIncludedArray.includes(product.name))
+            )
         } else {
             commonSection.forEach(section => {
                 possibleDisplay = possibleDisplay.concat(
                     allProducts.filter(
-                        product => product.section === section && product.wishlist === false && product.status !== "disabled"
+                        product => product.section === section && !(notIncludedArray.includes(product.name))
                     )
                 );
             })
@@ -76,14 +90,14 @@ function Recommendation() {
                         <Product
                             key={`${product.name}Recommendation`}
                             product={product}
-                            handleAddToCart={() => handleAddToCart(product)}
+                            changeEditStatus={changeEditStatus}
                         />
                     )
                 })
                 :
                 <div className="recommendation__none-container">
                     <p> We have run out of recommendations for you!</p>
-                    <button className='recommendation-none__button' onClick={() => {redirect("/search")}}> Continue Shopping </button>
+                    <button className='recommendation-none__button' onClick={() => { redirect("/search") }}> Continue Shopping </button>
                 </div>
             }
         </div>

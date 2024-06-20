@@ -8,6 +8,7 @@ import StarGeneration from "../../components/product/StarGeneration.jsx";
 import Recommendation from "../../components/Recommendation/Recommendation.jsx";
 import ScrollToTopOnMount from "../../components/app/ScrollToTopOnMount.jsx";
 import { Link } from "react-router-dom";
+import EditScreen from '../../components/editscreen/EditScreen.jsx';
 
 function Wishlist() {
     // Custom Hook
@@ -25,6 +26,20 @@ function Wishlist() {
     // State used to manage message
     const [wishlistMessage, setWishlistMessage] = useState("")
 
+    // State used to mange editing
+    const [edit, setEdit] = useState(false)
+    const [editProduct, setEditProduct] = useState(null);
+    const [clickedFrom, setClickedFrom] = useState("wishlist");
+
+    // Check if edit screen should appear
+    useEffect(() => {
+        if (edit) {
+            document.body.style.overflow = "hidden"
+        } else {
+            document.body.style.overflow = "auto"
+        }
+    }, [edit])
+
     // Change the wistlist display when the wishlist changes
     useEffect(() => {
         setCurrentDisplay(wishlistInventory);
@@ -37,49 +52,71 @@ function Wishlist() {
         changeSortingOrder()
     }, [sortingOrder])
 
+    // Update the current product being edited and change the edit status
+    function changeEditStatus(product, clickedFrom) {
+        setClickedFrom(clickedFrom)
+        setEditProduct(product)
+        setEdit(true);
+    }
+
+    // Function to pass to children to change edit
+    function changeEditScreen(data) {
+        setEdit(data)
+    }
+
+    // Function to pass to children setCartMessage
+    function changeCartMessage(data) {
+        setWishlistMessage(data)
+    }
+
     // Handled the onClick of the button to add to cart
     function handleAddToCart(product) {
-        if (!cartInventory.find(cartProduct => cartProduct.name === product.name
-            && cartProduct.size === product.size
-            && cartProduct.color === product.color
-        )) {
-            // Checking if discount exist in the system
-            let discounted = new Set();
-            // Finding only unqiue discounts
-            cartInventory.forEach(product => product.discountAmount > 0 ? discounted.add(JSON.stringify({ section: product.section, discountPercent: product.discountPercent })) : null)
+        if (product.size === "Not Selected" || product.color === "Not Selected") {
+            // ADDED ADD TO CART CHECKER OPENING EDIT SCREEN AND MAKE IT PUT THE PRODUCT IN THE SCREEN THEN REMOVE IT FROM WISHLIST IF NOT CANCEL
+            // ADDED NOTIFCATION BANNER 
+        } else {
+            if (!cartInventory.find(cartProduct => cartProduct.name === product.name
+                && cartProduct.size === product.size
+                && cartProduct.color === product.color
+            )) {
+                // Checking if discount exist in the system
+                let discounted = new Set();
+                // Finding only unqiue discounts
+                cartInventory.forEach(product => product.discountAmount > 0 ? discounted.add(JSON.stringify({ section: product.section, discountPercent: product.discountPercent })) : null)
 
-            let discountArray = [];
-            let discountPercent = 0;
+                let discountArray = [];
+                let discountPercent = 0;
 
-            // Finding if discount matches the product section
-            if (discounted.size !== 0) {
-                discounted.forEach(element => {
-                    discountArray = discountArray.concat(JSON.parse(element))
-                })
+                // Finding if discount matches the product section
+                if (discounted.size !== 0) {
+                    discounted.forEach(element => {
+                        discountArray = discountArray.concat(JSON.parse(element))
+                    })
 
-                // Setting the discount values
-                let isDiscounted = discountArray.find(element => element.section === product.section);
-                if (isDiscounted) {
-                    discountPercent = isDiscounted.discountPercent
+                    // Setting the discount values
+                    let isDiscounted = discountArray.find(element => element.section === product.section);
+                    if (isDiscounted) {
+                        discountPercent = isDiscounted.discountPercent
+                    }
                 }
-            }
 
-            // Adding the data to cart
-            setCartInventory(prev => [...prev, {
-                // Only added the products required information
-                name: product.name,
-                price: product.price,
-                section: product.section,
-                image: product.image,
-                // Give it a quantity value
-                quantity: 1,
-                // discount
-                discountAmount: product.price * discountPercent,
-                discountPercent: discountPercent,
-                // Selection
-                size: product.size,
-                color: product.color
-            }]);
+                // Adding the data to cart
+                setCartInventory(prev => [...prev, {
+                    // Only added the products required information
+                    name: product.name,
+                    price: product.price,
+                    section: product.section,
+                    image: product.image,
+                    // Give it a quantity value
+                    quantity: 1,
+                    // discount
+                    discountAmount: product.price * discountPercent,
+                    discountPercent: discountPercent,
+                    // Selection
+                    size: product.size,
+                    color: product.color
+                }]);
+            }
         }
 
         // Find the corresponding product and set its button to disabled
@@ -149,6 +186,12 @@ function Wishlist() {
         >
             <ScrollToTopOnMount />
             <SearchNav />
+            {edit ? <EditScreen
+                setEditScreen={changeEditScreen}
+                product={editProduct}
+                clickedFrom={clickedFrom}
+                message={changeCartMessage}
+            /> : <></>}
             <article className="wishlist__content-container">
                 <div className="wishlist__banner-container">
                     <Banner
@@ -198,16 +241,24 @@ function Wishlist() {
                                             <p className="wishlist-product__additional"> Color: {product.color} </p>
                                             <p className="wishlist-product__additional"> Size: {product.size} </p>
                                             <StarGeneration product={product} />
+
                                         </div>
                                         <div className="wishlist-product__button-container">
                                             <button
                                                 className="wishlist-product__button-add"
                                                 onClick={() => handleAddToCart(product)}
                                             >Add to Cart</button>
-                                            <button
-                                                className="wishlist-product__button-remove"
-                                                onClick={() => removeItem(product)}
-                                            >Remove </button>
+                                            <div className="wishlist-product__button-format">
+                                                <button
+                                                    className="wishlist-product__button-remove"
+                                                    onClick={() => { changeEditStatus(product, "wishlist") }}
+                                                > Edit </button>
+                                                <button
+                                                    className="wishlist-product__button-remove"
+                                                    onClick={() => removeItem(product)}
+                                                >Remove </button>
+                                            </div>
+
                                         </div>
                                     </div>
                                 </div>
@@ -224,7 +275,7 @@ function Wishlist() {
                 {/* Recommondation */}
                 <div className="wishlist__recommend-container">
                     <h3 className="wishlist__title">Check Out These Recommendations</h3>
-                    <Recommendation />
+                    <Recommendation changeEditStatus={changeEditStatus} />
                 </div>
             </article>
         </motion.section >

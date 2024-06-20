@@ -1,20 +1,32 @@
+import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import SearchNav from "../../components/nav/SearchNav";
 import { useAllProducts, useCartInventory, useWishlistInventory } from "../../components/app/Hook";
-import { useEffect, useState } from "react";
 import ScrollToTopOnMount from "../../components/app/ScrollToTopOnMount.jsx";
 import StarGeneration from "../../components/product/StarGeneration.jsx";
+import ProductReview from "./ProductReview.jsx";
+import SimilarProduct from "../../components/Recommendation/SimilarProduct.jsx";
+import Recommendation from "../../components/Recommendation/Recommendation.jsx";
+import EditScreen from '../../components/editscreen/EditScreen.jsx';
 
-function ProductPage() {
+function ProductPage({ reviews }) {
     // Custom Hook
     const { allProducts, setAllProducts } = useAllProducts();
     const { wishlistInventory, setWishlistInventory } = useWishlistInventory();
-    const {cartInventory, setCartInventory} = useCartInventory();
+    const { cartInventory, setCartInventory } = useCartInventory();
 
     // State used to mange product information
     const [selectedColor, setSelectedColor] = useState("Not Selected");
     const [selectedSize, setSelectedSize] = useState("Not Selected");
     const [quantity, setQuantity] = useState(1);
+
+    // State used to mange message
+    const [productMessage, setProductMessage] = useState("");
+    const [cartAmountSame, setCartAmountSame] = useState(1);
+
+    // State used to mange editing
+    const [edit, setEdit] = useState(false)
+    const [editProduct, setEditProduct] = useState(null);
 
     // The product ID
     const { productID } = useParams();
@@ -49,11 +61,31 @@ function ProductPage() {
         }
     }, [currentProduct]);
 
+    // Check if edit screen should appear
+    useEffect(() => {
+        if (edit) {
+            document.body.style.overflow = "hidden"
+        } else {
+            document.body.style.overflow = "auto"
+        }
+    }, [edit])
+
+    // Update the current product being edited and change the edit status
+    function changeEditStatus(product) {
+        setEditProduct(product)
+        setEdit(true);
+    }
+
+    // Function to pass to children to change edit
+    function changeEditScreen(data) {
+        setEdit(data)
+    }
+
     // Handled the onClick of the button to Move to wishlist
     function handleAddTowishlist() {
         if (!wishlistInventory.find(wishlistProduct =>
             wishlistProduct.name === currentProduct.name
-            && wishlistProduct.size === selectedSize
+            && (wishlistProduct.size === `${currentProduct.section} ${selectedSize}` || wishlistProduct.size === selectedSize)
             && wishlistProduct.color === selectedColor
         )) {
             setWishlistInventory(prev => [...prev, {
@@ -71,15 +103,18 @@ function ProductPage() {
             }]);
 
             setAllProducts(prevProducts => prevProducts.map(prevProduct => (
-                prevProduct.wish === currentProduct.name ? { ...prevProduct, wishlist: true } : prevProduct
+                prevProduct.name === currentProduct.name ? { ...prevProduct, wishlist: true } : prevProduct
             )));
+            setProductMessage("Product has been added to wishlist")
+        } else {
+            setProductMessage("Product is already in wishlist")
         }
     }
 
     // Handled the onClick of the button to add to cart
     function handleAddToCart() {
         if (!cartInventory.find(cartProduct => cartProduct.name === currentProduct.name
-            && cartProduct.size === selectedSize
+            && cartProduct.size === `${currentProduct.section} ${selectedSize}`
             && cartProduct.color === selectedColor
         )) {
             // Checking if discount exist in the system
@@ -119,14 +154,36 @@ function ProductPage() {
                 size: `${currentProduct.section} ${selectedSize}`,
                 color: selectedColor
             }]);
+            setProductMessage("Product has been added to cart")
+            if (cartAmountSame > 1) {
+                setCartAmountSame(1);
+            }
+        } else {
+            // Added the addition into the cart if already there
+            setCartInventory(prevCartProducts =>
+                prevCartProducts.map(cartProduct =>
+                    cartProduct.name === currentProduct.name && cartProduct.size === `${currentProduct.section} ${selectedSize}` && cartProduct.color === selectedColor
+                        ? { ...cartProduct, quantity: cartProduct.quantity + quantity }
+                        : cartProduct
+                )
+            );
+            setCartAmountSame(cartAmountSame + 1);
+            setProductMessage(`Product has been added to cart (${cartAmountSame})`)
         }
+
     }
 
     return (
         <section className="productpage">
             <SearchNav />
             <ScrollToTopOnMount />
-            <div className="productpage__content-container">
+            {edit ? <EditScreen
+                setEditScreen={changeEditScreen}
+                product={editProduct}
+                clickedFrom={"default"}
+            /> : <></>}
+
+            <article className="productpage__content-display">
                 <div
                     className="productpage-content__img"
                     style={{ backgroundImage: `url("/productimage/${currentProduct.section}/${currentProduct.image}")` }}
@@ -134,6 +191,7 @@ function ProductPage() {
                 {/* Information display */}
                 <div className="productpage__information">
                     <h2 className="productpage__title">{currentProduct.name}</h2>
+                    <p className="productpage__subtitle">{currentProduct.description}</p>
                     <div className="productpage__star-container">
                         <p> {currentProduct.rating} </p>
                         <StarGeneration product={currentProduct} displayRating={false} />
@@ -148,7 +206,12 @@ function ProductPage() {
                                 <li
                                     className="productpage__color-container productpage__range-container "
                                     key={`${currentProduct.name}-${element}-color`}
-                                    onClick={() => { setSelectedColor(element) }}
+                                    onClick={() => {
+                                        if (productMessage.length > 0) {
+                                            setProductMessage("")
+                                        }
+                                        setSelectedColor(element)
+                                    }}
                                     data-active={selectedColor === element ? "true" : "false"}
                                 >
                                     <div
@@ -170,7 +233,12 @@ function ProductPage() {
                                 <li
                                     className="productpage__range-container"
                                     key={`${currentProduct.name}-${element}-range`}
-                                    onClick={() => { setSelectedSize(element) }}
+                                    onClick={() => {
+                                        if (productMessage.length > 0) {
+                                            setProductMessage("")
+                                        }
+                                        setSelectedSize(element)
+                                    }}
                                     data-active={selectedSize === element ? "true" : "false"}
                                 >
                                     <p className="productpage__shape productpage__size-text"> {element} </p>
@@ -194,22 +262,80 @@ function ProductPage() {
                         > + </button>
                     </div>
 
-                    <p className="productpage__unselect">To buy, select a <b>color</b> and <b>size</b></p>
+                    {productMessage.length > 0
+                        ? <p className="productpage__message">{productMessage}</p>
+                        : null}
+
                     <button
                         className="productpage__button"
-                        onClick={() => {handleAddToCart()}}
-                        data-active={selectedColor === "Not Selected" || selectedSize === "Not Selected"
-                            ? false : true}
-                    >Add to Cart</button>
+                        onClick={() => {
+                            if (selectedColor !== "Not Selected" && selectedSize !== "Not Selected") {
+                                handleAddToCart();
+                            }
+                        }}
+                        data-active={selectedColor !== "Not Selected" && selectedSize !== "Not Selected"
+                            ? true : false}
+                    >Add to Cart </button>
 
-                    <button 
-                    className="productpage__button productpage__button-wishlist"
-                    onClick={() => {handleAddTowishlist()}}
+                    <button
+                        className="productpage__button productpage__button-wishlist"
+                        onClick={() => { handleAddTowishlist() }}
                     >Add to Wishlist</button>
 
                 </div>
+            </article>
+
+            {/* Comments / Discription */}
+            <article className="productpage__reviews-container">
+                <h2 className="productpage-reviews__title ">Reviews and Product Details</h2>
+                <div className="productpage-information__display">
+                    <div className="productpage-review__display">
+                        <ProductReview
+                            reviews={reviews}
+                            length={3}
+                            product={currentProduct}
+                        />
+                    </div>
+                    <div className="productpage__information-discription">
+                        <p className="productpage__information-title">Details</p>
+                        <ul className="productpage-discription__list">
+                            <li>Product Type: Casual Wear</li>
+                            <li>Colors: {currentProduct.colorrange.join(", ")}</li>
+                            <li>Sizes: {currentProduct.sizes.join(", ")}</li>
+                            <li>Fit: Regular</li>
+                            <li>Style: Modern, versatile design</li>
+                            <li>Eco Friendly</li>
+                        </ul>
+                        <p className="productpage__information-title">Material</p>
+                        <ul className="productpage-discription__list">
+                            <li>Fabric Type: 90% Fake, 5% Made Up, and 5% Love</li>
+                        </ul>
+                        <p className="productpage__information-title">Care</p>
+                        <ul className="productpage-discription__list">
+                            <li>Storage: Store in a cool, dry place away from direct sunlight and humidity</li>
+                            <li>Handling: Handle with care to avoid damage</li>
+                            <li>Avoiding Damage: Avoid exposure to harsh chemicals, extreme temperatures, and abrasive surfaces</li>
+                        </ul>
+                        <p className="productpage__information-title">Exchanges & Returns</p>
+                        <p className="productpage-discription__list">Exchanges and returns are accepted within 30 days of the purchase date, provided the items are unworn, unwashed, and have tags attached. Items purchased online, including Buy Online, Pick Up In-Store (BOPUS) orders, can only be returned to our warehouse via mail using our Prepaid Return Label/QR Code. If payment was completed at a store, the item can be returned to any store location in the US.</p>
+                    </div>
+                </div>
+            </article>
 
 
+            {/* Similar Product */}
+            <div className="productpage__similar-container">
+                <h3 className="productpage-reviews__title">Similar Product</h3>
+                <SimilarProduct
+                    product={currentProduct}
+                    changeEditStatus={changeEditStatus}
+                />
+            </div>
+
+            {/* RECOMMENDATION */}
+            <div className="productpage__similar-container">
+                <h3 className="productpage-reviews__title ">Recommend for you</h3>
+                <Recommendation changeEditStatus={changeEditStatus} />
             </div>
         </section>
     )
