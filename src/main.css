@@ -29,21 +29,22 @@
 @import './pages/wishlist/wishlist.css';
 @import "./pages/product-page/productpage.css";
 @import "./components/editscreen/editscreen.css";
+@import "./components/app/mediaqueries.css";
 
 :root {
     --primary-font: "Libre Baskerville", serif;
     --secondary-font: "Montserrat", sans-serif;
 
-    --font-size-very-small: clamp(0.5rem, max(1rem, 1.1vmax), max(1.10rem, 1.1vmax));
-    --font-size-small: clamp(1rem, max(1.15rem, 1.3vmax), max(1.25rem, 1.75vmax));
-    --font-size-med: clamp(1.35rem, max(1.25rem, 1.75vmax), max(2.25rem, 2.5vmax));
-    --font-size-large: clamp(1.75rem, max(2rem, 2.5vmax), max(2.5rem, 2.75vmax));
-    --font-size-very-large: clamp(2.5rem, max(3rem, 3.25vmax), max(3.25rem, 3.5vmax));
+    --font-size-very-small: clamp(0.5rem, max(1rem, 1vmax), max(1.10rem, 1.1vmax));
+    --font-size-small: clamp(1rem, max(1.15rem, 1.25vmax), max(1.25rem, 1.5vmax));
+    --font-size-med: clamp(1.25rem, max(1.35rem, 1.45vmax), max(2rem, 2.5vmax));
+    --font-size-large: clamp(1.75rem, max(2rem, 2.25vmax), max(2.5rem, 3vmax));
+    --font-size-very-large: clamp(2.5rem, max(3rem, 3vmax), max(3.25rem, 3.25vmax));
 
-    --padding-very-small: clamp(0.25rem, max(0.50rem, 0.75vmax), max(1rem, 1.25vmax));
-    --padding-small: clamp(0.75rem, max(1.25rem, 1.25vmax), max(1.5rem, 2vmax));
-    --padding-med: clamp(1.5rem, max(2.25rem, 2.75vmax), max(2.5rem, 3.25vmax));
-    --padding-large: clamp(3rem, max(3.5rem, 4vmax), max(4rem, 4.5vmax));
+    --padding-very-small: clamp(0.25rem, max(0.50rem, 0.50vmax), max(1rem, 1.5vmax));
+    --padding-small: clamp(0.75rem, max(1.25rem, 1.25vmax), max(1.5rem, 2.5vmax));
+    --padding-med: clamp(1.5rem, max(2rem, 2.35vmax), max(2.5rem, 3.5vmax));
+    --padding-large: clamp(3rem, max(4.5rem, 6vmax), max(6rem, 7vmax));
 
     --primary-shadow-color: #D3D3D3;
     --primary-font-color: #121205;
@@ -59,4 +60,3 @@
     list-style: none;
     scroll-margin-top: max(3rem, 3.25vmax);
 }
-

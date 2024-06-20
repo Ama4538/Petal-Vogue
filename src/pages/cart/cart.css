@@ -15,7 +15,7 @@
 
 .cart__banner-container {
     padding: var(--padding-small) 0;
-    height: max(22.5rem, 25vmax);
+    height: max(22.5rem, 27.5vmax);
 }
 
 .cart__banner-container>.banner {
@@ -214,9 +214,9 @@
     display: flex;
     flex-direction: column;
     padding: var(--padding-small);
-    margin: var(--padding-small) 0 0 0;
     font-family: var(--primary-font);
     border: solid 1px var(--primary-shadow-color);
+    border-top: none;
     box-shadow: 0px 0px 5px var(--primary-shadow-color);
 }
 

@@ -107,7 +107,7 @@
     top: 2.5%;
     right: 2.5%;
     z-index: 3;
-    width: calc(var(--padding-large) / 2);
+    width: calc(var(--padding-med) / 1.25);
     aspect-ratio: 1 / 1;
     background-color: transparent;
     border: none;

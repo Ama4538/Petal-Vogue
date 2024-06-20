@@ -11,7 +11,7 @@
     grid-template-columns: 1fr 0.8fr;
     flex: 1;
     min-height: calc(95vh - max(4vmax, 3.5rem));
-    gap: var(--padding-large);
+    gap: calc(var(--padding-med) * 1.25);
     margin: var(--padding-small) var(--padding-large);
 }
 
@@ -81,6 +81,7 @@
 /* Color orbs */
 .productpage__range {
     display: flex;
+    flex-wrap: wrap;
     gap: calc(var(--padding-very-small) / 1.5);
     margin-left: calc(var(--padding-very-small) / -2.5);
 }
@@ -100,7 +101,8 @@
 }
 
 .productpage__shape {
-    width: calc(var(--padding-large) / 1.35);
+    width: calc(var(--padding-med) * 1.5);
+    font-size: var(--font-size-small);
     aspect-ratio: 1 /1;
     border: solid 1px var(--unactive-color);
     cursor: pointer;
@@ -135,12 +137,13 @@
 /* Information */
 .productpage__price {
     margin-top: var(--padding-small);
-    font-size: var(--font-size-med);
+    font-size: calc(var(--font-size-med) * 1.05);
     font-weight: 400;
 }
 
 .productpage__message {
     margin-bottom: var(--padding-very-small);
+    font-size: var(--font-size-very-small);
     font-weight: 500;
     color: #306844;
 }

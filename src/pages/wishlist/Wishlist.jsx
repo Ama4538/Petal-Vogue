@@ -303,7 +303,7 @@ function Wishlist() {
 
                 {/* Recommondation */}
                 <div className="wishlist__recommend-container">
-                    <h3 className="wishlist__title">Check Out These Recommendations</h3>
+                    <h3 className="wishlist__title title__recommmend">Check Out These Recommendations</h3>
                     <Recommendation changeEditStatus={changeEditStatus} />
                 </div>
             </article>

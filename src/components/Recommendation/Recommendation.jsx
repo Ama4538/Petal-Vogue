@@ -13,7 +13,16 @@ function Recommendation({ changeEditStatus }) {
     const [currentDisplay, setCurrentDisplay] = useState([])
 
     // Default amount of items on the grid
-    let defaultAmount = 4;
+    let defaultAmount = 5;
+
+    // Media Query 
+    if (window.screen.width < 576) {
+        defaultAmount = 2;
+    } else if (window.screen.width >= 576 && window.screen.width <= 767) {
+        defaultAmount = 3;
+    } else if (window.screen.width >= 768 && window.screen.width <= 1199) {
+        defaultAmount = 4;
+    }
 
     // Used to redirected back to search page
     const redirect = useNavigate();
@@ -62,7 +71,7 @@ function Recommendation({ changeEditStatus }) {
                 );
             })
         }
-        
+
         // Display with only unqiue product
         let displaySet = new Set();
         // Check to see if we are not pulling more product then in the recommnedation system
@@ -82,7 +91,10 @@ function Recommendation({ changeEditStatus }) {
     }, [])
 
     return (
-        <div className="recommendation">
+        <div
+            className="recommendation"
+            style={{gridTemplateColumns: `repeat(${defaultAmount}, 1fr)`,}}
+        >
             {/* Print out the product or a message */}
             {currentDisplay.length !== 0 ?
                 currentDisplay.map((product) => {

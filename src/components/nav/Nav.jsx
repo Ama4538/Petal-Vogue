@@ -7,9 +7,10 @@ function Nav({ handleActiveSection, activeSection }) {
     const { wishlistAmount } = useWishlistInventory();
 
     return (
-        <nav
-            className="nav" >
-            <CustomLink to="/home" className="nav__logo" />
+        <nav className="nav" >
+            <div className="nav__logo-container">
+                <CustomLink to="/home" className="nav__logo" />
+            </div>
             <ul className="nav__list nav__list-button-container">
                 {/* Print each tab for each section */}
                 {["women", "men", "kids"].map((element, index) => (

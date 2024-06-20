@@ -11,7 +11,16 @@ function SimilarProduct({ product, changeEditStatus }) {
     const [currentDisplay, setCurrentDisplay] = useState([])
 
     // Default amount of items on the grid
-    let defaultAmount = 4;
+    let defaultAmount = 5;
+
+     // Media Query 
+     if (window.screen.width < 576) {
+        defaultAmount = 2;
+    } else if (window.screen.width >= 576 && window.screen.width <= 767) {
+        defaultAmount = 3;
+    } else if (window.screen.width >= 768 && window.screen.width <= 1199) {
+        defaultAmount = 4;
+    }
 
     // Used to redirected back to search page
     const redirect = useNavigate();
@@ -41,7 +50,10 @@ function SimilarProduct({ product, changeEditStatus }) {
     }, [])
 
     return (
-        <div className="recommendation">
+        <div
+            className="recommendation"
+            style={{ gridTemplateColumns: `repeat(${defaultAmount}, 1fr)`, }}
+        >
             {/* Print out the product or a message */}
             {currentDisplay.length !== 0 ?
                 currentDisplay.map((prevProduct) => {

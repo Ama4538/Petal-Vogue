@@ -1,7 +1,6 @@
 /* Recommendation */
 .recommendation {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
     gap: var(--padding-small);
     margin: var(--padding-small) 0;
 }
@@ -28,4 +27,21 @@
     color: var(--secondary-font-color);
     background-color: var(--active-color);
     translate: 0 -5%;
+}
+
+.recommendation .product-card__rating-container {
+    flex-direction: column;
+    align-items: start;
+    gap: calc(var(--padding-very-small) / 2);
+    margin-top: calc(var(--padding-very-small) * -0.25);
+    height: 100%;
+}
+
+.recommendation .product-card__rating-container button {
+    margin-top: auto;
+    width: 100%;
+}
+
+.recommendation .product-card__content-container {
+    height: max(10.30rem, 9.3vmax);
 }

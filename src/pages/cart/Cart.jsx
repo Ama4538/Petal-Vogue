@@ -343,7 +343,7 @@ function Cart() {
 
                 {/* Recommendation */}
                 <div className="cart__recommend-container">
-                    <h3 className="cart__title">Check Out These Recommendations</h3>
+                    <h3 className="cart__title title__recommmend">Check Out These Recommendations</h3>
                     <Recommendation changeEditStatus={changeEditStatus} />
                 </div>
             </article>

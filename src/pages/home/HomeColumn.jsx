@@ -12,6 +12,13 @@ function HomeColumn({ section, data }) {
     // State to manage the current scroll position
     const [scrollPosition, setScrollPosition] = useState(0);
 
+    // Listen to mobile swipe
+    const [touchStart, setTouchStart] = useState(null)
+    const [touchEnd, setTouchEnd] = useState(null)
+
+    // the required distance between touchStart and touchEnd to be detected as a swipe
+    const MIN_SWIPE_DISTANCE = 30
+
     // Current Display
     const displayBanners = section === "women" ? data.slice(1) : data;
 
@@ -40,6 +47,34 @@ function HomeColumn({ section, data }) {
     function handleOnClick(searchValue) {
         setSearched(searchValue);
         redirect("/search");
+    }
+
+    // Mobile Swipe Methods (Off Stackoverflow)
+    function onTouchStart (event) {
+        // otherwise the swipe is fired even with usual touch events
+        setTouchEnd(null)
+        setTouchStart(event.targetTouches[0].clientY)
+    }
+
+    function onTouchMove(event) {
+        setTouchEnd(event.targetTouches[0].clientY)
+    }
+
+    function onTouchEnd () {
+        if (!touchStart || !touchEnd) {
+            return
+        }
+
+        const distance = touchStart - touchEnd
+        const isDownSwipe = distance > MIN_SWIPE_DISTANCE
+        const isUpSwipe = distance < -MIN_SWIPE_DISTANCE
+
+        if (isUpSwipe || isDownSwipe) {
+            let newScrollPosition = scrollPosition + (isDownSwipe ? ITEM_SCROLL_HEIGHT : (ITEM_SCROLL_HEIGHT * -1));
+            if (newScrollPosition >= maxScrollPosition && newScrollPosition <= 0) {
+                setScrollPosition(newScrollPosition);
+            }
+        }
     }
 
     // Animation for scroll
@@ -73,6 +108,10 @@ function HomeColumn({ section, data }) {
                 variants={scrollAnimation}
                 animate='scroll'
                 onWheel={handleWheel}
+                // Mobile
+                onTouchStart={onTouchStart}
+                onTouchMove={onTouchMove}
+                onTouchEnd={onTouchEnd}
             >
                 {section === "women" ?
                     // Main block used for transtion
@@ -105,7 +144,7 @@ function HomeColumn({ section, data }) {
                             key={index}
                             section={section}
                             data={element}
-                            clickEvent = {handleOnClick}
+                            clickEvent={handleOnClick}
                         />
                     )
                 })}

@@ -87,7 +87,7 @@
     flex-direction: column;
     flex-wrap: wrap;
     gap: var(--padding-very-small);
-    width: 30%;
+    width: 40%;
     background-color: transparent;
     color: var(--secondary-font-color);
     text-shadow: 1px 2px 2px black;
@@ -100,7 +100,7 @@
 
 .home-column__text-title {
     font-family: var(--primary-font);
-    font-size: var(--font-size-med);
+    font-size: calc(var(--font-size-med) * 1.15);
 }
 
 .home-column__text-statement {
@@ -131,7 +131,7 @@
     background-color: var(--secondary-font-color);
 }
 
-.home>.nav>.nav__logo::before {
+.home>.nav> .nav__logo-container >.nav__logo::before {
     background: url(/icons/home-logo.svg) no-repeat center / contain;
 }
 

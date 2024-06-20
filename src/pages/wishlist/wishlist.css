@@ -15,7 +15,7 @@
 
 .wishlist__banner-container {
     padding: var(--padding-small) 0 0;
-    height: max(22.5rem, 22.5vmax);
+    height: max(22.5rem, 27.5vmax);
 }
 
 .wishlist__banner-container>.banner {
@@ -31,6 +31,7 @@
     border-bottom: solid 1px var(--primary-shadow-color);
     text-transform: uppercase;
 }
+
 
 .wishlist__filter-container {
     display: flex;
@@ -155,6 +156,7 @@
 
 .wishlist-product__button-format {
     display: flex;
+    gap: var(--padding-very-small);
     width: 70%;
 }
 

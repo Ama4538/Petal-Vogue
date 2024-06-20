@@ -109,7 +109,9 @@ function SearchNav({ intoView = null }) {
 
     return (
         <nav className="nav" data-visible={(visible) ? "visible" : "hidden"}>
-            <CustomLink to="/home" className="nav__logo" />
+            <div className="nav__logo-container">
+                <CustomLink to="/home" className="nav__logo" />
+            </div>
             <div className='nav__search-container'>
                 <div className="nav-search__content">
                     <input

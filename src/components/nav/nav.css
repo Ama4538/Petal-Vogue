@@ -18,16 +18,16 @@
 
 .nav__logo {
     position: relative;
-    height: 90%;
-    width: 30%;
+    height: calc(var(--font-size-med) * 1.45);
+    aspect-ratio: 1 / 1;
     cursor: pointer;
     transition: 0.25s;
 }
 
 .nav__list-icon {
     position: relative;
-    height: 100%;
-    width: calc(var(--padding-large) / 1.25);
+    height: var(--font-size-med);
+    aspect-ratio: 1 / 1;
     cursor: pointer;
     transition: 0.25s;
 }
@@ -42,10 +42,11 @@
 }
 
 .nav__list-icon-container {
-    justify-content: flex-end;
-    gap: var(--padding-very-small);
+    gap: var(--padding-med);
     height: 100%;
     width: 100%;
+    justify-content: flex-end;
+    align-items: center;
 }
 
 .nav__buttons {
@@ -81,7 +82,7 @@
 }
 
 .nav__logo::before {
-    height: var(--font-size-large);
+    height: calc(var(--font-size-med) * 1.45);
     background: url(/icons/default-logo.svg) no-repeat center / contain;
 }
 
@@ -100,8 +101,8 @@
 .nav__list-icon-container>.nav__list-icon:nth-child(2)[data-visible = "visible"]::after,
 .nav__list-icon-container>.nav__list-icon:nth-child(3)[data-visible = "visible"]::after {
     position: absolute;
-    top: 35%;
-    right: -5%;
+    top: 15%;
+    right: 10%;
     display: flex;
     height: var(--font-size-very-small);
     align-items: center;
@@ -114,7 +115,7 @@
     border-radius: 100%;
     content: attr(data-amount);
     color: var(--secondary-font-color);
-    translate: -50% -50%;
+    translate: 50% -50%;
 }
 
 
