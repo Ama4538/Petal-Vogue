@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { color, motion } from 'framer-motion'
+import { motion } from 'framer-motion'
 import { useAllProducts, useSearched } from "../../components/app/Hook.jsx";
 import SearchNav from '../../components/nav/SearchNav.jsx';
 import Banner from '../../components/banner/Banner.jsx';
