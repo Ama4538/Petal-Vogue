@@ -39,7 +39,7 @@ function Search() {
     const categoryFilter = {
         women: ["All", "Sunglasses", "Bikinis", "T-shirts", "Tank Tops", "Sweaters"],
         men: ["All", "Hoodies", "Hats", "Rain Coats", "Shirts", "Jackets"],
-        kids: ["All", "Shorts", "Jackets", "Swimwears", "Sweaters", "Crop Tops"],
+        kids: ["All", "Shorts", "Kids-Jackets", "Swimwears", "Kids-Sweaters", "Crop Tops"],
         result: ["All"]
     }
 

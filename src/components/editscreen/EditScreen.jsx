@@ -40,6 +40,12 @@ function EditScreen({ setEditScreen, product, clickedFrom, message = null, chang
         orange: "#bb3e03",
         red: "#ae2012",
         maroon: "#9b2226",
+        green: "#606c38",
+        forest: "#283618",
+        white: "#fefae0",
+        tan: "#dda15e",
+        pink: "#ffafcc",
+        lavender: "#cdb4db"
     }
 
     // Reference the display menu

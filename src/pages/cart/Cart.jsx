@@ -182,6 +182,13 @@ function Cart() {
         setCartMessage(`${product.name} has been moved to wishlist`)
     }
 
+    // Main checkout function
+    function handleCheckOut() {
+        // No offical check out
+        setCartInventory([])
+        setConfirmMessage("Thank you for your purchese")
+    }
+
     // Main cart animation
     const cartAnimation = {
         exit: {
@@ -332,7 +339,10 @@ function Cart() {
                             />
                         </div>
 
-                        <button className='cart-summary__checkout'>Checkout</button>
+                        <button 
+                        className='cart-summary__checkout'
+                        onClick={() => {handleCheckOut()}}
+                        >Checkout</button>
                     </div>
                 </div>
                     : <div className="cart__empty-container">

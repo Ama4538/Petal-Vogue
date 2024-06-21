@@ -17,6 +17,9 @@ function SearchNav({ intoView = null }) {
     // State used to manage the current sugguestions
     const [content, setcontent] = useState([]);
 
+    // Status of the menu tab
+    const [openStatus, setOpenStatus] = useState(false)
+
     // Ref for clicking off the input
     const navSearchRef = useRef(null);
     const navContentRef = useRef(null);
@@ -107,6 +110,34 @@ function SearchNav({ intoView = null }) {
         }
     }
 
+    // Handle onClick Event
+    function handleSeachSuggestion(name) {
+        // Checking if not a category or section
+        if (searchCategory.includes(name) || searchSection.includes(name)) {
+            // Scroll into view
+            if (intoView !== null) {
+                intoView.current.scrollIntoView({ behavior: 'smooth' })
+            }
+
+            // redirect to search page
+            if (location.pathname !== "/search") {
+                redirect("/search")
+            }
+
+            setSearched(name);
+        } else {
+            // Redirect to product page
+            redirect(`/product/${name.toLowerCase().replaceAll(" ", "-").replaceAll("'", "")}`);
+        }
+    }
+
+    // Handle the location when nav icon has been press
+    function handleLocation(dest) {
+        if (location.pathname !== dest) {
+            redirect(dest);
+        }
+    }
+
     return (
         <nav className="nav" data-visible={(visible) ? "visible" : "hidden"}>
             <div className="nav__logo-container">
@@ -127,26 +158,48 @@ function SearchNav({ intoView = null }) {
                     <div className='nav-search__display-container' ref={navContentRef}>
                         {/* Prints out all sugguestion */}
                         {content.map((name) => {
-                            return (<p key={`${name}Search`} className='nav-search__product-name'>{name}</p>)
+                            return (
+                                <p
+                                    key={`${name}Search`}
+                                    className='nav-search__product-name'
+                                    onClick={() => { handleSeachSuggestion(name) }}
+                                >{name}</p>
+                            )
                         })}
                     </div>
                 </div>
             </div>
-            <div className="nav__list nav__list-icon-container">
-                <CustomLink to="/search" className="nav__list-icon" />
-                <CustomLink
-                    to="/wishlist"
-                    className="nav__list-icon"
-                    dataVisible={wishlistAmount !== 0 ? "visible" : "hidden"}
-                    dataAmount={wishlistAmount}
-                />
-                {/* Manage cart amount display*/}
-                <CustomLink
-                    to="/cart"
-                    className="nav__list-icon"
-                    dataVisible={cartAmount !== 0 ? "visible" : "hidden"}
-                    dataAmount={cartAmount}
-                />
+
+            <div
+                className="nav__list nav-list__icon-wrapper"
+                data-open={openStatus}
+            >
+                <button
+                    className="nav__menu"
+                    onClick={() => { setOpenStatus(!openStatus) }}
+                ></button>
+                <div className="nav__icon-holder">
+                    <button
+                        className="nav-icons"
+                        onClick={() => handleLocation("/search")}
+                    ></button>
+                </div>
+                <div className="nav__icon-holder">
+                    <button
+                        className="nav-icons"
+                        onClick={() => handleLocation("/wishlist")}
+                        data-visible={wishlistAmount !== 0 ? "visible" : "hidden"}
+                        data-amount={wishlistAmount}
+                    ></button>
+                </div>
+                <div className="nav__icon-holder">
+                    <button
+                        className="nav-icons"
+                        onClick={() => handleLocation("/cart")}
+                        data-visible={cartAmount !== 0 ? "visible" : "hidden"}
+                        data-amount={cartAmount}
+                    ></button>
+                </div>
             </div>
         </nav>
     )
