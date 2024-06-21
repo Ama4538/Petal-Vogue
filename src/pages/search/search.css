@@ -2,7 +2,6 @@
 .search {
     display: flex;
     flex-direction: column;
-    width: 100%;
     color: var(--primary-font-color);
 }
 
@@ -58,7 +57,7 @@
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: var(--padding-small);
-    width: 100%;
+    max-width: 100%;
 }
 
 .search-content__filter-container {

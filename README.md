@@ -12,7 +12,7 @@ A Fast Fashion E-commerce platform. Each product has its unique page, complement
 - [License](#license)
 
 ## Access
-
+Accessible from https://petal-vogue.vercel.app
 
 ## Features
 - Unique Product Pages: Every product has its own distinct page with their own coloring, sizing, and randomly selected reviews.
