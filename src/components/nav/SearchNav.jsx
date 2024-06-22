@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import CustomLink from '../../components/router/CustomLink';
 import { useCartInventory, useAllProducts, useSearched, useWishlistInventory } from '../app/Hook.jsx';
 
-function SearchNav({ intoView = null }) {
+function SearchNav({ intoView = null, currentDisply = null}) {
     // Custom hook
     const { cartAmount } = useCartInventory()
     const { wishlistAmount } = useWishlistInventory();
@@ -124,7 +124,8 @@ function SearchNav({ intoView = null }) {
                 redirect("/search")
             }
 
-            setSearched(name);
+            setVisible(false)
+            setSearched("women");
         } else {
             // Redirect to product page
             redirect(`/product/${name.toLowerCase().replaceAll(" ", "-").replaceAll("'", "")}`);
@@ -181,7 +182,10 @@ function SearchNav({ intoView = null }) {
                 <div className="nav__icon-holder">
                     <button
                         className="nav-icons"
-                        onClick={() => handleLocation("/search")}
+                        onClick={() => {
+                            setSearched("");
+                            handleLocation("/search")
+                        }}
                     ></button>
                 </div>
                 <div className="nav__icon-holder">

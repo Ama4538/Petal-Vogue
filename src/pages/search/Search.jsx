@@ -145,6 +145,7 @@ function Search() {
         } else {
             // Default seach return
             setActiveSection("women")
+            setCurrentDisplay(allProducts.filter(product => product.section === "women"))
         }
     }, [searched])
 

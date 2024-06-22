@@ -74,11 +74,14 @@ function EditScreen({ setEditScreen, product, clickedFrom, message = null, chang
 
     // Handle update if clicked from cart
     function updateProductFromCart() {
+        // remove the product from the a temp cart in order to find its the same product or the same as another 
+        let cartInventoryWithoutItem = cartInventory.filter(cartProduct => cartProduct !== product);
+
         if ((product.size !== selectedSize || product.color !== selectedColor)
             && !cartInventory.find(cartProduct => cartProduct.name === currentProduct.name
                 && cartProduct.size === `${currentProduct.section} ${selectedSize}`
                 && cartProduct.color === selectedColor)) {
-            // Not inside the cart and is different remove old product add with the changed values
+            // Not inside the cart and is different remove old product add with the changed value
 
             if (editMessage.length <= 0 && product.quantity > 1) {
                 setEditMessage("The current product being altered has multiple copies. Continuing will affect all of them.")
@@ -92,7 +95,7 @@ function EditScreen({ setEditScreen, product, clickedFrom, message = null, chang
                 message(`${product.name} has been successfully edited.`);
             }
         } else if ((product.size === selectedSize || product.color === selectedColor)
-            && cartInventory.find(cartProduct => cartProduct.name === currentProduct.name
+            && !cartInventoryWithoutItem.find(cartProduct => cartProduct.name === currentProduct.name
                 && cartProduct.size === `${currentProduct.section} ${selectedSize}`
                 && cartProduct.color === selectedColor)) {
             // Product is the same

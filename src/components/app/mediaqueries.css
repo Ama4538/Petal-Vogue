@@ -1,8 +1,5 @@
 /* Large devices  */
 @media (min-width: 992px) and (max-width: 1199px) {
-    :root {
-        --font-size-very-large: clamp(2.25rem, max(2.75rem, 2.75vmax), max(3rem, 3vmax));
-    }
 
     /* Home */
     .home-column__text-container {
@@ -51,15 +48,6 @@
 
 /* Medium devices */
 @media (min-width: 768px) and (max-width: 991px) {
-    :root {
-        --font-size-very-small: clamp(0.5rem, max(0.95rem, 0.95vmax), max(1.10rem, 1.1vmax));
-        --font-size-med: clamp(1.05rem, max(1.25rem, 1.25vmax), max(1.5rem, 1.5vmax));
-        --font-size-large: clamp(1.65rem, max(1.70rem, 1.70vmax), max(2rem, 2.5vmax));
-        --font-size-very-large: clamp(2rem, max(2.5rem, 2.5vmax), max(3rem, 3vmax));
-
-        --padding-small: clamp(0.75rem, max(1rem, 1vmax), max(1.5rem, 2.5vmax));
-    }
-
     .home-column__text-container {
         left: 5%;
         bottom: 15%;
@@ -140,7 +128,7 @@
 
     /* Edit Screen */
     .editproduct__display {
-        height: 60%;
+        height: 80%;
         width: 80%;
     }
 
@@ -222,22 +210,20 @@
 
 /* Small Device */
 @media (min-width: 576px) and (max-width: 767px) {
-    :root {
-        --font-size-very-small: clamp(0.5rem, max(0.95rem, 0.95vmax), max(1.10rem, 1.1vmax));
-        --font-size-small: clamp(1rem, max(1.20rem, 1.20vmax), max(1.25rem, 1.5vmax));
-        --font-size-med: clamp(1.05rem, max(1.25rem, 1.25vmax), max(1.5rem, 1.5vmax));
-        --font-size-large: clamp(1.65rem, max(1.70rem, 1.70vmax), max(2rem, 2.5vmax));
-        --font-size-very-large: clamp(1.8rem, max(1.95rem, 1.95vmax), max(2.25rem, 2.25vmax));
-
-        --padding-small: clamp(0.75rem, max(1rem, 1vmax), max(1.5rem, 2.5vmax));
-        --padding-large: clamp(2rem, max(3rem, 3vmax), max(5rem, 5vmax));
-    }
 
     /* Home */
     .home-column__text-container {
         left: 5%;
         bottom: 10%;
         width: 50%;
+    }
+
+    .home-column__text-title {
+        font-size: var(--font-size-med);
+    }
+
+    .home-column__text-statement {
+        font-size: var(--font-size-very-small);
     }
 
     /* Product */
@@ -286,6 +272,32 @@
         grid-row: 3;
     }
 
+    .search__content {
+        display: flex;
+        flex-direction: column;
+        padding: 0 var(--padding-med);
+    }
+
+    .search-content__filter-container {
+        margin: 0 var(--padding-med);
+    }
+
+    .search-content__dropdown-container {
+        font-size: var(--font-size-very-small);
+    }
+
+    .marquee__content {
+        font-size: var(--font-size-very-small);
+    }
+
+    .search__banner-container {
+        padding: var(--padding-small) var(--padding-med);
+    }
+
+    .search__section-selector {
+        margin: 0 var(--padding-med);
+    }
+
     /* Wishlist */
     .wishlist-product__content-container {
         grid-template-columns: 0.8fr 0.5fr;
@@ -299,9 +311,28 @@
         width: 100%;
     }
 
-    .title__recommmend,
     .productpage-reviews__title {
         font-size: calc(var(--font-size-large) / 1.05);
+    }
+
+    .wishlist__content-container {
+        margin: 0 var(--padding-med);
+    }
+
+    .wishlist__filter-container {
+        display: grid;
+        grid-template-columns: 0.5fr 1fr;
+    }
+
+    .wishlist-filter__dropdown-container {
+        grid-column: 2;
+        grid-row: 1;
+        justify-content: end;
+    }
+
+    .wishlist-message__remove,
+    .wishlist-message__add {
+        grid-column: 1 / end;
     }
 
     /* Cart */
@@ -314,9 +345,17 @@
         width: 35%;
     }
 
+    .cart__content-container {
+        margin: 0 var(--padding-med);
+    }
+
+    .cart__title {
+        flex-direction: column;
+    }
+
     /* Edit Screen */
     .editproduct__display {
-        height: 60%;
+        height: 80%;
         width: 80%;
     }
 
@@ -341,7 +380,47 @@
         border-bottom: solid 1px var(--primary-shadow-color);
     }
 
+    .productpage-information__display {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .productpage-review__display {
+        border-bottom: solid 1px var(--primary-shadow-color);
+    }
+
+    .productreview__container {
+        padding-right: 0;
+    }
+
+    .productpage__information-discription {
+        padding: calc(var(--padding-small) / 1.15) 0;
+        font-family: var(--secondary-font);
+        border: none
+    }
+
+    .productpage__content-display {
+        margin: var(--padding-small) var(--padding-med);
+    }
+
+    .productpage__reviews-container {
+        margin: 0 var(--padding-med) var(--padding-small);
+    }
+
+    .productpage__similar-container {
+        margin: 0 var(--padding-med);
+    }
     /* Nav */
+    .nav__buttons {
+        width: max-content;
+        font-size: var(--font-size-very-small);
+    }
+
+    .nav__list-button-container {
+        gap: var(--padding-med);
+    }
+
+
     .nav-search__content {
         width: 95%;
     }
@@ -393,20 +472,24 @@
     .home .nav__icon-holder {
         background-color: transparent;
     }
+
+    /* Titles */
+    .search-header__title {
+        font-size: calc(var(--font-size-med) * 1.20);
+    }
+
+    .productpage__title {
+        font-size: var(--font-size-large);
+    }
+    
+    .title__recommmend {
+        font-size: calc(var(--font-size-med) * 1.25);
+    }
+
 }
 
 /* Extra small devices */
 @media (max-width: 576px) {
-    :root {
-        --font-size-very-small: clamp(0.5rem, max(0.95rem, 0.95vmax), max(1.10rem, 1.1vmax));
-        --font-size-small: clamp(1rem, max(1.20rem, 1.20vmax), max(1.25rem, 1.5vmax));
-        --font-size-med: clamp(1.05rem, max(1.10rem, 1.25vmax), max(1.5rem, 1.5vmax));
-        --font-size-large: clamp(1.5rem, max(1.5rem, 1.5vmax), max(2rem, 2.5vmax));
-        --font-size-very-large: clamp(1.5rem, max(1.70rem, 1.70vmax), max(2.25rem, 2.25vmax));
-
-        --padding-small: clamp(0.75rem, max(1rem, 1vmax), max(1.5rem, 2.5vmax));
-        --padding-large: clamp(1rem, max(1.25rem, 1.5vmax), max(3rem, 3vmax));
-    }
 
     /* Home */
     .home-column__text-container {
@@ -414,6 +497,15 @@
         bottom: 10%;
         width: 50%;
     }
+
+    .home-column__text-title {
+        font-size: var(--font-size-med);
+    }
+
+    .home-column__text-statement {
+        font-size: var(--font-size-very-small);
+    }
+
 
     /* Product */
     .product-card__rating-container {
@@ -430,7 +522,7 @@
     }
 
     .product-card__content-container {
-        height: max(10.3rem, 10.3vmax);
+        height: max(10rem, 18.5vmax);
     }
 
     /* Search */
@@ -461,6 +553,32 @@
         grid-row: 3;
     }
 
+    .search__content {
+        display: flex;
+        flex-direction: column;
+        padding: 0 var(--padding-med);
+    }
+
+    .search-content__filter-container {
+        margin: 0 var(--padding-med);
+    }
+
+    .search-content__dropdown-container {
+        font-size: var(--font-size-very-small);
+    }
+
+    .marquee__content {
+        font-size: var(--font-size-very-small);
+    }
+
+    .search__banner-container {
+        padding: var(--padding-small) var(--padding-med);
+    }
+
+    .search__section-selector {
+        margin: 0 var(--padding-med);
+    }
+
     /* Wishlist */
     .wishlist-product__content-container {
         grid-template-columns: 0.8fr 0.5fr;
@@ -471,7 +589,7 @@
     }
 
     .wishlist-product__button-add {
-        width: 100%;
+        width: 75%;
     }
 
     .wishlist-product__img-container {
@@ -486,7 +604,7 @@
 
     .wishlist-product__button-format {
         flex-direction: column;
-        width: 100%;
+        width: 75%;
     }
 
     .wishlist-product__button-remove {
@@ -500,7 +618,35 @@
         font-size: calc(var(--font-size-large) / 1.05);
     }
 
+    .wishlist__content-container {
+        margin: 0 var(--padding-med);
+    }
+
+    .wishlist__filter-container {
+        display: grid;
+        grid-template-columns: 0.5fr 1fr;
+    }
+
+    .wishlist-filter__dropdown-container {
+        grid-column: 2;
+        grid-row: 1;
+        justify-content: end;
+    }
+
+    .wishlist-message__remove,
+    .wishlist-message__add {
+        grid-column: 1 / end;
+    }
+
     /* Cart */
+    .cart__content-container {
+        margin: 0 var(--padding-med);
+    }
+
+    .cart__title {
+        flex-direction: column;
+    }
+
     .cart__content {
         display: flex;
         flex-direction: column;
@@ -516,7 +662,7 @@
 
     /* Edit Screen */
     .editproduct__display {
-        height: 70%;
+        height: 80%;
         width: 90%;
     }
 
@@ -541,9 +687,44 @@
         border-bottom: solid 1px var(--primary-shadow-color);
     }
 
+    .productpage-information__display {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .productpage-review__display {
+        border-bottom: solid 1px var(--primary-shadow-color);
+    }
+
+    .productreview__container {
+        padding-right: 0;
+    }
+
+    .productpage__information-discription {
+        padding: calc(var(--padding-small) / 1.15) 0;
+        font-family: var(--secondary-font);
+        border: none
+    }
+
+    .productpage__content-display {
+        margin: var(--padding-small) var(--padding-med);
+    }
+
+    .productpage__reviews-container {
+        margin: 0 var(--padding-med) var(--padding-small);
+    }
+
+    .productpage__similar-container {
+        margin: 0 var(--padding-med);
+    }
+
     /* Nav */
+    .nav {
+        padding: 0 var(--padding-med);
+    }
+
     .nav-search__content {
-        width: 95%;
+        width: 80%;
     }
 
     .nav__search {
@@ -590,6 +771,15 @@
         background-color: white;
     }
 
+    .nav__buttons {
+        width: max-content;
+        font-size: var(--font-size-very-small);
+    }
+
+    .nav__list-button-container {
+        gap: var(--padding-small);
+    }
+
     .home .nav__icon-holder {
         background-color: transparent;
     }
@@ -597,5 +787,18 @@
     /* Recommend */
     .recommendation .product-card__content-container {
         height: max(10.3rem, 10.3vmax);
+    }
+
+    /* Titles */
+    .search-header__title {
+        font-size: calc(var(--font-size-med) * 1.20);
+    }
+
+    .productpage__title {
+        font-size: var(--font-size-large);
+    }
+
+    .title__recommmend {
+        font-size: calc(var(--font-size-med) * 1.25);
     }
 }

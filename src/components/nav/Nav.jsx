@@ -1,5 +1,5 @@
 import CustomLink from "../router/CustomLink";
-import { useCartInventory, useWishlistInventory } from '../app/Hook.jsx';
+import { useCartInventory, useSearched, useWishlistInventory } from '../app/Hook.jsx';
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
@@ -7,6 +7,8 @@ function Nav({ handleActiveSection, activeSection }) {
     // Custom hook
     const { cartAmount } = useCartInventory()
     const { wishlistAmount } = useWishlistInventory();
+    const { setSearched } = useSearched();
+
     // Status of the menu tab
     const [openStatus, setOpenStatus] = useState(false)
 
@@ -52,7 +54,9 @@ function Nav({ handleActiveSection, activeSection }) {
                 <div className="nav__icon-holder">
                     <button
                         className="nav-icons"
-                        onClick={() => handleLocation("/search")}
+                        onClick={() => {
+                            setSearched("");
+                            handleLocation("/search")}}
                     ></button>
                 </div>
                 <div className="nav__icon-holder">

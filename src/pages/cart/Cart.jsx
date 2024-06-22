@@ -286,7 +286,7 @@ function Cart() {
                                             > Remove </button>
                                             <button
                                                 className="cart-product__edit"
-                                                onClick={() => { changeEditStatus(product) }}
+                                                onClick={() => { changeEditStatus(product, "cart") }}
                                             > Edit </button>
                                             <button
                                                 className="cart-product__edit"

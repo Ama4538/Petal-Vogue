@@ -1,27 +1,9 @@
-import { useEffect, useRef, useState } from "react";
-import { easeInOut, motion, useAnimation, useInView } from 'framer-motion'
 import { Link, useNavigate } from 'react-router-dom';
 import StarGeneration from "./StarGeneration";
 
 function Product({ product, changeEditStatus }) {
     // use to naviage to the product page while keeping the button nature color
     const redirect = useNavigate();
-
-    // Reference to the product
-    const ref = useRef(null)
-
-    // Determines if the section is in view
-    const inView = useInView(ref, { once: true })
-
-    // Animation controller
-    const playAnimation = useAnimation();
-
-    // Play animation when the product is in view
-    useEffect(() => {
-        if (inView) {
-            playAnimation.start("animation")
-        }
-    }, [inView])
 
     // Handled the onClick of the button to add to wishlist
     function handleAddToWishlist() {
@@ -35,30 +17,8 @@ function Product({ product, changeEditStatus }) {
         redirect(`/product/${product.name.toLowerCase().replaceAll(" ", "-").replaceAll("'", "")}`)
     }
 
-    // Default product animation
-    const productAnimation = {
-        init: {
-            y: 10,
-            opacity: 0,
-        },
-        animation: {
-            y: 0,
-            opacity: 1,
-            transtion: {
-                duration: 1000,
-                ease: easeInOut
-            }
-        }
-    }
-
     return (
-        <motion.div
-            className="product-card"
-            ref={ref}
-            variants={productAnimation}
-            initial="init"
-            animate={playAnimation}
-        >
+        <div className="product-card">
             {/* Product img */}
             {/* Link to product page */}
             <Link
@@ -91,7 +51,7 @@ function Product({ product, changeEditStatus }) {
                 </div>
 
             </div>
-        </motion.div >
+        </div >
     )
 }
 

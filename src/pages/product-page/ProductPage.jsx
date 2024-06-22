@@ -63,6 +63,8 @@ function ProductPage({ reviews }) {
         product.name.toLowerCase().replaceAll(" ", "-").replaceAll("'", "") === productID
     );
 
+
+
     // Effect to handle redirection if product is not found
     useEffect(() => {
         if (!currentProduct) {
@@ -156,7 +158,7 @@ function ProductPage({ reviews }) {
                 })
 
                 // Setting the discount values
-                let isDiscounted = discountArray.find(element => element.section === product.section);
+                let isDiscounted = discountArray.find(element => element.section === currentProduct.section);
                 if (isDiscounted) {
                     discountPercent = isDiscounted.discountPercent
                 }
@@ -178,6 +180,7 @@ function ProductPage({ reviews }) {
                 size: `${currentProduct.section} ${selectedSize}`,
                 color: selectedColor
             }]);
+
             setProductMessage("Product has been added to cart")
             if (cartAmountSame > 1) {
                 setCartAmountSame(1);
@@ -362,7 +365,7 @@ function ProductPage({ reviews }) {
 
             {/* RECOMMENDATION */}
             <div className="productpage__similar-container">
-                <h3 className="productpage-reviews__title ">Recommend for you</h3>
+                <h3 className="productpage-reviews__title title__recommmend">Recommend for you</h3>
                 <Recommendation changeEditStatus={changeEditStatus} />
             </div>
         </section>
