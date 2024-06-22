@@ -9,21 +9,36 @@ function SimilarProduct({ product, changeEditStatus }) {
 
     // Current display for recommendation
     const [currentDisplay, setCurrentDisplay] = useState([])
-
-    // Default amount of items on the grid
-    let defaultAmount = 5;
-
-     // Media Query 
-     if (window.screen.width < 576) {
-        defaultAmount = 2;
-    } else if (window.screen.width >= 576 && window.screen.width <= 767) {
-        defaultAmount = 3;
-    } else if (window.screen.width >= 768 && window.screen.width <= 1199) {
-        defaultAmount = 4;
-    }
+    const [defaultAmount, setDefaultAmount] = useState(5)
 
     // Used to redirected back to search page
     const redirect = useNavigate();
+
+    // Media Query 
+    useEffect(() => {
+        const handleResize = () => {
+            if (window.innerWidth < 576) {
+                setDefaultAmount(2);
+            } else if (window.innerWidth >= 576 && window.innerWidth <= 767) {
+                setDefaultAmount(3);
+            } else if (window.innerWidth >= 768 && window.innerWidth <= 1199) {
+                setDefaultAmount(4);
+            } else {
+                setDefaultAmount(5);
+            }
+        };
+
+        // Call the function initially to set the default amount
+        handleResize();
+
+        // Add an event listener for window resize
+        window.addEventListener('resize', handleResize);
+
+        // Clean up the event listener on component unmount
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, [])
 
     // Handle the recommondation system on mount
     useEffect(() => {
@@ -47,7 +62,7 @@ function SimilarProduct({ product, changeEditStatus }) {
 
         // Add it to the current display
         setCurrentDisplay([...displaySet])
-    }, [])
+    }, [defaultAmount])
 
     return (
         <div
