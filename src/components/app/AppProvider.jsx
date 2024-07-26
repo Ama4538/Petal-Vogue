@@ -31,17 +31,7 @@ function AppProvider({ children }) {
                 // Parse and set cartInventory state
                 const parseCart = JSON.parse(currentCart);
                 setCartInventory(parseCart);
-
-                // Update our product status based upon old cart
-                parseCart.forEach(product => {
-                    setAllProducts(prevProducts =>
-                        prevProducts.map(prevProduct =>
-                            prevProduct.name === product.name
-                                ? { ...prevProduct, status: 'disabled' }
-                                : prevProduct
-                        )
-                    );
-                });
+                
                 // Update loaded state
                 setCartDataLoaded(true);
             } catch (error) {
@@ -60,16 +50,6 @@ function AppProvider({ children }) {
                 const parsewishlist = JSON.parse(currentwishlist);
                 setWishlistInventory(parsewishlist)
 
-                // Update our product status based upon old wishlist inventory
-                parsewishlist.forEach(product => {
-                    setAllProducts(prevProducts =>
-                        prevProducts.map(prevProduct =>
-                            prevProduct.name === product.name
-                                ? { ...prevProduct, wishlist: true }
-                                : prevProduct
-                        )
-                    );
-                });
                 // Update loaded state
                 setWishlistDataLoaded(true);
             } catch (error) {
