@@ -51,7 +51,7 @@ function SimilarProduct({ product, changeEditStatus }) {
 
         // Check to see if we are not pulling more product then in the system
         if (defaultAmount > possibleDisplay.length) {
-            defaultAmount = possibleDisplay.length
+            setDefaultAmount(possibleDisplay.length)
         }
 
         if (defaultAmount !== 0) {

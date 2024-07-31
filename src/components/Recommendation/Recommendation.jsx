@@ -91,7 +91,7 @@ function Recommendation({ changeEditStatus }) {
         let displaySet = new Set();
         // Check to see if we are not pulling more product then in the recommnedation system
         if (defaultAmount > possibleDisplay.length) {
-            defaultAmount = possibleDisplay.length
+            setDefaultAmount(possibleDisplay.length)
         }
 
         // Populate the display set with random product
