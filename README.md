@@ -19,7 +19,7 @@ Accessible from https://petal-vogue.vercel.app
 1. **Clone the repository:**
     ```bash
     git clone https://github.com/Ama4538/Petal-Vogue.git
-    cd PortfolioV3
+    cd Petal-Vogue
     ```
 2. **Install dependencies:**
     ```bash
