@@ -5,14 +5,33 @@ A Fast Fashion E-commerce platform. Each product has its unique page, complement
 
 ## Table of Contents
 - [Access](#Access)
-- [Features](#features)
 - [Installation](#installation)
+- [Features](#features)
 - [Tech Stack](#tech-stack)
+- [Project Structure](#project-structure)
 - [Screenshots](#Screenshots)
 - [License](#license)
 
 ## Access
 Accessible from https://petal-vogue.vercel.app
+
+## Installation
+1. **Clone the repository:**
+    ```bash
+    git clone https://github.com/Ama4538/Petal-Vogue.git
+    cd PortfolioV3
+    ```
+2. **Install dependencies:**
+    ```bash
+    npm i
+    ```
+3. **Build and Start the server:**
+    ```bash
+    npm build
+    npm preview
+    ```
+4. **Access the application:**
+Open your browser and go to localhost
 
 ## Features
 - Unique Product Pages: Every product has its own distinct page with their own coloring, sizing, and randomly selected reviews.
@@ -25,15 +44,30 @@ Accessible from https://petal-vogue.vercel.app
 - Responsiveness: Find your fit no matter your device
 - Maintains data between refreshes: All data is store in the local storage
 
-## Installation
-1. Clone the repository: git clone https://github.com/Ama4538/E-commerce.git
-2. Install dependencies: npm install
-3. Run built in script: npm run build
-4. Open on localHost: npm run preview
-
 ## Tech Stack
 - React
+- JS
 - CSS
+- HTML
+
+## Project Structure
+```
+├── public/                 # Static Files
+│   ├── bannerImage/        # All banner images
+│   ├── homeImage/          # All main page images
+│   ├── icons/              # All icons
+│   ├── loadingImages/      # All loading screen images
+│   ├── productimage/       # All product images
+├── src/                    # Source folder
+│   ├── component/          # Contains all react component
+│   ├── data/               # Contains data of all product, details, and comments
+│   ├── pages/              # Contains all pages made up from components
+│   ├── main.css            # Styling
+│   ├── main.jsx            # Entry point
+├── index.html              # Starting html file
+├── .gitignore              # Git ignore file
+└── package.json            # Project metadata and dependencies
+```
 
 ## Screenshots
 ![Edit Page](image/edit.png)
